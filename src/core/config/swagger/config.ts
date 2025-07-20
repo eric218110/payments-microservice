@@ -1,8 +1,8 @@
-import { NestExpressApplication } from '@nestjs/platform-express';
+import { INestApplication } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { description, name, version } from '../../../../package.json';
 
-export const setupSwagger = (app: NestExpressApplication) => {
+export const setupSwagger = (app: INestApplication<any>) => {
   const config = new DocumentBuilder()
     .setTitle(`${name}`)
     .setDescription(`${description}`)
