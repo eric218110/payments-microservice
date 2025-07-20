@@ -1,0 +1,193 @@
+openapi: 3.0.3
+info:
+  title: API Pay
+  description: API intermediária de pagamentos para checkout de e-commerce.
+  version: 1.0.0
+
+servers:
+  - url: https://api.pay.com/v1
+
+paths:
+  /payments:
+    post:
+      summary: Processar um pagamento
+      operationId: processPayment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+      responses:
+        '201':
+          description: Pagamento processado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '502':
+          $ref: '#/components/responses/BadGateway'
+
+  /refunds:
+    post:
+      summary: Estornar um pagamento
+      operationId: refundPayment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefundRequest'
+      responses:
+        '200':
+          description: Estorno realizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RefundResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /payments/{id}:
+    get:
+      summary: Obter informações de uma transação
+      operationId: getPayment
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do pagamento
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Detalhes do pagamento
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+components:
+  schemas:
+    PaymentRequest:
+      type: object
+      required: [amount, currency, provider, customer]
+      properties:
+        amount:
+          type: number
+          format: float
+          example: 199.99
+        currency:
+          type: string
+          example: BRL
+        provider:
+          type: string
+          enum: [stripe, braintree]
+          example: stripe
+        customer:
+          type: object
+          required: [name, email]
+          properties:
+            name:
+              type: string
+              example: João Silva
+            email:
+              type: string
+              format: email
+              example: joao@email.com
+        metadata:
+          type: object
+          additionalProperties: true
+          example:
+            orderId: 1234
+            note: "Pagamento do pedido 1234"
+
+    PaymentResponse:
+      type: object
+      properties:
+        paymentId:
+          type: string
+          example: pay_abc123
+        status:
+          type: string
+          enum: [authorized, declined, failed]
+          example: authorized
+        provider:
+          type: string
+          example: stripe
+        createdAt:
+          type: string
+          format: date-time
+          example: "2025-07-19T12:34:56Z"
+
+    RefundRequest:
+      type: object
+      required: [paymentId, amount]
+      properties:
+        paymentId:
+          type: string
+          example: pay_abc123
+        amount:
+          type: number
+          format: float
+          example: 199.99
+        reason:
+          type: string
+          example: "Produto danificado"
+
+    RefundResponse:
+      type: object
+      properties:
+        refundId:
+          type: string
+          example: refund_xyz456
+        status:
+          type: string
+          enum: [refunded, failed]
+          example: refunded
+        createdAt:
+          type: string
+          format: date-time
+          example: "2025-07-19T14:00:00Z"
+
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Erro ao processar pagamento"
+        code:
+          type: string
+          example: "PAYMENT_PROVIDER_UNAVAILABLE"
+        timestamp:
+          type: string
+          format: date-time
+          example: "2025-07-19T14:00:00Z"
+
+  responses:
+    BadRequest:
+      description: Requisição inválida
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+
+    NotFound:
+      description: Recurso não encontrado
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+
+    BadGateway:
+      description: Erro ao se comunicar com provedor externo
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
