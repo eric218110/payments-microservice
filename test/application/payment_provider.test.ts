@@ -1,4 +1,5 @@
 import { PaymentService } from 'src/application/services/create_payment.service';
+import { ConfigurationProvidersNotFoundException } from 'src/domain/exception';
 import { PaymentResultDTO } from 'src/domain/payment/dto/payment_result.dto';
 import type { StartPaymentProcess } from 'src/domain/payment/use_cases/payment_provider';
 import { fakes } from './payment_provider.fake';
@@ -33,5 +34,18 @@ describe('(PaymentService)', () => {
     expect(response).toBeInstanceOf(PaymentResultDTO);
     expect(response.payment_id).toBeDefined();
     expect(spy).toHaveBeenCalledTimes(1);
+  });
+
+  it('should be service throws error not configuration found, when repository return empty list', async () => {
+    try {
+      jest
+        .spyOn(fakes.findAllPaymentProviderRepositoryFake, 'onFindAll')
+        .mockResolvedValue([]);
+
+      const response = await sut.process(paymentMock.paymentMethodDTO);
+      expect(response).toBeUndefined();
+    } catch (error) {
+      expect(error).toBeInstanceOf(ConfigurationProvidersNotFoundException);
+    }
   });
 });
