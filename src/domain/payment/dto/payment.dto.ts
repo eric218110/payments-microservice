@@ -3,8 +3,8 @@ import { IsEnum, IsOptional, IsString } from 'class-validator';
 import { PaymentMethodEnum } from '../enum/payment_methods.enum';
 
 export class PaymentMethodDTO {
-  constructor(data: PaymentMethodDTO){
-    Object.assign(this, data)
+  constructor(data: PaymentMethodDTO) {
+    Object.assign(this, data);
   }
 
   @ApiProperty({ enum: PaymentMethodEnum })
