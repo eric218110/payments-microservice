@@ -48,4 +48,8 @@ describe('(PaymentService)', () => {
       expect(error).toBeInstanceOf(ConfigurationProvidersNotFoundException);
     }
   });
+
+  it('should be service call queue service with correct params', async () => {
+    const response = await sut.process(paymentMock.paymentMethodDTO);
+  });
 });
