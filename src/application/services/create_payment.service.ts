@@ -1,9 +1,9 @@
-import { NotifyPaymentMapper } from 'src/domain/mapper/notify_payment.mapper';
 import { NotifyProcessPayment } from 'src/domain/notify/use_cases/notify_process_payment';
 import { PaymentMethodDTO } from 'src/domain/payment/dto/payment.dto';
 import { PaymentResultDTO } from 'src/domain/payment/dto/payment_result.dto';
 import { StartPaymentProcess } from 'src/domain/payment/use_cases/payment_provider';
 import { ConfigurationProvidersNotFoundException } from 'src/domain/shared/exception';
+import { NotifyPaymentMapper } from 'src/domain/shared/mapper/notify_payment.mapper';
 import { TenantHeaderDto } from 'src/domain/tenant/dto/tenant_in_header.dto';
 import { FindAllPaymentProviderRepository } from '../repository/payment/find_all_payment_providers.repository';
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { PaymentMethodDTO } from '../payment/dto/payment.dto';
-import { StripperBodyModel } from '../payment/model/external/striper_body.model';
+import { PaymentMethodDTO } from 'src/domain/payment/dto/payment.dto';
+import { StripperBodyModel } from 'src/domain/payment/model/external/striper_body.model';
 
 @Injectable()
 export class StripperMapper {

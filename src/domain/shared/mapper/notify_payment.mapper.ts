@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { NotifyProcessPaymentDTO } from '../notify/dto/notify_process_payment.dto';
-import { PaymentMethodDTO } from '../payment/dto/payment.dto';
-import { ProviderTypeEnum } from '../payment/enum/provider_type.enum';
-import { PaymentModel } from '../payment/model';
-import { BrainTreeBodyModel } from '../payment/model/external/braintree_body.model';
-import { StripperBodyModel } from '../payment/model/external/striper_body.model';
+import { NotifyProcessPaymentDTO } from 'src/domain/notify/dto/notify_process_payment.dto';
+import { PaymentMethodDTO } from 'src/domain/payment/dto/payment.dto';
+import { ProviderTypeEnum } from 'src/domain/payment/enum/provider_type.enum';
+import { PaymentModel } from 'src/domain/payment/model';
+import { BrainTreeBodyModel } from 'src/domain/payment/model/external/braintree_body.model';
+import { StripperBodyModel } from 'src/domain/payment/model/external/striper_body.model';
 import { BrainTreeMapper } from './braintree.mapper';
 import { StripperMapper } from './stripper.mapper';
 

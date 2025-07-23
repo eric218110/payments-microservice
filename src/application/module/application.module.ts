@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { DomainModule } from 'src/domain/module/domain.module';
+import { DomainModule } from 'src/domain/shared/module/domain.module';
 
 const providers = [];
 
