@@ -11,6 +11,12 @@ export class PaymentMethodDTO {
   @IsEnum(PaymentMethodEnum)
   type: PaymentMethodEnum;
 
+  @ApiProperty()
+  amount: number;
+
+  @ApiProperty()
+  currency: string;
+
   @ApiPropertyOptional()
   @IsOptional()
   @IsString()
@@ -35,4 +41,9 @@ export class PaymentMethodDTO {
   @IsOptional()
   @IsString()
   cvv?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  installments?: number;
 }

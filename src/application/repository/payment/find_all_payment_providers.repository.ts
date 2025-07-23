@@ -1,5 +1,5 @@
-import { PaymentModel } from 'src/domain/model';
+import { PaymentModel } from 'src/domain/payment/model';
 
 export interface FindAllPaymentProviderRepository {
-  onFindAll(): Promise<PaymentModel[]>;
+  onFindAllByTenantId(tenantId: string): Promise<PaymentModel[]>;
 }

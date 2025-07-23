@@ -4,6 +4,7 @@ CREATE TABLE "PaymentProviders" (
     "maxRetry" INTEGER NOT NULL,
     "timeout" INTEGER NOT NULL,
     "name" TEXT NOT NULL,
+    "provider" TEXT NOT NULL,
     "detailid" TEXT NOT NULL,
     CONSTRAINT "PaymentProviders_detailid_fkey" FOREIGN KEY ("detailid") REFERENCES "ProviderDetail" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
@@ -12,6 +13,7 @@ CREATE TABLE "PaymentProviders" (
 CREATE TABLE "ProviderDetail" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "url" TEXT NOT NULL,
+    "method" TEXT NOT NULL,
     "requireAuthentication" BOOLEAN NOT NULL DEFAULT false,
     "authenticationId" TEXT NOT NULL,
     CONSTRAINT "ProviderDetail_authenticationId_fkey" FOREIGN KEY ("authenticationId") REFERENCES "ProviderAuthentication" ("id") ON DELETE RESTRICT ON UPDATE CASCADE

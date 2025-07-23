@@ -14,11 +14,17 @@ datasource db {
   url      = env("DATABASE_CONNECTION_URI")
 }
 
+enum PaymentProvidersType {
+  STRIPPER
+  BRAINTREE
+}
+
 model PaymentProviders {
   id       String @id @default(cuid())
   maxRetry Int
   timeout  Int
   name     String @unique
+  provider PaymentProvidersType
   detailid String
 
   detail ProviderDetail @relation(fields: [detailid], references: [id])
@@ -27,6 +33,7 @@ model PaymentProviders {
 model ProviderDetail {
   id                    String  @id @default(cuid())
   url                   String
+  method                String
   requireAuthentication Boolean @default(false)
   authenticationId      String
 

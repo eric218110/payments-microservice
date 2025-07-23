@@ -1,4 +1,11 @@
-import { Module } from "@nestjs/common";
+import { Module } from '@nestjs/common';
+import { DomainModule } from 'src/domain/module/domain.module';
 
-@Module({})
+const providers = [];
+
+@Module({
+  imports: [DomainModule],
+  providers,
+  exports: providers,
+})
 export class ApplicationModule {}
