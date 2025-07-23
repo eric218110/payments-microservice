@@ -1,12 +1,8 @@
 import { Module } from '@nestjs/common';
-import { BrainTreeMapper } from '../mapper/braintree.mapper';
-import { NotifyPaymentMapper } from '../mapper/notify_payment.mapper';
-import { StripperMapper } from '../mapper/stripper.mapper';
-
-const providers = [StripperMapper, BrainTreeMapper, NotifyPaymentMapper];
+import { ApplicationModule } from 'src/application/module/application.module';
 
 @Module({
-  providers,
-  exports: providers,
+  exports: [ApplicationModule],
+  imports: [ApplicationModule],
 })
 export class DomainModule {}

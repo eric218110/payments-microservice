@@ -18,5 +18,9 @@ describe('(PaymentController)', () => {
     );
 
     expect(spy).toHaveBeenCalledTimes(1);
+    expect(spy).toHaveBeenCalledWith(
+      paymentMock.tenant,
+      paymentMock.paymentMethodDTO,
+    );
   });
 });
