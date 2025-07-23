@@ -1,17 +1,25 @@
-import { Controller } from '@nestjs/common';
+import { Body, Controller, Inject } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { PaymentMethodDTO } from 'src/domain/payment/dto/payment.dto';
+import { StartPaymentProcess } from 'src/domain/payment/use_cases/payment_provider';
 import { TenantHeader } from 'src/domain/shared/decorator/tenant.decorator';
+import { TokenProvider } from 'src/domain/shared/tokens/tokens_providers';
 import { TenantHeaderDto } from 'src/domain/tenant/dto/tenant_in_header.dto';
 import { ProcessPayment } from './payment.decorator';
 
 @Controller('payment')
 @ApiTags('payment')
 export class PaymentController {
+  constructor(
+    @Inject(TokenProvider.StartPaymentProcess)
+    private readonly startPaymentProcess: StartPaymentProcess,
+  ) {}
+
   @ProcessPayment()
   processPaymentMethod(
     @TenantHeader() headers: TenantHeaderDto,
-  ): Promise<PaymentMethodDTO> {
-    throw new Error();
+    @Body() body: PaymentMethodDTO,
+  ) {
+    return this.startPaymentProcess.process(headers, body);
   }
 }

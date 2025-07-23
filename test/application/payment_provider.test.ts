@@ -2,8 +2,9 @@ import { PaymentService } from 'src/application/services/create_payment.service'
 import { PaymentResultDTO } from 'src/domain/payment/dto/payment_result.dto';
 import type { StartPaymentProcess } from 'src/domain/payment/use_cases/payment_provider';
 import { ConfigurationProvidersNotFoundException } from 'src/domain/shared/exception';
+import { paymentMock } from '../shared/mock';
 import { fakes } from './payment_provider.fake';
-import { notifyProcessPaymentMock, paymentMock } from './payment_provider.mock';
+import { notifyProcessPaymentMock } from './payment_provider.mock';
 
 describe('(PaymentService)', () => {
   const sut: StartPaymentProcess = new PaymentService(
