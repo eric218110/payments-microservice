@@ -4,6 +4,12 @@
   "sourceRoot": "src",
   "entryFile": "src/core/server/main.server.js",
   "compilerOptions": {
-    "deleteOutDir": true
+    "deleteOutDir": true,
+    "assets": [
+      {
+        "include": "infrastructure/prisma/client/**/*",
+        "outDir": "dist/src"
+      }
+    ]
   }
 }
