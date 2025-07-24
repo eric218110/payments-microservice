@@ -23,26 +23,50 @@ enum PaymentProvidersType {
   @@schema("main")
 }
 
+enum PaymentHistoryStatusType {
+  SUCCESS
+  IN_PROGRESS
+  FAIL
+
+  @@schema("main")
+}
+
+model PaymentHistory {
+  id                String                   @id @default(cuid())
+  tenantId          String
+  providerDetailsId String
+  status            PaymentHistoryStatusType
+
+  tenant           Tenant           @relation(fields: [tenantId], references: [id])
+  paymentProviders PaymentProviders @relation(fields: [providerDetailsId], references: [id])
+
+  @@map("payment_history")
+  @@schema("main")
+}
+
 model Tenant {
   id               String             @id @default(cuid())
   name             String             @unique
   PaymentProviders PaymentProviders[]
+  PaymentHistory   PaymentHistory[]
 
   @@map("tenants")
   @@schema("main")
 }
 
 model PaymentProviders {
-  id       String               @id @default(cuid())
-  maxRetry Int
-  timeout  Int
-  name     String               @unique
-  provider PaymentProvidersType
-  detailid String
-  tenantId String
+  id               String               @id @default(cuid())
+  maxRetry         Int
+  timeout          Int
+  name             String               @unique
+  provider         PaymentProvidersType
+  detailid         String
+  tenantId         String
+  paymentHistoryId String
 
-  tenant Tenant         @relation(fields: [tenantId], references: [id])
-  detail ProviderDetail @relation(fields: [detailid], references: [id])
+  tenant         Tenant           @relation(fields: [tenantId], references: [id])
+  detail         ProviderDetail   @relation(fields: [detailid], references: [id])
+  PaymentHistory PaymentHistory[]
 
   @@map("payment_providers")
   @@schema("main")

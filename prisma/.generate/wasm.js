@@ -120,6 +120,13 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.PaymentHistoryScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  providerDetailsId: 'providerDetailsId',
+  status: 'status'
+};
+
 exports.Prisma.TenantScalarFieldEnum = {
   id: 'id',
   name: 'name'
@@ -132,7 +139,8 @@ exports.Prisma.PaymentProvidersScalarFieldEnum = {
   name: 'name',
   provider: 'provider',
   detailid: 'detailid',
-  tenantId: 'tenantId'
+  tenantId: 'tenantId',
+  paymentHistoryId: 'paymentHistoryId'
 };
 
 exports.Prisma.ProviderDetailScalarFieldEnum = {
@@ -165,6 +173,12 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.PaymentHistoryStatusType = exports.$Enums.PaymentHistoryStatusType = {
+  SUCCESS: 'SUCCESS',
+  IN_PROGRESS: 'IN_PROGRESS',
+  FAIL: 'FAIL'
+};
+
 exports.PaymentProvidersType = exports.$Enums.PaymentProvidersType = {
   STRIPPER: 'STRIPPER',
   BRAINTREE: 'BRAINTREE'
@@ -178,6 +192,7 @@ exports.AuthenticationType = exports.$Enums.AuthenticationType = {
 };
 
 exports.Prisma.ModelName = {
+  PaymentHistory: 'PaymentHistory',
   Tenant: 'Tenant',
   PaymentProviders: 'PaymentProviders',
   ProviderDetail: 'ProviderDetail',
