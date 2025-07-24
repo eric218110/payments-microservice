@@ -1,6 +1,3 @@
--- CreateSchema
-CREATE SCHEMA IF NOT EXISTS "main";
-
 -- CreateEnum
 CREATE TYPE "main"."PaymentProvidersType" AS ENUM ('STRIPPER', 'BRAINTREE');
 

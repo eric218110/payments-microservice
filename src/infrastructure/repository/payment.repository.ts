@@ -9,23 +9,21 @@ export class PaymentRepository implements FindAllPaymentProviderRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async onFindAllByTenantId(tenantId: string): Promise<PaymentModel[]> {
-    const list = await this.prisma
-      .extendedPrismaClient()
-      .paymentProviders.findMany({
-        where: {
-          tenantId,
-        },
-        include: {
-          detail: {
-            select: {
-              authentication: true,
-              method: true,
-              requireAuthentication: true,
-              url: true,
-            },
+    const list = await this.prisma.paymentProviders.findMany({
+      where: {
+        tenantId,
+      },
+      include: {
+        detail: {
+          select: {
+            authentication: true,
+            method: true,
+            requireAuthentication: true,
+            url: true,
           },
         },
-      });
+      },
+    });
 
     return list.map((item) => {
       return new PaymentModel({

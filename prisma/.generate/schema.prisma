@@ -5,18 +5,22 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "../src/infrastructure/prisma/client"
+  provider        = "prisma-client-js"
+  output          = "./.generate"
+  previewFeatures = ["multiSchema"]
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  schemas  = ["main"]
 }
 
 enum PaymentProvidersType {
   STRIPPER
   BRAINTREE
+
+  @@schema("main")
 }
 
 model Tenant {
@@ -25,6 +29,7 @@ model Tenant {
   PaymentProviders PaymentProviders[]
 
   @@map("tenants")
+  @@schema("main")
 }
 
 model PaymentProviders {
@@ -40,6 +45,7 @@ model PaymentProviders {
   detail ProviderDetail @relation(fields: [detailid], references: [id])
 
   @@map("payment_providers")
+  @@schema("main")
 }
 
 model ProviderDetail {
@@ -53,6 +59,7 @@ model ProviderDetail {
   PaymentProviders PaymentProviders[]
 
   @@map("provider_details")
+  @@schema("main")
 }
 
 enum AuthenticationType {
@@ -60,6 +67,8 @@ enum AuthenticationType {
   BEARER
   API_KEY
   NONE
+
+  @@schema("main")
 }
 
 model ProviderAuthentication {
@@ -71,4 +80,5 @@ model ProviderAuthentication {
   password       String?
 
   @@map("provider_authentication")
+  @@schema("main")
 }

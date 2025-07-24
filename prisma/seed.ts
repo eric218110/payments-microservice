@@ -1,6 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { PrismaClient } from '@prisma/client/edge';
+/* eslint-disable @typescript-eslint/no-misused-promises */
+
 import 'dotenv/config';
+import { PrismaClient } from 'prisma/.generate';
 
 const prisma = new PrismaClient();
 
@@ -110,7 +111,7 @@ async function main() {
         });
       }
 
-      console.log('Seed finalizado com sucesso!');
+      console.log('Seed end success!');
     },
     { timeout: 15000 },
   );
@@ -118,7 +119,7 @@ async function main() {
 
 main()
   .catch((e) => {
-    console.error('Erro no seed:', e);
+    console.error('error in seed:', e);
     process.exit(1);
   })
   .finally(async () => {

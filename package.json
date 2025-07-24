@@ -5,12 +5,10 @@
   "description": "Payment Microservice Documentation",
   "license": "MIT",
   "scripts": {
-    "build": "nest build",
+    "build": "nest build && npm run copy:prisma",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "nest start",
-    "start:dev": "nest start --watch",
-    "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
+    "start:dev": "ts-node-dev --respawn --transpile-only -r tsconfig-paths/register src/core/server/main.server.ts",
+    "start:prod": "node dist/src/core/server/main.server",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -18,7 +16,8 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/jest/bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "mock:server": "npx ts-node scripts/server.ts",
-    "mock:seed": " npx ts-node prisma/seed.ts"
+    "mock:seed": " npx ts-node prisma/seed.ts",
+    "copy:prisma": "cpx \"prisma/.generate/**/*\" dist/prisma/.generate"
   },
   "engines": {
     "npm": ">=10.0.0",
@@ -54,6 +53,7 @@
     "@types/jest": "^29.5.14",
     "@types/node": "^22.10.7",
     "@types/supertest": "^6.0.2",
+    "cpx": "^1.5.0",
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.3",
@@ -66,6 +66,7 @@
     "ts-jest": "^29.2.5",
     "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.20.0"

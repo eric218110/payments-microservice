@@ -20,8 +20,8 @@ services:
       - "5432:5432"
     environment:
       POSTGRES_DB: payment
-      POSTGRES_USER: payment_user
-      POSTGRES_PASSWORD: payment_pass
+      POSTGRES_USER: payment
+      POSTGRES_PASSWORD: payment
     volumes:
       - pgdata:/var/lib/postgresql/data
     networks:

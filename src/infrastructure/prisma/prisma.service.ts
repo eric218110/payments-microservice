@@ -4,8 +4,7 @@ import {
   OnModuleDestroy,
   OnModuleInit,
 } from '@nestjs/common';
-import { PrismaClient } from '@prisma/client';
-import { withAccelerate } from '@prisma/extension-accelerate';
+import { PrismaClient } from 'prisma/.generate';
 
 @Injectable()
 export class PrismaService
@@ -22,9 +21,5 @@ export class PrismaService
   async onModuleDestroy() {
     await this.$disconnect();
     this.logger.log('Disconnected in database success');
-  }
-
-  extendedPrismaClient() {
-    return this.$extends(withAccelerate());
   }
 }
