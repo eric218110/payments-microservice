@@ -117,13 +117,19 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.TenantScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+};
+
 exports.Prisma.PaymentProvidersScalarFieldEnum = {
   id: 'id',
   maxRetry: 'maxRetry',
   timeout: 'timeout',
   name: 'name',
   provider: 'provider',
-  detailid: 'detailid'
+  detailid: 'detailid',
+  tenantId: 'tenantId'
 };
 
 exports.Prisma.ProviderDetailScalarFieldEnum = {
@@ -164,6 +170,7 @@ exports.AuthenticationType = exports.$Enums.AuthenticationType = {
 };
 
 exports.Prisma.ModelName = {
+  Tenant: 'Tenant',
   PaymentProviders: 'PaymentProviders',
   ProviderDetail: 'ProviderDetail',
   ProviderAuthentication: 'ProviderAuthentication'

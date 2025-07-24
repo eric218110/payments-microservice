@@ -19,6 +19,12 @@ enum PaymentProvidersType {
   BRAINTREE
 }
 
+model Tenant {
+  id               String             @id @default(cuid())
+  name             String             @unique
+  PaymentProviders PaymentProviders[]
+}
+
 model PaymentProviders {
   id       String               @id @default(cuid())
   maxRetry Int
@@ -26,7 +32,9 @@ model PaymentProviders {
   name     String               @unique
   provider PaymentProvidersType
   detailid String
+  tenantId String
 
+  tenant Tenant         @relation(fields: [tenantId], references: [id])
   detail ProviderDetail @relation(fields: [detailid], references: [id])
 }
 

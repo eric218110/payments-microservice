@@ -12,7 +12,7 @@ export function TenantHeader<T extends object>() {
       const { headers = {} }: Request = ctx
         .switchToHttp()
         .getRequest<Request>();
-      const { 'x-service-prodiver': xServiceProvider = '' } = headers;
+      const { 'x-service-provider': xServiceProvider = '' } = headers;
 
       if (typeof xServiceProvider !== 'string') {
         throw new BadRequestException('header x-service-prodiver is invalid');

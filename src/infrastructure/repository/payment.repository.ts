@@ -5,7 +5,9 @@ import { PrismaService } from '../prisma/prisma.service';
 export class PaymentRepository implements FindAllPaymentProviderRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  onFindAllByTenantId(tenantId: string): Promise<PaymentModel[]> {
-    throw new Error('Method not implemented.');
+  async onFindAllByTenantId(tenantId: string): Promise<PaymentModel[]> {
+    console.log(tenantId);
+
+    return Promise.resolve([]);
   }
 }
