@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 
 import 'dotenv/config';
-import { PrismaClient } from 'prisma/.generate';
+import { ProviderTypeEnum } from '../src/domain/payment/enum/provider_type.enum';
+import { PrismaClient } from './.generate';
 
 const prisma = new PrismaClient();
 
@@ -26,14 +27,14 @@ async function main() {
 
       let detail1 = await tx.providerDetail.findFirst({
         where: {
-          url: 'http://localhost:3001/braintree/transactions',
+          url: 'https://payment-simulator.onrender.com/braintree/transactions',
         },
       });
 
       if (!detail1) {
         detail1 = await tx.providerDetail.create({
           data: {
-            url: 'http://localhost:3001/braintree/transactions',
+            url: 'https://payment-simulator.onrender.com/braintree/transactions',
             method: 'POST',
             requireAuthentication: false,
             authenticationId: authBearer.id,
@@ -43,14 +44,14 @@ async function main() {
 
       let detail2 = await tx.providerDetail.findFirst({
         where: {
-          url: 'http://localhost:3001/stripe/charges',
+          url: 'https://payment-simulator.onrender.com/stripe/charges',
         },
       });
 
       if (!detail2) {
         detail2 = await tx.providerDetail.create({
           data: {
-            url: 'http://localhost:3001/stripe/charges',
+            url: 'https://payment-simulator.onrender.com/stripe/charges',
             method: 'POST',
             requireAuthentication: false,
             authenticationId: authBearer.id,
@@ -86,7 +87,7 @@ async function main() {
       if (!existingNames.has('StripeProvider')) {
         providersToCreate.push({
           name: 'StripeProvider',
-          provider: 'STRIPPER',
+          provider: ProviderTypeEnum.STRIPPER,
           maxRetry: 3,
           timeout: 5000,
           detailid: detail2.id,
@@ -97,7 +98,7 @@ async function main() {
       if (!existingNames.has('BraintreeProvider')) {
         providersToCreate.push({
           name: 'BraintreeProvider',
-          provider: 'BRAINTREE',
+          provider: ProviderTypeEnum.BRAINTREE,
           maxRetry: 5,
           timeout: 7000,
           detailid: detail1.id,

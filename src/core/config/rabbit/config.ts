@@ -5,7 +5,7 @@ export const setupRabbit = (app: INestApplication<any>) => {
   app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.RMQ,
     options: {
-      urls: ['amqp://guest:guest@localhost:5672'],
+      urls: [process.env.RABBIT_CONNECTION_STRING],
       queue: 'payment_queue',
       queueOptions: { durable: true },
     },

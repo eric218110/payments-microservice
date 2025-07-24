@@ -15,8 +15,8 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/jest/bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "mock:server": "npx ts-node scripts/server.ts",
     "mock:seed": " npx ts-node prisma/seed.ts",
+    "mock:seed:prd": " npx ts-node dist/prisma/seed.js",
     "copy:prisma": "cpx \"prisma/.generate/**/*\" dist/prisma/.generate"
   },
   "engines": {

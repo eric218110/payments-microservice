@@ -9,10 +9,20 @@ do
   sleep 2
 done
 
-echo "Postgres is up - running migrations and seed"
+echo "Postgres is up"
+
+until nc -z -v -w30 rabbitmq 15672
+do
+  echo "Waiting for RabbitMQ Management UI..."
+  sleep 2
+done
+
+echo "RabbitMQ UI is up!"
+
+echo "running migrations and seed"
 
 npx prisma migrate deploy
-npm run mock:seed
+npm run mock:seed:prd
 
 echo "Starting app..."
 

@@ -24,6 +24,24 @@ services:
       - pgdata:/var/lib/postgresql/data
     networks:
       - app_net
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nest-app
+    depends_on:
+      - postgres
+      - rabbitmq
+    environment:
+      SERVER_PORT: 3000
+      RABBIT_CONNECTION_STRING: amqp://guest:guest@rabbitmq:5672
+      DATABASE_URL: postgresql://payment:payment@postgres:5432/payment?schema=main
+    ports:
+      - "3000:3000"
+    networks:
+      - app_net
+
 networks:
   app_net:
     driver: bridge

@@ -1,4 +1,4 @@
 export enum ProviderTypeEnum {
-  STRIPPER,
-  BRAINTREE,
+  STRIPPER = 'STRIPPER',
+  BRAINTREE = 'BRAINTREE',
 }
