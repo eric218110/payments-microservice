@@ -1,4 +1,5 @@
 import { NestFactory } from '@nestjs/core';
+import 'dotenv/config';
 import { setupException } from '../config/exception/config';
 import { setupListen } from '../config/listen/config';
 import { setupMicroservices } from '../config/microservices/config';

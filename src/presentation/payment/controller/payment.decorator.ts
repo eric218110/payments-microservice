@@ -32,7 +32,7 @@ export function PaymentControllerDecorator() {
         example: 'bbb2adfb-d684-413f-96c4-0d0d247d7eb0',
       },
     }),
-    Controller('payment'),
+    Controller(),
     ApiTags('payment'),
   );
 }

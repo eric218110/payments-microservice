@@ -11,7 +11,7 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = env("DATABASE_CONNECTION_URI")
+  url      = "file:./dev.db"
 }
 
 enum PaymentProvidersType {
@@ -23,6 +23,8 @@ model Tenant {
   id               String             @id @default(cuid())
   name             String             @unique
   PaymentProviders PaymentProviders[]
+
+  @@map("tenants")
 }
 
 model PaymentProviders {
@@ -36,6 +38,8 @@ model PaymentProviders {
 
   tenant Tenant         @relation(fields: [tenantId], references: [id])
   detail ProviderDetail @relation(fields: [detailid], references: [id])
+
+  @@map("payment_providers")
 }
 
 model ProviderDetail {
@@ -47,6 +51,8 @@ model ProviderDetail {
 
   authentication   ProviderAuthentication @relation(fields: [authenticationId], references: [id])
   PaymentProviders PaymentProviders[]
+
+  @@map("provider_details")
 }
 
 enum AuthenticationType {
@@ -63,4 +69,6 @@ model ProviderAuthentication {
   ProviderDetail ProviderDetail[]
   username       String?
   password       String?
+
+  @@map("provider_authentication")
 }
