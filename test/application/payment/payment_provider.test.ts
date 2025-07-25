@@ -2,7 +2,7 @@ import { PaymentService } from 'src/application/services/payment/create_payment.
 import { PaymentResultDTO } from 'src/domain/payment/dto/payment_result.dto';
 import type { StartPaymentProcess } from 'src/domain/payment/use_cases/payment_provider';
 import { ConfigurationProvidersNotFoundException } from 'src/domain/shared/exception';
-import { paymentMock } from '../shared/mock';
+import { paymentMock } from '../../shared/mock';
 import { fakes } from './payment_provider.fake';
 import { notifyProcessPaymentMock } from './payment_provider.mock';
 
