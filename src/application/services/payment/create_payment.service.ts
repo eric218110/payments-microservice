@@ -5,6 +5,7 @@ import { NotifyPaymentMapper } from 'src/application/shared/mapper/notify_paymen
 import { NotifyProcessPayment } from 'src/domain/notify/use_cases/notify_process_payment';
 import { PaymentMethodDTO } from 'src/domain/payment/dto/payment.dto';
 import { PaymentResultDTO } from 'src/domain/payment/dto/payment_result.dto';
+import { ProviderStatusTypeEnum } from 'src/domain/payment/enum/payment_history_type.enum';
 import { StartPaymentProcess } from 'src/domain/payment/use_cases/payment_provider';
 import { ConfigurationProvidersNotFoundException } from 'src/domain/shared/exception';
 import { TokenProvider } from 'src/domain/shared/tokens/tokens_providers';
@@ -44,12 +45,20 @@ export class PaymentService implements StartPaymentProcess {
     );
 
     if (notifyPaymentProcess) {
-      const paymentHistoy = await this.addPaymentHistoryRepository.onAdd(
-        tenantHeader.tenantId,
-        paymentProviders,
+      const paymentProvidersIds = paymentProviders.map(
+        ({ payment_id }) => payment_id,
       );
+      const paymentHistory = await this.addPaymentHistoryRepository.onAdd(
+        tenantHeader.tenantId,
+        paymentProvidersIds,
+      );
+
+      return new PaymentResultDTO({ ...paymentHistory });
     }
 
-    return new PaymentResultDTO({ payment_id: '123' });
+    return new PaymentResultDTO({
+      payment_id: '',
+      status: ProviderStatusTypeEnum.FAIL,
+    });
   }
 }

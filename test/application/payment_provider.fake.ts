@@ -1,10 +1,13 @@
+import { AddPaymentHistoryRepository } from 'src/application/repository/payment/add_payment_history.repository';
 import { FindAllPaymentProviderRepository } from 'src/application/repository/payment/find_all_payment_providers.repository';
 import { BrainTreeMapper } from 'src/application/shared/mapper/braintree.mapper';
 import { NotifyPaymentMapper } from 'src/application/shared/mapper/notify_payment.mapper';
 import { StripperMapper } from 'src/application/shared/mapper/stripper.mapper';
 import { NotifyProcessPaymentDTO } from 'src/domain/notify/dto/notify_process_payment.dto';
 import { NotifyProcessPayment } from 'src/domain/notify/use_cases/notify_process_payment';
+import { ProviderStatusTypeEnum } from 'src/domain/payment/enum/payment_history_type.enum';
 import { PaymentModel } from 'src/domain/payment/model';
+import { PaymentHistoryModel } from 'src/domain/payment/model/payment_history.model';
 import { onFindAllByTenantIdMock } from './payment_provider.mock';
 
 class FindAllPaymentProviderRepositoryFake
@@ -22,6 +25,17 @@ class NotifyProcessPaymentFake implements NotifyProcessPayment {
   }
 }
 
+class AddPaymentHistoryRepositoryFake implements AddPaymentHistoryRepository {
+  onAdd(): Promise<PaymentHistoryModel> {
+    return Promise.resolve(
+      new PaymentHistoryModel({
+        payment_id: '1234',
+        status: ProviderStatusTypeEnum.IN_PROGRESS,
+      }),
+    );
+  }
+}
+
 export const fakes = {
   findAllPaymentProviderRepositoryFake:
     new FindAllPaymentProviderRepositoryFake(),
@@ -30,4 +44,5 @@ export const fakes = {
     new StripperMapper(),
     new BrainTreeMapper(),
   ),
+  addPaymentHistoryRepositoryFake: new AddPaymentHistoryRepositoryFake(),
 };

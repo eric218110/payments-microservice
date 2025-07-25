@@ -10,6 +10,7 @@ describe('(PaymentService)', () => {
   const sut: StartPaymentProcess = new PaymentService(
     fakes.findAllPaymentProviderRepositoryFake,
     fakes.notifyProcessPayment,
+    fakes.addPaymentHistoryRepositoryFake,
     fakes.notifyPaymentMapperFake,
   );
 
@@ -76,5 +77,14 @@ describe('(PaymentService)', () => {
 
     expect(spy).toHaveBeenCalledTimes(1);
     expect(spy).toHaveBeenCalledWith(notifyProcessPaymentMock);
+  });
+
+  it('should be service call addPaymentHistoryRepository with correct params when success notify', async () => {
+    const spy = jest.spyOn(fakes.addPaymentHistoryRepositoryFake, 'onAdd');
+
+    await sut.process(paymentMock.tenant, paymentMock.paymentMethodDTO);
+
+    expect(spy).toHaveBeenCalledTimes(1);
+    expect(spy).toHaveBeenCalledWith('any_client', ['id-123']);
   });
 });

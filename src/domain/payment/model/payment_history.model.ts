@@ -1,5 +1,5 @@
 import { IsEnum, IsString } from 'class-validator';
-import { ProviderHistoryStatusTypeEnum } from '../enum/payment_history_type.enum';
+import { ProviderStatusTypeEnum } from '../enum/payment_history_type.enum';
 
 export class PaymentHistoryModel {
   constructor(data: PaymentHistoryModel) {
@@ -9,6 +9,6 @@ export class PaymentHistoryModel {
   @IsString()
   payment_id: string;
 
-  @IsEnum(ProviderHistoryStatusTypeEnum)
-  status: ProviderHistoryStatusTypeEnum;
+  @IsEnum(ProviderStatusTypeEnum)
+  status: ProviderStatusTypeEnum;
 }

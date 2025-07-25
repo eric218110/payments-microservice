@@ -32,13 +32,12 @@ enum PaymentHistoryStatusType {
 }
 
 model PaymentHistory {
-  id                String                   @id @default(cuid())
-  tenantId          String
-  providerDetailsId String
-  status            PaymentHistoryStatusType
+  id       String                   @id @default(cuid())
+  tenantId String
+  status   PaymentHistoryStatusType
 
-  tenant           Tenant           @relation(fields: [tenantId], references: [id])
-  paymentProviders PaymentProviders @relation(fields: [providerDetailsId], references: [id])
+  tenant    Tenant             @relation(fields: [tenantId], references: [id])
+  providers PaymentProviders[] @relation("historyProviders")
 
   @@map("payment_history")
   @@schema("main")
@@ -55,18 +54,17 @@ model Tenant {
 }
 
 model PaymentProviders {
-  id               String               @id @default(cuid())
-  maxRetry         Int
-  timeout          Int
-  name             String               @unique
-  provider         PaymentProvidersType
-  detailid         String
-  tenantId         String
-  paymentHistoryId String
+  id       String               @id @default(cuid())
+  name     String               @unique
+  provider PaymentProvidersType
+  maxRetry Int
+  timeout  Int
+  detailId String
+  tenantId String
 
-  tenant         Tenant           @relation(fields: [tenantId], references: [id])
-  detail         ProviderDetail   @relation(fields: [detailid], references: [id])
-  PaymentHistory PaymentHistory[]
+  tenant    Tenant           @relation(fields: [tenantId], references: [id])
+  detail    ProviderDetail   @relation(fields: [detailId], references: [id])
+  histories PaymentHistory[] @relation("historyProviders")
 
   @@map("payment_providers")
   @@schema("main")

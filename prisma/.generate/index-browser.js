@@ -123,7 +123,6 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 exports.Prisma.PaymentHistoryScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
-  providerDetailsId: 'providerDetailsId',
   status: 'status'
 };
 
@@ -134,13 +133,12 @@ exports.Prisma.TenantScalarFieldEnum = {
 
 exports.Prisma.PaymentProvidersScalarFieldEnum = {
   id: 'id',
-  maxRetry: 'maxRetry',
-  timeout: 'timeout',
   name: 'name',
   provider: 'provider',
-  detailid: 'detailid',
-  tenantId: 'tenantId',
-  paymentHistoryId: 'paymentHistoryId'
+  maxRetry: 'maxRetry',
+  timeout: 'timeout',
+  detailId: 'detailId',
+  tenantId: 'tenantId'
 };
 
 exports.Prisma.ProviderDetailScalarFieldEnum = {

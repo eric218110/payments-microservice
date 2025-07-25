@@ -37,7 +37,7 @@ model PaymentHistory {
   status   PaymentHistoryStatusType
 
   tenant    Tenant             @relation(fields: [tenantId], references: [id])
-  providers PaymentProviders[] @relation("HistoryProviders")
+  providers PaymentProviders[] @relation("historyProviders")
 
   @@map("payment_history")
   @@schema("main")
@@ -64,7 +64,7 @@ model PaymentProviders {
 
   tenant    Tenant           @relation(fields: [tenantId], references: [id])
   detail    ProviderDetail   @relation(fields: [detailId], references: [id])
-  histories PaymentHistory[] @relation("HistoryProviders")
+  histories PaymentHistory[] @relation("historyProviders")
 
   @@map("payment_providers")
   @@schema("main")

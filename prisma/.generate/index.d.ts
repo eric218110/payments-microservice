@@ -1273,6 +1273,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type PaymentHistoryCountOutputType
+   */
+
+  export type PaymentHistoryCountOutputType = {
+    providers: number
+  }
+
+  export type PaymentHistoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    providers?: boolean | PaymentHistoryCountOutputTypeCountProvidersArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PaymentHistoryCountOutputType without action
+   */
+  export type PaymentHistoryCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentHistoryCountOutputType
+     */
+    select?: PaymentHistoryCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PaymentHistoryCountOutputType without action
+   */
+  export type PaymentHistoryCountOutputTypeCountProvidersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PaymentProvidersWhereInput
+  }
+
+
+  /**
    * Count Type TenantCountOutputType
    */
 
@@ -1317,11 +1348,11 @@ export namespace Prisma {
    */
 
   export type PaymentProvidersCountOutputType = {
-    PaymentHistory: number
+    histories: number
   }
 
   export type PaymentProvidersCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    PaymentHistory?: boolean | PaymentProvidersCountOutputTypeCountPaymentHistoryArgs
+    histories?: boolean | PaymentProvidersCountOutputTypeCountHistoriesArgs
   }
 
   // Custom InputTypes
@@ -1338,7 +1369,7 @@ export namespace Prisma {
   /**
    * PaymentProvidersCountOutputType without action
    */
-  export type PaymentProvidersCountOutputTypeCountPaymentHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PaymentProvidersCountOutputTypeCountHistoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PaymentHistoryWhereInput
   }
 
@@ -1422,21 +1453,18 @@ export namespace Prisma {
   export type PaymentHistoryMinAggregateOutputType = {
     id: string | null
     tenantId: string | null
-    providerDetailsId: string | null
     status: $Enums.PaymentHistoryStatusType | null
   }
 
   export type PaymentHistoryMaxAggregateOutputType = {
     id: string | null
     tenantId: string | null
-    providerDetailsId: string | null
     status: $Enums.PaymentHistoryStatusType | null
   }
 
   export type PaymentHistoryCountAggregateOutputType = {
     id: number
     tenantId: number
-    providerDetailsId: number
     status: number
     _all: number
   }
@@ -1445,21 +1473,18 @@ export namespace Prisma {
   export type PaymentHistoryMinAggregateInputType = {
     id?: true
     tenantId?: true
-    providerDetailsId?: true
     status?: true
   }
 
   export type PaymentHistoryMaxAggregateInputType = {
     id?: true
     tenantId?: true
-    providerDetailsId?: true
     status?: true
   }
 
   export type PaymentHistoryCountAggregateInputType = {
     id?: true
     tenantId?: true
-    providerDetailsId?: true
     status?: true
     _all?: true
   }
@@ -1539,7 +1564,6 @@ export namespace Prisma {
   export type PaymentHistoryGroupByOutputType = {
     id: string
     tenantId: string
-    providerDetailsId: string
     status: $Enums.PaymentHistoryStatusType
     _count: PaymentHistoryCountAggregateOutputType | null
     _min: PaymentHistoryMinAggregateOutputType | null
@@ -1563,61 +1587,54 @@ export namespace Prisma {
   export type PaymentHistorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     tenantId?: boolean
-    providerDetailsId?: boolean
     status?: boolean
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
-    paymentProviders?: boolean | PaymentProvidersDefaultArgs<ExtArgs>
+    providers?: boolean | PaymentHistory$providersArgs<ExtArgs>
+    _count?: boolean | PaymentHistoryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["paymentHistory"]>
 
   export type PaymentHistorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     tenantId?: boolean
-    providerDetailsId?: boolean
     status?: boolean
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
-    paymentProviders?: boolean | PaymentProvidersDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["paymentHistory"]>
 
   export type PaymentHistorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     tenantId?: boolean
-    providerDetailsId?: boolean
     status?: boolean
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
-    paymentProviders?: boolean | PaymentProvidersDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["paymentHistory"]>
 
   export type PaymentHistorySelectScalar = {
     id?: boolean
     tenantId?: boolean
-    providerDetailsId?: boolean
     status?: boolean
   }
 
-  export type PaymentHistoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "providerDetailsId" | "status", ExtArgs["result"]["paymentHistory"]>
+  export type PaymentHistoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "status", ExtArgs["result"]["paymentHistory"]>
   export type PaymentHistoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
-    paymentProviders?: boolean | PaymentProvidersDefaultArgs<ExtArgs>
+    providers?: boolean | PaymentHistory$providersArgs<ExtArgs>
+    _count?: boolean | PaymentHistoryCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PaymentHistoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
-    paymentProviders?: boolean | PaymentProvidersDefaultArgs<ExtArgs>
   }
   export type PaymentHistoryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
-    paymentProviders?: boolean | PaymentProvidersDefaultArgs<ExtArgs>
   }
 
   export type $PaymentHistoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "PaymentHistory"
     objects: {
       tenant: Prisma.$TenantPayload<ExtArgs>
-      paymentProviders: Prisma.$PaymentProvidersPayload<ExtArgs>
+      providers: Prisma.$PaymentProvidersPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       tenantId: string
-      providerDetailsId: string
       status: $Enums.PaymentHistoryStatusType
     }, ExtArgs["result"]["paymentHistory"]>
     composites: {}
@@ -2014,7 +2031,7 @@ export namespace Prisma {
   export interface Prisma__PaymentHistoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    paymentProviders<T extends PaymentProvidersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PaymentProvidersDefaultArgs<ExtArgs>>): Prisma__PaymentProvidersClient<$Result.GetResult<Prisma.$PaymentProvidersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    providers<T extends PaymentHistory$providersArgs<ExtArgs> = {}>(args?: Subset<T, PaymentHistory$providersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentProvidersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2046,7 +2063,6 @@ export namespace Prisma {
   interface PaymentHistoryFieldRefs {
     readonly id: FieldRef<"PaymentHistory", 'String'>
     readonly tenantId: FieldRef<"PaymentHistory", 'String'>
-    readonly providerDetailsId: FieldRef<"PaymentHistory", 'String'>
     readonly status: FieldRef<"PaymentHistory", 'PaymentHistoryStatusType'>
   }
     
@@ -2441,6 +2457,30 @@ export namespace Prisma {
      * Limit how many PaymentHistories to delete.
      */
     limit?: number
+  }
+
+  /**
+   * PaymentHistory.providers
+   */
+  export type PaymentHistory$providersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentProviders
+     */
+    select?: PaymentProvidersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentProviders
+     */
+    omit?: PaymentProvidersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentProvidersInclude<ExtArgs> | null
+    where?: PaymentProvidersWhereInput
+    orderBy?: PaymentProvidersOrderByWithRelationInput | PaymentProvidersOrderByWithRelationInput[]
+    cursor?: PaymentProvidersWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PaymentProvidersScalarFieldEnum | PaymentProvidersScalarFieldEnum[]
   }
 
   /**
@@ -3545,35 +3585,32 @@ export namespace Prisma {
 
   export type PaymentProvidersMinAggregateOutputType = {
     id: string | null
-    maxRetry: number | null
-    timeout: number | null
     name: string | null
     provider: $Enums.PaymentProvidersType | null
-    detailid: string | null
+    maxRetry: number | null
+    timeout: number | null
+    detailId: string | null
     tenantId: string | null
-    paymentHistoryId: string | null
   }
 
   export type PaymentProvidersMaxAggregateOutputType = {
     id: string | null
-    maxRetry: number | null
-    timeout: number | null
     name: string | null
     provider: $Enums.PaymentProvidersType | null
-    detailid: string | null
+    maxRetry: number | null
+    timeout: number | null
+    detailId: string | null
     tenantId: string | null
-    paymentHistoryId: string | null
   }
 
   export type PaymentProvidersCountAggregateOutputType = {
     id: number
-    maxRetry: number
-    timeout: number
     name: number
     provider: number
-    detailid: number
+    maxRetry: number
+    timeout: number
+    detailId: number
     tenantId: number
-    paymentHistoryId: number
     _all: number
   }
 
@@ -3590,35 +3627,32 @@ export namespace Prisma {
 
   export type PaymentProvidersMinAggregateInputType = {
     id?: true
-    maxRetry?: true
-    timeout?: true
     name?: true
     provider?: true
-    detailid?: true
+    maxRetry?: true
+    timeout?: true
+    detailId?: true
     tenantId?: true
-    paymentHistoryId?: true
   }
 
   export type PaymentProvidersMaxAggregateInputType = {
     id?: true
-    maxRetry?: true
-    timeout?: true
     name?: true
     provider?: true
-    detailid?: true
+    maxRetry?: true
+    timeout?: true
+    detailId?: true
     tenantId?: true
-    paymentHistoryId?: true
   }
 
   export type PaymentProvidersCountAggregateInputType = {
     id?: true
-    maxRetry?: true
-    timeout?: true
     name?: true
     provider?: true
-    detailid?: true
+    maxRetry?: true
+    timeout?: true
+    detailId?: true
     tenantId?: true
-    paymentHistoryId?: true
     _all?: true
   }
 
@@ -3710,13 +3744,12 @@ export namespace Prisma {
 
   export type PaymentProvidersGroupByOutputType = {
     id: string
-    maxRetry: number
-    timeout: number
     name: string
     provider: $Enums.PaymentProvidersType
-    detailid: string
+    maxRetry: number
+    timeout: number
+    detailId: string
     tenantId: string
-    paymentHistoryId: string
     _count: PaymentProvidersCountAggregateOutputType | null
     _avg: PaymentProvidersAvgAggregateOutputType | null
     _sum: PaymentProvidersSumAggregateOutputType | null
@@ -3740,61 +3773,57 @@ export namespace Prisma {
 
   export type PaymentProvidersSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    maxRetry?: boolean
-    timeout?: boolean
     name?: boolean
     provider?: boolean
-    detailid?: boolean
+    maxRetry?: boolean
+    timeout?: boolean
+    detailId?: boolean
     tenantId?: boolean
-    paymentHistoryId?: boolean
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
     detail?: boolean | ProviderDetailDefaultArgs<ExtArgs>
-    PaymentHistory?: boolean | PaymentProviders$PaymentHistoryArgs<ExtArgs>
+    histories?: boolean | PaymentProviders$historiesArgs<ExtArgs>
     _count?: boolean | PaymentProvidersCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["paymentProviders"]>
 
   export type PaymentProvidersSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    maxRetry?: boolean
-    timeout?: boolean
     name?: boolean
     provider?: boolean
-    detailid?: boolean
+    maxRetry?: boolean
+    timeout?: boolean
+    detailId?: boolean
     tenantId?: boolean
-    paymentHistoryId?: boolean
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
     detail?: boolean | ProviderDetailDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["paymentProviders"]>
 
   export type PaymentProvidersSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    maxRetry?: boolean
-    timeout?: boolean
     name?: boolean
     provider?: boolean
-    detailid?: boolean
+    maxRetry?: boolean
+    timeout?: boolean
+    detailId?: boolean
     tenantId?: boolean
-    paymentHistoryId?: boolean
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
     detail?: boolean | ProviderDetailDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["paymentProviders"]>
 
   export type PaymentProvidersSelectScalar = {
     id?: boolean
-    maxRetry?: boolean
-    timeout?: boolean
     name?: boolean
     provider?: boolean
-    detailid?: boolean
+    maxRetry?: boolean
+    timeout?: boolean
+    detailId?: boolean
     tenantId?: boolean
-    paymentHistoryId?: boolean
   }
 
-  export type PaymentProvidersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "maxRetry" | "timeout" | "name" | "provider" | "detailid" | "tenantId" | "paymentHistoryId", ExtArgs["result"]["paymentProviders"]>
+  export type PaymentProvidersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "provider" | "maxRetry" | "timeout" | "detailId" | "tenantId", ExtArgs["result"]["paymentProviders"]>
   export type PaymentProvidersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
     detail?: boolean | ProviderDetailDefaultArgs<ExtArgs>
-    PaymentHistory?: boolean | PaymentProviders$PaymentHistoryArgs<ExtArgs>
+    histories?: boolean | PaymentProviders$historiesArgs<ExtArgs>
     _count?: boolean | PaymentProvidersCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PaymentProvidersIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3811,17 +3840,16 @@ export namespace Prisma {
     objects: {
       tenant: Prisma.$TenantPayload<ExtArgs>
       detail: Prisma.$ProviderDetailPayload<ExtArgs>
-      PaymentHistory: Prisma.$PaymentHistoryPayload<ExtArgs>[]
+      histories: Prisma.$PaymentHistoryPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      maxRetry: number
-      timeout: number
       name: string
       provider: $Enums.PaymentProvidersType
-      detailid: string
+      maxRetry: number
+      timeout: number
+      detailId: string
       tenantId: string
-      paymentHistoryId: string
     }, ExtArgs["result"]["paymentProviders"]>
     composites: {}
   }
@@ -4218,7 +4246,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     detail<T extends ProviderDetailDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProviderDetailDefaultArgs<ExtArgs>>): Prisma__ProviderDetailClient<$Result.GetResult<Prisma.$ProviderDetailPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    PaymentHistory<T extends PaymentProviders$PaymentHistoryArgs<ExtArgs> = {}>(args?: Subset<T, PaymentProviders$PaymentHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    histories<T extends PaymentProviders$historiesArgs<ExtArgs> = {}>(args?: Subset<T, PaymentProviders$historiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4249,13 +4277,12 @@ export namespace Prisma {
    */
   interface PaymentProvidersFieldRefs {
     readonly id: FieldRef<"PaymentProviders", 'String'>
-    readonly maxRetry: FieldRef<"PaymentProviders", 'Int'>
-    readonly timeout: FieldRef<"PaymentProviders", 'Int'>
     readonly name: FieldRef<"PaymentProviders", 'String'>
     readonly provider: FieldRef<"PaymentProviders", 'PaymentProvidersType'>
-    readonly detailid: FieldRef<"PaymentProviders", 'String'>
+    readonly maxRetry: FieldRef<"PaymentProviders", 'Int'>
+    readonly timeout: FieldRef<"PaymentProviders", 'Int'>
+    readonly detailId: FieldRef<"PaymentProviders", 'String'>
     readonly tenantId: FieldRef<"PaymentProviders", 'String'>
-    readonly paymentHistoryId: FieldRef<"PaymentProviders", 'String'>
   }
     
 
@@ -4652,9 +4679,9 @@ export namespace Prisma {
   }
 
   /**
-   * PaymentProviders.PaymentHistory
+   * PaymentProviders.histories
    */
-  export type PaymentProviders$PaymentHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PaymentProviders$historiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the PaymentHistory
      */
@@ -6869,7 +6896,6 @@ export namespace Prisma {
   export const PaymentHistoryScalarFieldEnum: {
     id: 'id',
     tenantId: 'tenantId',
-    providerDetailsId: 'providerDetailsId',
     status: 'status'
   };
 
@@ -6886,13 +6912,12 @@ export namespace Prisma {
 
   export const PaymentProvidersScalarFieldEnum: {
     id: 'id',
-    maxRetry: 'maxRetry',
-    timeout: 'timeout',
     name: 'name',
     provider: 'provider',
-    detailid: 'detailid',
-    tenantId: 'tenantId',
-    paymentHistoryId: 'paymentHistoryId'
+    maxRetry: 'maxRetry',
+    timeout: 'timeout',
+    detailId: 'detailId',
+    tenantId: 'tenantId'
   };
 
   export type PaymentProvidersScalarFieldEnum = (typeof PaymentProvidersScalarFieldEnum)[keyof typeof PaymentProvidersScalarFieldEnum]
@@ -6978,20 +7003,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int'
-   */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int[]'
-   */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
-
-  /**
    * Reference to a field of type 'PaymentProvidersType'
    */
   export type EnumPaymentProvidersTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentProvidersType'>
@@ -7002,6 +7013,20 @@ export namespace Prisma {
    * Reference to a field of type 'PaymentProvidersType[]'
    */
   export type ListEnumPaymentProvidersTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentProvidersType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
 
 
@@ -7049,19 +7074,17 @@ export namespace Prisma {
     NOT?: PaymentHistoryWhereInput | PaymentHistoryWhereInput[]
     id?: StringFilter<"PaymentHistory"> | string
     tenantId?: StringFilter<"PaymentHistory"> | string
-    providerDetailsId?: StringFilter<"PaymentHistory"> | string
     status?: EnumPaymentHistoryStatusTypeFilter<"PaymentHistory"> | $Enums.PaymentHistoryStatusType
     tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
-    paymentProviders?: XOR<PaymentProvidersScalarRelationFilter, PaymentProvidersWhereInput>
+    providers?: PaymentProvidersListRelationFilter
   }
 
   export type PaymentHistoryOrderByWithRelationInput = {
     id?: SortOrder
     tenantId?: SortOrder
-    providerDetailsId?: SortOrder
     status?: SortOrder
     tenant?: TenantOrderByWithRelationInput
-    paymentProviders?: PaymentProvidersOrderByWithRelationInput
+    providers?: PaymentProvidersOrderByRelationAggregateInput
   }
 
   export type PaymentHistoryWhereUniqueInput = Prisma.AtLeast<{
@@ -7070,16 +7093,14 @@ export namespace Prisma {
     OR?: PaymentHistoryWhereInput[]
     NOT?: PaymentHistoryWhereInput | PaymentHistoryWhereInput[]
     tenantId?: StringFilter<"PaymentHistory"> | string
-    providerDetailsId?: StringFilter<"PaymentHistory"> | string
     status?: EnumPaymentHistoryStatusTypeFilter<"PaymentHistory"> | $Enums.PaymentHistoryStatusType
     tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
-    paymentProviders?: XOR<PaymentProvidersScalarRelationFilter, PaymentProvidersWhereInput>
+    providers?: PaymentProvidersListRelationFilter
   }, "id">
 
   export type PaymentHistoryOrderByWithAggregationInput = {
     id?: SortOrder
     tenantId?: SortOrder
-    providerDetailsId?: SortOrder
     status?: SortOrder
     _count?: PaymentHistoryCountOrderByAggregateInput
     _max?: PaymentHistoryMaxOrderByAggregateInput
@@ -7092,7 +7113,6 @@ export namespace Prisma {
     NOT?: PaymentHistoryScalarWhereWithAggregatesInput | PaymentHistoryScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"PaymentHistory"> | string
     tenantId?: StringWithAggregatesFilter<"PaymentHistory"> | string
-    providerDetailsId?: StringWithAggregatesFilter<"PaymentHistory"> | string
     status?: EnumPaymentHistoryStatusTypeWithAggregatesFilter<"PaymentHistory"> | $Enums.PaymentHistoryStatusType
   }
 
@@ -7144,30 +7164,28 @@ export namespace Prisma {
     OR?: PaymentProvidersWhereInput[]
     NOT?: PaymentProvidersWhereInput | PaymentProvidersWhereInput[]
     id?: StringFilter<"PaymentProviders"> | string
-    maxRetry?: IntFilter<"PaymentProviders"> | number
-    timeout?: IntFilter<"PaymentProviders"> | number
     name?: StringFilter<"PaymentProviders"> | string
     provider?: EnumPaymentProvidersTypeFilter<"PaymentProviders"> | $Enums.PaymentProvidersType
-    detailid?: StringFilter<"PaymentProviders"> | string
+    maxRetry?: IntFilter<"PaymentProviders"> | number
+    timeout?: IntFilter<"PaymentProviders"> | number
+    detailId?: StringFilter<"PaymentProviders"> | string
     tenantId?: StringFilter<"PaymentProviders"> | string
-    paymentHistoryId?: StringFilter<"PaymentProviders"> | string
     tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
     detail?: XOR<ProviderDetailScalarRelationFilter, ProviderDetailWhereInput>
-    PaymentHistory?: PaymentHistoryListRelationFilter
+    histories?: PaymentHistoryListRelationFilter
   }
 
   export type PaymentProvidersOrderByWithRelationInput = {
     id?: SortOrder
-    maxRetry?: SortOrder
-    timeout?: SortOrder
     name?: SortOrder
     provider?: SortOrder
-    detailid?: SortOrder
+    maxRetry?: SortOrder
+    timeout?: SortOrder
+    detailId?: SortOrder
     tenantId?: SortOrder
-    paymentHistoryId?: SortOrder
     tenant?: TenantOrderByWithRelationInput
     detail?: ProviderDetailOrderByWithRelationInput
-    PaymentHistory?: PaymentHistoryOrderByRelationAggregateInput
+    histories?: PaymentHistoryOrderByRelationAggregateInput
   }
 
   export type PaymentProvidersWhereUniqueInput = Prisma.AtLeast<{
@@ -7176,26 +7194,24 @@ export namespace Prisma {
     AND?: PaymentProvidersWhereInput | PaymentProvidersWhereInput[]
     OR?: PaymentProvidersWhereInput[]
     NOT?: PaymentProvidersWhereInput | PaymentProvidersWhereInput[]
+    provider?: EnumPaymentProvidersTypeFilter<"PaymentProviders"> | $Enums.PaymentProvidersType
     maxRetry?: IntFilter<"PaymentProviders"> | number
     timeout?: IntFilter<"PaymentProviders"> | number
-    provider?: EnumPaymentProvidersTypeFilter<"PaymentProviders"> | $Enums.PaymentProvidersType
-    detailid?: StringFilter<"PaymentProviders"> | string
+    detailId?: StringFilter<"PaymentProviders"> | string
     tenantId?: StringFilter<"PaymentProviders"> | string
-    paymentHistoryId?: StringFilter<"PaymentProviders"> | string
     tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
     detail?: XOR<ProviderDetailScalarRelationFilter, ProviderDetailWhereInput>
-    PaymentHistory?: PaymentHistoryListRelationFilter
+    histories?: PaymentHistoryListRelationFilter
   }, "id" | "name">
 
   export type PaymentProvidersOrderByWithAggregationInput = {
     id?: SortOrder
-    maxRetry?: SortOrder
-    timeout?: SortOrder
     name?: SortOrder
     provider?: SortOrder
-    detailid?: SortOrder
+    maxRetry?: SortOrder
+    timeout?: SortOrder
+    detailId?: SortOrder
     tenantId?: SortOrder
-    paymentHistoryId?: SortOrder
     _count?: PaymentProvidersCountOrderByAggregateInput
     _avg?: PaymentProvidersAvgOrderByAggregateInput
     _max?: PaymentProvidersMaxOrderByAggregateInput
@@ -7208,13 +7224,12 @@ export namespace Prisma {
     OR?: PaymentProvidersScalarWhereWithAggregatesInput[]
     NOT?: PaymentProvidersScalarWhereWithAggregatesInput | PaymentProvidersScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"PaymentProviders"> | string
-    maxRetry?: IntWithAggregatesFilter<"PaymentProviders"> | number
-    timeout?: IntWithAggregatesFilter<"PaymentProviders"> | number
     name?: StringWithAggregatesFilter<"PaymentProviders"> | string
     provider?: EnumPaymentProvidersTypeWithAggregatesFilter<"PaymentProviders"> | $Enums.PaymentProvidersType
-    detailid?: StringWithAggregatesFilter<"PaymentProviders"> | string
+    maxRetry?: IntWithAggregatesFilter<"PaymentProviders"> | number
+    timeout?: IntWithAggregatesFilter<"PaymentProviders"> | number
+    detailId?: StringWithAggregatesFilter<"PaymentProviders"> | string
     tenantId?: StringWithAggregatesFilter<"PaymentProviders"> | string
-    paymentHistoryId?: StringWithAggregatesFilter<"PaymentProviders"> | string
   }
 
   export type ProviderDetailWhereInput = {
@@ -7334,34 +7349,33 @@ export namespace Prisma {
     id?: string
     status: $Enums.PaymentHistoryStatusType
     tenant: TenantCreateNestedOneWithoutPaymentHistoryInput
-    paymentProviders: PaymentProvidersCreateNestedOneWithoutPaymentHistoryInput
+    providers?: PaymentProvidersCreateNestedManyWithoutHistoriesInput
   }
 
   export type PaymentHistoryUncheckedCreateInput = {
     id?: string
     tenantId: string
-    providerDetailsId: string
     status: $Enums.PaymentHistoryStatusType
+    providers?: PaymentProvidersUncheckedCreateNestedManyWithoutHistoriesInput
   }
 
   export type PaymentHistoryUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     status?: EnumPaymentHistoryStatusTypeFieldUpdateOperationsInput | $Enums.PaymentHistoryStatusType
     tenant?: TenantUpdateOneRequiredWithoutPaymentHistoryNestedInput
-    paymentProviders?: PaymentProvidersUpdateOneRequiredWithoutPaymentHistoryNestedInput
+    providers?: PaymentProvidersUpdateManyWithoutHistoriesNestedInput
   }
 
   export type PaymentHistoryUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     tenantId?: StringFieldUpdateOperationsInput | string
-    providerDetailsId?: StringFieldUpdateOperationsInput | string
     status?: EnumPaymentHistoryStatusTypeFieldUpdateOperationsInput | $Enums.PaymentHistoryStatusType
+    providers?: PaymentProvidersUncheckedUpdateManyWithoutHistoriesNestedInput
   }
 
   export type PaymentHistoryCreateManyInput = {
     id?: string
     tenantId: string
-    providerDetailsId: string
     status: $Enums.PaymentHistoryStatusType
   }
 
@@ -7373,7 +7387,6 @@ export namespace Prisma {
   export type PaymentHistoryUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     tenantId?: StringFieldUpdateOperationsInput | string
-    providerDetailsId?: StringFieldUpdateOperationsInput | string
     status?: EnumPaymentHistoryStatusTypeFieldUpdateOperationsInput | $Enums.PaymentHistoryStatusType
   }
 
@@ -7422,81 +7435,74 @@ export namespace Prisma {
 
   export type PaymentProvidersCreateInput = {
     id?: string
-    maxRetry: number
-    timeout: number
     name: string
     provider: $Enums.PaymentProvidersType
-    paymentHistoryId: string
+    maxRetry: number
+    timeout: number
     tenant: TenantCreateNestedOneWithoutPaymentProvidersInput
     detail: ProviderDetailCreateNestedOneWithoutPaymentProvidersInput
-    PaymentHistory?: PaymentHistoryCreateNestedManyWithoutPaymentProvidersInput
+    histories?: PaymentHistoryCreateNestedManyWithoutProvidersInput
   }
 
   export type PaymentProvidersUncheckedCreateInput = {
     id?: string
-    maxRetry: number
-    timeout: number
     name: string
     provider: $Enums.PaymentProvidersType
-    detailid: string
+    maxRetry: number
+    timeout: number
+    detailId: string
     tenantId: string
-    paymentHistoryId: string
-    PaymentHistory?: PaymentHistoryUncheckedCreateNestedManyWithoutPaymentProvidersInput
+    histories?: PaymentHistoryUncheckedCreateNestedManyWithoutProvidersInput
   }
 
   export type PaymentProvidersUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    maxRetry?: IntFieldUpdateOperationsInput | number
-    timeout?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     provider?: EnumPaymentProvidersTypeFieldUpdateOperationsInput | $Enums.PaymentProvidersType
-    paymentHistoryId?: StringFieldUpdateOperationsInput | string
+    maxRetry?: IntFieldUpdateOperationsInput | number
+    timeout?: IntFieldUpdateOperationsInput | number
     tenant?: TenantUpdateOneRequiredWithoutPaymentProvidersNestedInput
     detail?: ProviderDetailUpdateOneRequiredWithoutPaymentProvidersNestedInput
-    PaymentHistory?: PaymentHistoryUpdateManyWithoutPaymentProvidersNestedInput
+    histories?: PaymentHistoryUpdateManyWithoutProvidersNestedInput
   }
 
   export type PaymentProvidersUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    maxRetry?: IntFieldUpdateOperationsInput | number
-    timeout?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     provider?: EnumPaymentProvidersTypeFieldUpdateOperationsInput | $Enums.PaymentProvidersType
-    detailid?: StringFieldUpdateOperationsInput | string
+    maxRetry?: IntFieldUpdateOperationsInput | number
+    timeout?: IntFieldUpdateOperationsInput | number
+    detailId?: StringFieldUpdateOperationsInput | string
     tenantId?: StringFieldUpdateOperationsInput | string
-    paymentHistoryId?: StringFieldUpdateOperationsInput | string
-    PaymentHistory?: PaymentHistoryUncheckedUpdateManyWithoutPaymentProvidersNestedInput
+    histories?: PaymentHistoryUncheckedUpdateManyWithoutProvidersNestedInput
   }
 
   export type PaymentProvidersCreateManyInput = {
     id?: string
-    maxRetry: number
-    timeout: number
     name: string
     provider: $Enums.PaymentProvidersType
-    detailid: string
+    maxRetry: number
+    timeout: number
+    detailId: string
     tenantId: string
-    paymentHistoryId: string
   }
 
   export type PaymentProvidersUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    maxRetry?: IntFieldUpdateOperationsInput | number
-    timeout?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     provider?: EnumPaymentProvidersTypeFieldUpdateOperationsInput | $Enums.PaymentProvidersType
-    paymentHistoryId?: StringFieldUpdateOperationsInput | string
+    maxRetry?: IntFieldUpdateOperationsInput | number
+    timeout?: IntFieldUpdateOperationsInput | number
   }
 
   export type PaymentProvidersUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    maxRetry?: IntFieldUpdateOperationsInput | number
-    timeout?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     provider?: EnumPaymentProvidersTypeFieldUpdateOperationsInput | $Enums.PaymentProvidersType
-    detailid?: StringFieldUpdateOperationsInput | string
+    maxRetry?: IntFieldUpdateOperationsInput | number
+    timeout?: IntFieldUpdateOperationsInput | number
+    detailId?: StringFieldUpdateOperationsInput | string
     tenantId?: StringFieldUpdateOperationsInput | string
-    paymentHistoryId?: StringFieldUpdateOperationsInput | string
   }
 
   export type ProviderDetailCreateInput = {
@@ -7645,29 +7651,31 @@ export namespace Prisma {
     isNot?: TenantWhereInput
   }
 
-  export type PaymentProvidersScalarRelationFilter = {
-    is?: PaymentProvidersWhereInput
-    isNot?: PaymentProvidersWhereInput
+  export type PaymentProvidersListRelationFilter = {
+    every?: PaymentProvidersWhereInput
+    some?: PaymentProvidersWhereInput
+    none?: PaymentProvidersWhereInput
+  }
+
+  export type PaymentProvidersOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type PaymentHistoryCountOrderByAggregateInput = {
     id?: SortOrder
     tenantId?: SortOrder
-    providerDetailsId?: SortOrder
     status?: SortOrder
   }
 
   export type PaymentHistoryMaxOrderByAggregateInput = {
     id?: SortOrder
     tenantId?: SortOrder
-    providerDetailsId?: SortOrder
     status?: SortOrder
   }
 
   export type PaymentHistoryMinOrderByAggregateInput = {
     id?: SortOrder
     tenantId?: SortOrder
-    providerDetailsId?: SortOrder
     status?: SortOrder
   }
 
@@ -7699,20 +7707,10 @@ export namespace Prisma {
     _max?: NestedEnumPaymentHistoryStatusTypeFilter<$PrismaModel>
   }
 
-  export type PaymentProvidersListRelationFilter = {
-    every?: PaymentProvidersWhereInput
-    some?: PaymentProvidersWhereInput
-    none?: PaymentProvidersWhereInput
-  }
-
   export type PaymentHistoryListRelationFilter = {
     every?: PaymentHistoryWhereInput
     some?: PaymentHistoryWhereInput
     none?: PaymentHistoryWhereInput
-  }
-
-  export type PaymentProvidersOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type PaymentHistoryOrderByRelationAggregateInput = {
@@ -7734,6 +7732,13 @@ export namespace Prisma {
     name?: SortOrder
   }
 
+  export type EnumPaymentProvidersTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentProvidersType | EnumPaymentProvidersTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentProvidersType[] | ListEnumPaymentProvidersTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentProvidersType[] | ListEnumPaymentProvidersTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentProvidersTypeFilter<$PrismaModel> | $Enums.PaymentProvidersType
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -7745,13 +7750,6 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type EnumPaymentProvidersTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.PaymentProvidersType | EnumPaymentProvidersTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.PaymentProvidersType[] | ListEnumPaymentProvidersTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.PaymentProvidersType[] | ListEnumPaymentProvidersTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumPaymentProvidersTypeFilter<$PrismaModel> | $Enums.PaymentProvidersType
-  }
-
   export type ProviderDetailScalarRelationFilter = {
     is?: ProviderDetailWhereInput
     isNot?: ProviderDetailWhereInput
@@ -7759,13 +7757,12 @@ export namespace Prisma {
 
   export type PaymentProvidersCountOrderByAggregateInput = {
     id?: SortOrder
-    maxRetry?: SortOrder
-    timeout?: SortOrder
     name?: SortOrder
     provider?: SortOrder
-    detailid?: SortOrder
+    maxRetry?: SortOrder
+    timeout?: SortOrder
+    detailId?: SortOrder
     tenantId?: SortOrder
-    paymentHistoryId?: SortOrder
   }
 
   export type PaymentProvidersAvgOrderByAggregateInput = {
@@ -7775,29 +7772,37 @@ export namespace Prisma {
 
   export type PaymentProvidersMaxOrderByAggregateInput = {
     id?: SortOrder
-    maxRetry?: SortOrder
-    timeout?: SortOrder
     name?: SortOrder
     provider?: SortOrder
-    detailid?: SortOrder
+    maxRetry?: SortOrder
+    timeout?: SortOrder
+    detailId?: SortOrder
     tenantId?: SortOrder
-    paymentHistoryId?: SortOrder
   }
 
   export type PaymentProvidersMinOrderByAggregateInput = {
     id?: SortOrder
-    maxRetry?: SortOrder
-    timeout?: SortOrder
     name?: SortOrder
     provider?: SortOrder
-    detailid?: SortOrder
+    maxRetry?: SortOrder
+    timeout?: SortOrder
+    detailId?: SortOrder
     tenantId?: SortOrder
-    paymentHistoryId?: SortOrder
   }
 
   export type PaymentProvidersSumOrderByAggregateInput = {
     maxRetry?: SortOrder
     timeout?: SortOrder
+  }
+
+  export type EnumPaymentProvidersTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentProvidersType | EnumPaymentProvidersTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentProvidersType[] | ListEnumPaymentProvidersTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentProvidersType[] | ListEnumPaymentProvidersTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentProvidersTypeWithAggregatesFilter<$PrismaModel> | $Enums.PaymentProvidersType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPaymentProvidersTypeFilter<$PrismaModel>
+    _max?: NestedEnumPaymentProvidersTypeFilter<$PrismaModel>
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -7814,16 +7819,6 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type EnumPaymentProvidersTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.PaymentProvidersType | EnumPaymentProvidersTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.PaymentProvidersType[] | ListEnumPaymentProvidersTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.PaymentProvidersType[] | ListEnumPaymentProvidersTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumPaymentProvidersTypeWithAggregatesFilter<$PrismaModel> | $Enums.PaymentProvidersType
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumPaymentProvidersTypeFilter<$PrismaModel>
-    _max?: NestedEnumPaymentProvidersTypeFilter<$PrismaModel>
   }
 
   export type BoolFilter<$PrismaModel = never> = {
@@ -7963,10 +7958,16 @@ export namespace Prisma {
     connect?: TenantWhereUniqueInput
   }
 
-  export type PaymentProvidersCreateNestedOneWithoutPaymentHistoryInput = {
-    create?: XOR<PaymentProvidersCreateWithoutPaymentHistoryInput, PaymentProvidersUncheckedCreateWithoutPaymentHistoryInput>
-    connectOrCreate?: PaymentProvidersCreateOrConnectWithoutPaymentHistoryInput
-    connect?: PaymentProvidersWhereUniqueInput
+  export type PaymentProvidersCreateNestedManyWithoutHistoriesInput = {
+    create?: XOR<PaymentProvidersCreateWithoutHistoriesInput, PaymentProvidersUncheckedCreateWithoutHistoriesInput> | PaymentProvidersCreateWithoutHistoriesInput[] | PaymentProvidersUncheckedCreateWithoutHistoriesInput[]
+    connectOrCreate?: PaymentProvidersCreateOrConnectWithoutHistoriesInput | PaymentProvidersCreateOrConnectWithoutHistoriesInput[]
+    connect?: PaymentProvidersWhereUniqueInput | PaymentProvidersWhereUniqueInput[]
+  }
+
+  export type PaymentProvidersUncheckedCreateNestedManyWithoutHistoriesInput = {
+    create?: XOR<PaymentProvidersCreateWithoutHistoriesInput, PaymentProvidersUncheckedCreateWithoutHistoriesInput> | PaymentProvidersCreateWithoutHistoriesInput[] | PaymentProvidersUncheckedCreateWithoutHistoriesInput[]
+    connectOrCreate?: PaymentProvidersCreateOrConnectWithoutHistoriesInput | PaymentProvidersCreateOrConnectWithoutHistoriesInput[]
+    connect?: PaymentProvidersWhereUniqueInput | PaymentProvidersWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -7985,12 +7986,30 @@ export namespace Prisma {
     update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutPaymentHistoryInput, TenantUpdateWithoutPaymentHistoryInput>, TenantUncheckedUpdateWithoutPaymentHistoryInput>
   }
 
-  export type PaymentProvidersUpdateOneRequiredWithoutPaymentHistoryNestedInput = {
-    create?: XOR<PaymentProvidersCreateWithoutPaymentHistoryInput, PaymentProvidersUncheckedCreateWithoutPaymentHistoryInput>
-    connectOrCreate?: PaymentProvidersCreateOrConnectWithoutPaymentHistoryInput
-    upsert?: PaymentProvidersUpsertWithoutPaymentHistoryInput
-    connect?: PaymentProvidersWhereUniqueInput
-    update?: XOR<XOR<PaymentProvidersUpdateToOneWithWhereWithoutPaymentHistoryInput, PaymentProvidersUpdateWithoutPaymentHistoryInput>, PaymentProvidersUncheckedUpdateWithoutPaymentHistoryInput>
+  export type PaymentProvidersUpdateManyWithoutHistoriesNestedInput = {
+    create?: XOR<PaymentProvidersCreateWithoutHistoriesInput, PaymentProvidersUncheckedCreateWithoutHistoriesInput> | PaymentProvidersCreateWithoutHistoriesInput[] | PaymentProvidersUncheckedCreateWithoutHistoriesInput[]
+    connectOrCreate?: PaymentProvidersCreateOrConnectWithoutHistoriesInput | PaymentProvidersCreateOrConnectWithoutHistoriesInput[]
+    upsert?: PaymentProvidersUpsertWithWhereUniqueWithoutHistoriesInput | PaymentProvidersUpsertWithWhereUniqueWithoutHistoriesInput[]
+    set?: PaymentProvidersWhereUniqueInput | PaymentProvidersWhereUniqueInput[]
+    disconnect?: PaymentProvidersWhereUniqueInput | PaymentProvidersWhereUniqueInput[]
+    delete?: PaymentProvidersWhereUniqueInput | PaymentProvidersWhereUniqueInput[]
+    connect?: PaymentProvidersWhereUniqueInput | PaymentProvidersWhereUniqueInput[]
+    update?: PaymentProvidersUpdateWithWhereUniqueWithoutHistoriesInput | PaymentProvidersUpdateWithWhereUniqueWithoutHistoriesInput[]
+    updateMany?: PaymentProvidersUpdateManyWithWhereWithoutHistoriesInput | PaymentProvidersUpdateManyWithWhereWithoutHistoriesInput[]
+    deleteMany?: PaymentProvidersScalarWhereInput | PaymentProvidersScalarWhereInput[]
+  }
+
+  export type PaymentProvidersUncheckedUpdateManyWithoutHistoriesNestedInput = {
+    create?: XOR<PaymentProvidersCreateWithoutHistoriesInput, PaymentProvidersUncheckedCreateWithoutHistoriesInput> | PaymentProvidersCreateWithoutHistoriesInput[] | PaymentProvidersUncheckedCreateWithoutHistoriesInput[]
+    connectOrCreate?: PaymentProvidersCreateOrConnectWithoutHistoriesInput | PaymentProvidersCreateOrConnectWithoutHistoriesInput[]
+    upsert?: PaymentProvidersUpsertWithWhereUniqueWithoutHistoriesInput | PaymentProvidersUpsertWithWhereUniqueWithoutHistoriesInput[]
+    set?: PaymentProvidersWhereUniqueInput | PaymentProvidersWhereUniqueInput[]
+    disconnect?: PaymentProvidersWhereUniqueInput | PaymentProvidersWhereUniqueInput[]
+    delete?: PaymentProvidersWhereUniqueInput | PaymentProvidersWhereUniqueInput[]
+    connect?: PaymentProvidersWhereUniqueInput | PaymentProvidersWhereUniqueInput[]
+    update?: PaymentProvidersUpdateWithWhereUniqueWithoutHistoriesInput | PaymentProvidersUpdateWithWhereUniqueWithoutHistoriesInput[]
+    updateMany?: PaymentProvidersUpdateManyWithWhereWithoutHistoriesInput | PaymentProvidersUpdateManyWithWhereWithoutHistoriesInput[]
+    deleteMany?: PaymentProvidersScalarWhereInput | PaymentProvidersScalarWhereInput[]
   }
 
   export type PaymentProvidersCreateNestedManyWithoutTenantInput = {
@@ -8089,18 +8108,20 @@ export namespace Prisma {
     connect?: ProviderDetailWhereUniqueInput
   }
 
-  export type PaymentHistoryCreateNestedManyWithoutPaymentProvidersInput = {
-    create?: XOR<PaymentHistoryCreateWithoutPaymentProvidersInput, PaymentHistoryUncheckedCreateWithoutPaymentProvidersInput> | PaymentHistoryCreateWithoutPaymentProvidersInput[] | PaymentHistoryUncheckedCreateWithoutPaymentProvidersInput[]
-    connectOrCreate?: PaymentHistoryCreateOrConnectWithoutPaymentProvidersInput | PaymentHistoryCreateOrConnectWithoutPaymentProvidersInput[]
-    createMany?: PaymentHistoryCreateManyPaymentProvidersInputEnvelope
+  export type PaymentHistoryCreateNestedManyWithoutProvidersInput = {
+    create?: XOR<PaymentHistoryCreateWithoutProvidersInput, PaymentHistoryUncheckedCreateWithoutProvidersInput> | PaymentHistoryCreateWithoutProvidersInput[] | PaymentHistoryUncheckedCreateWithoutProvidersInput[]
+    connectOrCreate?: PaymentHistoryCreateOrConnectWithoutProvidersInput | PaymentHistoryCreateOrConnectWithoutProvidersInput[]
     connect?: PaymentHistoryWhereUniqueInput | PaymentHistoryWhereUniqueInput[]
   }
 
-  export type PaymentHistoryUncheckedCreateNestedManyWithoutPaymentProvidersInput = {
-    create?: XOR<PaymentHistoryCreateWithoutPaymentProvidersInput, PaymentHistoryUncheckedCreateWithoutPaymentProvidersInput> | PaymentHistoryCreateWithoutPaymentProvidersInput[] | PaymentHistoryUncheckedCreateWithoutPaymentProvidersInput[]
-    connectOrCreate?: PaymentHistoryCreateOrConnectWithoutPaymentProvidersInput | PaymentHistoryCreateOrConnectWithoutPaymentProvidersInput[]
-    createMany?: PaymentHistoryCreateManyPaymentProvidersInputEnvelope
+  export type PaymentHistoryUncheckedCreateNestedManyWithoutProvidersInput = {
+    create?: XOR<PaymentHistoryCreateWithoutProvidersInput, PaymentHistoryUncheckedCreateWithoutProvidersInput> | PaymentHistoryCreateWithoutProvidersInput[] | PaymentHistoryUncheckedCreateWithoutProvidersInput[]
+    connectOrCreate?: PaymentHistoryCreateOrConnectWithoutProvidersInput | PaymentHistoryCreateOrConnectWithoutProvidersInput[]
     connect?: PaymentHistoryWhereUniqueInput | PaymentHistoryWhereUniqueInput[]
+  }
+
+  export type EnumPaymentProvidersTypeFieldUpdateOperationsInput = {
+    set?: $Enums.PaymentProvidersType
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -8109,10 +8130,6 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
-  }
-
-  export type EnumPaymentProvidersTypeFieldUpdateOperationsInput = {
-    set?: $Enums.PaymentProvidersType
   }
 
   export type TenantUpdateOneRequiredWithoutPaymentProvidersNestedInput = {
@@ -8131,31 +8148,29 @@ export namespace Prisma {
     update?: XOR<XOR<ProviderDetailUpdateToOneWithWhereWithoutPaymentProvidersInput, ProviderDetailUpdateWithoutPaymentProvidersInput>, ProviderDetailUncheckedUpdateWithoutPaymentProvidersInput>
   }
 
-  export type PaymentHistoryUpdateManyWithoutPaymentProvidersNestedInput = {
-    create?: XOR<PaymentHistoryCreateWithoutPaymentProvidersInput, PaymentHistoryUncheckedCreateWithoutPaymentProvidersInput> | PaymentHistoryCreateWithoutPaymentProvidersInput[] | PaymentHistoryUncheckedCreateWithoutPaymentProvidersInput[]
-    connectOrCreate?: PaymentHistoryCreateOrConnectWithoutPaymentProvidersInput | PaymentHistoryCreateOrConnectWithoutPaymentProvidersInput[]
-    upsert?: PaymentHistoryUpsertWithWhereUniqueWithoutPaymentProvidersInput | PaymentHistoryUpsertWithWhereUniqueWithoutPaymentProvidersInput[]
-    createMany?: PaymentHistoryCreateManyPaymentProvidersInputEnvelope
+  export type PaymentHistoryUpdateManyWithoutProvidersNestedInput = {
+    create?: XOR<PaymentHistoryCreateWithoutProvidersInput, PaymentHistoryUncheckedCreateWithoutProvidersInput> | PaymentHistoryCreateWithoutProvidersInput[] | PaymentHistoryUncheckedCreateWithoutProvidersInput[]
+    connectOrCreate?: PaymentHistoryCreateOrConnectWithoutProvidersInput | PaymentHistoryCreateOrConnectWithoutProvidersInput[]
+    upsert?: PaymentHistoryUpsertWithWhereUniqueWithoutProvidersInput | PaymentHistoryUpsertWithWhereUniqueWithoutProvidersInput[]
     set?: PaymentHistoryWhereUniqueInput | PaymentHistoryWhereUniqueInput[]
     disconnect?: PaymentHistoryWhereUniqueInput | PaymentHistoryWhereUniqueInput[]
     delete?: PaymentHistoryWhereUniqueInput | PaymentHistoryWhereUniqueInput[]
     connect?: PaymentHistoryWhereUniqueInput | PaymentHistoryWhereUniqueInput[]
-    update?: PaymentHistoryUpdateWithWhereUniqueWithoutPaymentProvidersInput | PaymentHistoryUpdateWithWhereUniqueWithoutPaymentProvidersInput[]
-    updateMany?: PaymentHistoryUpdateManyWithWhereWithoutPaymentProvidersInput | PaymentHistoryUpdateManyWithWhereWithoutPaymentProvidersInput[]
+    update?: PaymentHistoryUpdateWithWhereUniqueWithoutProvidersInput | PaymentHistoryUpdateWithWhereUniqueWithoutProvidersInput[]
+    updateMany?: PaymentHistoryUpdateManyWithWhereWithoutProvidersInput | PaymentHistoryUpdateManyWithWhereWithoutProvidersInput[]
     deleteMany?: PaymentHistoryScalarWhereInput | PaymentHistoryScalarWhereInput[]
   }
 
-  export type PaymentHistoryUncheckedUpdateManyWithoutPaymentProvidersNestedInput = {
-    create?: XOR<PaymentHistoryCreateWithoutPaymentProvidersInput, PaymentHistoryUncheckedCreateWithoutPaymentProvidersInput> | PaymentHistoryCreateWithoutPaymentProvidersInput[] | PaymentHistoryUncheckedCreateWithoutPaymentProvidersInput[]
-    connectOrCreate?: PaymentHistoryCreateOrConnectWithoutPaymentProvidersInput | PaymentHistoryCreateOrConnectWithoutPaymentProvidersInput[]
-    upsert?: PaymentHistoryUpsertWithWhereUniqueWithoutPaymentProvidersInput | PaymentHistoryUpsertWithWhereUniqueWithoutPaymentProvidersInput[]
-    createMany?: PaymentHistoryCreateManyPaymentProvidersInputEnvelope
+  export type PaymentHistoryUncheckedUpdateManyWithoutProvidersNestedInput = {
+    create?: XOR<PaymentHistoryCreateWithoutProvidersInput, PaymentHistoryUncheckedCreateWithoutProvidersInput> | PaymentHistoryCreateWithoutProvidersInput[] | PaymentHistoryUncheckedCreateWithoutProvidersInput[]
+    connectOrCreate?: PaymentHistoryCreateOrConnectWithoutProvidersInput | PaymentHistoryCreateOrConnectWithoutProvidersInput[]
+    upsert?: PaymentHistoryUpsertWithWhereUniqueWithoutProvidersInput | PaymentHistoryUpsertWithWhereUniqueWithoutProvidersInput[]
     set?: PaymentHistoryWhereUniqueInput | PaymentHistoryWhereUniqueInput[]
     disconnect?: PaymentHistoryWhereUniqueInput | PaymentHistoryWhereUniqueInput[]
     delete?: PaymentHistoryWhereUniqueInput | PaymentHistoryWhereUniqueInput[]
     connect?: PaymentHistoryWhereUniqueInput | PaymentHistoryWhereUniqueInput[]
-    update?: PaymentHistoryUpdateWithWhereUniqueWithoutPaymentProvidersInput | PaymentHistoryUpdateWithWhereUniqueWithoutPaymentProvidersInput[]
-    updateMany?: PaymentHistoryUpdateManyWithWhereWithoutPaymentProvidersInput | PaymentHistoryUpdateManyWithWhereWithoutPaymentProvidersInput[]
+    update?: PaymentHistoryUpdateWithWhereUniqueWithoutProvidersInput | PaymentHistoryUpdateWithWhereUniqueWithoutProvidersInput[]
+    updateMany?: PaymentHistoryUpdateManyWithWhereWithoutProvidersInput | PaymentHistoryUpdateManyWithWhereWithoutProvidersInput[]
     deleteMany?: PaymentHistoryScalarWhereInput | PaymentHistoryScalarWhereInput[]
   }
 
@@ -8335,6 +8350,16 @@ export namespace Prisma {
     not?: NestedEnumPaymentProvidersTypeFilter<$PrismaModel> | $Enums.PaymentProvidersType
   }
 
+  export type NestedEnumPaymentProvidersTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentProvidersType | EnumPaymentProvidersTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentProvidersType[] | ListEnumPaymentProvidersTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentProvidersType[] | ListEnumPaymentProvidersTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentProvidersTypeWithAggregatesFilter<$PrismaModel> | $Enums.PaymentProvidersType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPaymentProvidersTypeFilter<$PrismaModel>
+    _max?: NestedEnumPaymentProvidersTypeFilter<$PrismaModel>
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -8360,16 +8385,6 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
-  export type NestedEnumPaymentProvidersTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.PaymentProvidersType | EnumPaymentProvidersTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.PaymentProvidersType[] | ListEnumPaymentProvidersTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.PaymentProvidersType[] | ListEnumPaymentProvidersTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumPaymentProvidersTypeWithAggregatesFilter<$PrismaModel> | $Enums.PaymentProvidersType
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumPaymentProvidersTypeFilter<$PrismaModel>
-    _max?: NestedEnumPaymentProvidersTypeFilter<$PrismaModel>
   }
 
   export type NestedBoolFilter<$PrismaModel = never> = {
@@ -8461,31 +8476,29 @@ export namespace Prisma {
     create: XOR<TenantCreateWithoutPaymentHistoryInput, TenantUncheckedCreateWithoutPaymentHistoryInput>
   }
 
-  export type PaymentProvidersCreateWithoutPaymentHistoryInput = {
+  export type PaymentProvidersCreateWithoutHistoriesInput = {
     id?: string
-    maxRetry: number
-    timeout: number
     name: string
     provider: $Enums.PaymentProvidersType
-    paymentHistoryId: string
+    maxRetry: number
+    timeout: number
     tenant: TenantCreateNestedOneWithoutPaymentProvidersInput
     detail: ProviderDetailCreateNestedOneWithoutPaymentProvidersInput
   }
 
-  export type PaymentProvidersUncheckedCreateWithoutPaymentHistoryInput = {
+  export type PaymentProvidersUncheckedCreateWithoutHistoriesInput = {
     id?: string
-    maxRetry: number
-    timeout: number
     name: string
     provider: $Enums.PaymentProvidersType
-    detailid: string
+    maxRetry: number
+    timeout: number
+    detailId: string
     tenantId: string
-    paymentHistoryId: string
   }
 
-  export type PaymentProvidersCreateOrConnectWithoutPaymentHistoryInput = {
+  export type PaymentProvidersCreateOrConnectWithoutHistoriesInput = {
     where: PaymentProvidersWhereUniqueInput
-    create: XOR<PaymentProvidersCreateWithoutPaymentHistoryInput, PaymentProvidersUncheckedCreateWithoutPaymentHistoryInput>
+    create: XOR<PaymentProvidersCreateWithoutHistoriesInput, PaymentProvidersUncheckedCreateWithoutHistoriesInput>
   }
 
   export type TenantUpsertWithoutPaymentHistoryInput = {
@@ -8511,59 +8524,53 @@ export namespace Prisma {
     PaymentProviders?: PaymentProvidersUncheckedUpdateManyWithoutTenantNestedInput
   }
 
-  export type PaymentProvidersUpsertWithoutPaymentHistoryInput = {
-    update: XOR<PaymentProvidersUpdateWithoutPaymentHistoryInput, PaymentProvidersUncheckedUpdateWithoutPaymentHistoryInput>
-    create: XOR<PaymentProvidersCreateWithoutPaymentHistoryInput, PaymentProvidersUncheckedCreateWithoutPaymentHistoryInput>
-    where?: PaymentProvidersWhereInput
+  export type PaymentProvidersUpsertWithWhereUniqueWithoutHistoriesInput = {
+    where: PaymentProvidersWhereUniqueInput
+    update: XOR<PaymentProvidersUpdateWithoutHistoriesInput, PaymentProvidersUncheckedUpdateWithoutHistoriesInput>
+    create: XOR<PaymentProvidersCreateWithoutHistoriesInput, PaymentProvidersUncheckedCreateWithoutHistoriesInput>
   }
 
-  export type PaymentProvidersUpdateToOneWithWhereWithoutPaymentHistoryInput = {
-    where?: PaymentProvidersWhereInput
-    data: XOR<PaymentProvidersUpdateWithoutPaymentHistoryInput, PaymentProvidersUncheckedUpdateWithoutPaymentHistoryInput>
+  export type PaymentProvidersUpdateWithWhereUniqueWithoutHistoriesInput = {
+    where: PaymentProvidersWhereUniqueInput
+    data: XOR<PaymentProvidersUpdateWithoutHistoriesInput, PaymentProvidersUncheckedUpdateWithoutHistoriesInput>
   }
 
-  export type PaymentProvidersUpdateWithoutPaymentHistoryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    maxRetry?: IntFieldUpdateOperationsInput | number
-    timeout?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    provider?: EnumPaymentProvidersTypeFieldUpdateOperationsInput | $Enums.PaymentProvidersType
-    paymentHistoryId?: StringFieldUpdateOperationsInput | string
-    tenant?: TenantUpdateOneRequiredWithoutPaymentProvidersNestedInput
-    detail?: ProviderDetailUpdateOneRequiredWithoutPaymentProvidersNestedInput
+  export type PaymentProvidersUpdateManyWithWhereWithoutHistoriesInput = {
+    where: PaymentProvidersScalarWhereInput
+    data: XOR<PaymentProvidersUpdateManyMutationInput, PaymentProvidersUncheckedUpdateManyWithoutHistoriesInput>
   }
 
-  export type PaymentProvidersUncheckedUpdateWithoutPaymentHistoryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    maxRetry?: IntFieldUpdateOperationsInput | number
-    timeout?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    provider?: EnumPaymentProvidersTypeFieldUpdateOperationsInput | $Enums.PaymentProvidersType
-    detailid?: StringFieldUpdateOperationsInput | string
-    tenantId?: StringFieldUpdateOperationsInput | string
-    paymentHistoryId?: StringFieldUpdateOperationsInput | string
+  export type PaymentProvidersScalarWhereInput = {
+    AND?: PaymentProvidersScalarWhereInput | PaymentProvidersScalarWhereInput[]
+    OR?: PaymentProvidersScalarWhereInput[]
+    NOT?: PaymentProvidersScalarWhereInput | PaymentProvidersScalarWhereInput[]
+    id?: StringFilter<"PaymentProviders"> | string
+    name?: StringFilter<"PaymentProviders"> | string
+    provider?: EnumPaymentProvidersTypeFilter<"PaymentProviders"> | $Enums.PaymentProvidersType
+    maxRetry?: IntFilter<"PaymentProviders"> | number
+    timeout?: IntFilter<"PaymentProviders"> | number
+    detailId?: StringFilter<"PaymentProviders"> | string
+    tenantId?: StringFilter<"PaymentProviders"> | string
   }
 
   export type PaymentProvidersCreateWithoutTenantInput = {
     id?: string
-    maxRetry: number
-    timeout: number
     name: string
     provider: $Enums.PaymentProvidersType
-    paymentHistoryId: string
+    maxRetry: number
+    timeout: number
     detail: ProviderDetailCreateNestedOneWithoutPaymentProvidersInput
-    PaymentHistory?: PaymentHistoryCreateNestedManyWithoutPaymentProvidersInput
+    histories?: PaymentHistoryCreateNestedManyWithoutProvidersInput
   }
 
   export type PaymentProvidersUncheckedCreateWithoutTenantInput = {
     id?: string
-    maxRetry: number
-    timeout: number
     name: string
     provider: $Enums.PaymentProvidersType
-    detailid: string
-    paymentHistoryId: string
-    PaymentHistory?: PaymentHistoryUncheckedCreateNestedManyWithoutPaymentProvidersInput
+    maxRetry: number
+    timeout: number
+    detailId: string
+    histories?: PaymentHistoryUncheckedCreateNestedManyWithoutProvidersInput
   }
 
   export type PaymentProvidersCreateOrConnectWithoutTenantInput = {
@@ -8579,13 +8586,13 @@ export namespace Prisma {
   export type PaymentHistoryCreateWithoutTenantInput = {
     id?: string
     status: $Enums.PaymentHistoryStatusType
-    paymentProviders: PaymentProvidersCreateNestedOneWithoutPaymentHistoryInput
+    providers?: PaymentProvidersCreateNestedManyWithoutHistoriesInput
   }
 
   export type PaymentHistoryUncheckedCreateWithoutTenantInput = {
     id?: string
-    providerDetailsId: string
     status: $Enums.PaymentHistoryStatusType
+    providers?: PaymentProvidersUncheckedCreateNestedManyWithoutHistoriesInput
   }
 
   export type PaymentHistoryCreateOrConnectWithoutTenantInput = {
@@ -8614,20 +8621,6 @@ export namespace Prisma {
     data: XOR<PaymentProvidersUpdateManyMutationInput, PaymentProvidersUncheckedUpdateManyWithoutTenantInput>
   }
 
-  export type PaymentProvidersScalarWhereInput = {
-    AND?: PaymentProvidersScalarWhereInput | PaymentProvidersScalarWhereInput[]
-    OR?: PaymentProvidersScalarWhereInput[]
-    NOT?: PaymentProvidersScalarWhereInput | PaymentProvidersScalarWhereInput[]
-    id?: StringFilter<"PaymentProviders"> | string
-    maxRetry?: IntFilter<"PaymentProviders"> | number
-    timeout?: IntFilter<"PaymentProviders"> | number
-    name?: StringFilter<"PaymentProviders"> | string
-    provider?: EnumPaymentProvidersTypeFilter<"PaymentProviders"> | $Enums.PaymentProvidersType
-    detailid?: StringFilter<"PaymentProviders"> | string
-    tenantId?: StringFilter<"PaymentProviders"> | string
-    paymentHistoryId?: StringFilter<"PaymentProviders"> | string
-  }
-
   export type PaymentHistoryUpsertWithWhereUniqueWithoutTenantInput = {
     where: PaymentHistoryWhereUniqueInput
     update: XOR<PaymentHistoryUpdateWithoutTenantInput, PaymentHistoryUncheckedUpdateWithoutTenantInput>
@@ -8650,7 +8643,6 @@ export namespace Prisma {
     NOT?: PaymentHistoryScalarWhereInput | PaymentHistoryScalarWhereInput[]
     id?: StringFilter<"PaymentHistory"> | string
     tenantId?: StringFilter<"PaymentHistory"> | string
-    providerDetailsId?: StringFilter<"PaymentHistory"> | string
     status?: EnumPaymentHistoryStatusTypeFilter<"PaymentHistory"> | $Enums.PaymentHistoryStatusType
   }
 
@@ -8692,26 +8684,21 @@ export namespace Prisma {
     create: XOR<ProviderDetailCreateWithoutPaymentProvidersInput, ProviderDetailUncheckedCreateWithoutPaymentProvidersInput>
   }
 
-  export type PaymentHistoryCreateWithoutPaymentProvidersInput = {
+  export type PaymentHistoryCreateWithoutProvidersInput = {
     id?: string
     status: $Enums.PaymentHistoryStatusType
     tenant: TenantCreateNestedOneWithoutPaymentHistoryInput
   }
 
-  export type PaymentHistoryUncheckedCreateWithoutPaymentProvidersInput = {
+  export type PaymentHistoryUncheckedCreateWithoutProvidersInput = {
     id?: string
     tenantId: string
     status: $Enums.PaymentHistoryStatusType
   }
 
-  export type PaymentHistoryCreateOrConnectWithoutPaymentProvidersInput = {
+  export type PaymentHistoryCreateOrConnectWithoutProvidersInput = {
     where: PaymentHistoryWhereUniqueInput
-    create: XOR<PaymentHistoryCreateWithoutPaymentProvidersInput, PaymentHistoryUncheckedCreateWithoutPaymentProvidersInput>
-  }
-
-  export type PaymentHistoryCreateManyPaymentProvidersInputEnvelope = {
-    data: PaymentHistoryCreateManyPaymentProvidersInput | PaymentHistoryCreateManyPaymentProvidersInput[]
-    skipDuplicates?: boolean
+    create: XOR<PaymentHistoryCreateWithoutProvidersInput, PaymentHistoryUncheckedCreateWithoutProvidersInput>
   }
 
   export type TenantUpsertWithoutPaymentProvidersInput = {
@@ -8764,20 +8751,20 @@ export namespace Prisma {
     authenticationId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type PaymentHistoryUpsertWithWhereUniqueWithoutPaymentProvidersInput = {
+  export type PaymentHistoryUpsertWithWhereUniqueWithoutProvidersInput = {
     where: PaymentHistoryWhereUniqueInput
-    update: XOR<PaymentHistoryUpdateWithoutPaymentProvidersInput, PaymentHistoryUncheckedUpdateWithoutPaymentProvidersInput>
-    create: XOR<PaymentHistoryCreateWithoutPaymentProvidersInput, PaymentHistoryUncheckedCreateWithoutPaymentProvidersInput>
+    update: XOR<PaymentHistoryUpdateWithoutProvidersInput, PaymentHistoryUncheckedUpdateWithoutProvidersInput>
+    create: XOR<PaymentHistoryCreateWithoutProvidersInput, PaymentHistoryUncheckedCreateWithoutProvidersInput>
   }
 
-  export type PaymentHistoryUpdateWithWhereUniqueWithoutPaymentProvidersInput = {
+  export type PaymentHistoryUpdateWithWhereUniqueWithoutProvidersInput = {
     where: PaymentHistoryWhereUniqueInput
-    data: XOR<PaymentHistoryUpdateWithoutPaymentProvidersInput, PaymentHistoryUncheckedUpdateWithoutPaymentProvidersInput>
+    data: XOR<PaymentHistoryUpdateWithoutProvidersInput, PaymentHistoryUncheckedUpdateWithoutProvidersInput>
   }
 
-  export type PaymentHistoryUpdateManyWithWhereWithoutPaymentProvidersInput = {
+  export type PaymentHistoryUpdateManyWithWhereWithoutProvidersInput = {
     where: PaymentHistoryScalarWhereInput
-    data: XOR<PaymentHistoryUpdateManyMutationInput, PaymentHistoryUncheckedUpdateManyWithoutPaymentProvidersInput>
+    data: XOR<PaymentHistoryUpdateManyMutationInput, PaymentHistoryUncheckedUpdateManyWithoutProvidersInput>
   }
 
   export type ProviderAuthenticationCreateWithoutProviderDetailInput = {
@@ -8803,24 +8790,22 @@ export namespace Prisma {
 
   export type PaymentProvidersCreateWithoutDetailInput = {
     id?: string
-    maxRetry: number
-    timeout: number
     name: string
     provider: $Enums.PaymentProvidersType
-    paymentHistoryId: string
+    maxRetry: number
+    timeout: number
     tenant: TenantCreateNestedOneWithoutPaymentProvidersInput
-    PaymentHistory?: PaymentHistoryCreateNestedManyWithoutPaymentProvidersInput
+    histories?: PaymentHistoryCreateNestedManyWithoutProvidersInput
   }
 
   export type PaymentProvidersUncheckedCreateWithoutDetailInput = {
     id?: string
-    maxRetry: number
-    timeout: number
     name: string
     provider: $Enums.PaymentProvidersType
+    maxRetry: number
+    timeout: number
     tenantId: string
-    paymentHistoryId: string
-    PaymentHistory?: PaymentHistoryUncheckedCreateNestedManyWithoutPaymentProvidersInput
+    histories?: PaymentHistoryUncheckedCreateNestedManyWithoutProvidersInput
   }
 
   export type PaymentProvidersCreateOrConnectWithoutDetailInput = {
@@ -8929,91 +8914,109 @@ export namespace Prisma {
     authenticationId?: StringFilter<"ProviderDetail"> | string
   }
 
+  export type PaymentProvidersUpdateWithoutHistoriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    provider?: EnumPaymentProvidersTypeFieldUpdateOperationsInput | $Enums.PaymentProvidersType
+    maxRetry?: IntFieldUpdateOperationsInput | number
+    timeout?: IntFieldUpdateOperationsInput | number
+    tenant?: TenantUpdateOneRequiredWithoutPaymentProvidersNestedInput
+    detail?: ProviderDetailUpdateOneRequiredWithoutPaymentProvidersNestedInput
+  }
+
+  export type PaymentProvidersUncheckedUpdateWithoutHistoriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    provider?: EnumPaymentProvidersTypeFieldUpdateOperationsInput | $Enums.PaymentProvidersType
+    maxRetry?: IntFieldUpdateOperationsInput | number
+    timeout?: IntFieldUpdateOperationsInput | number
+    detailId?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PaymentProvidersUncheckedUpdateManyWithoutHistoriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    provider?: EnumPaymentProvidersTypeFieldUpdateOperationsInput | $Enums.PaymentProvidersType
+    maxRetry?: IntFieldUpdateOperationsInput | number
+    timeout?: IntFieldUpdateOperationsInput | number
+    detailId?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+  }
+
   export type PaymentProvidersCreateManyTenantInput = {
     id?: string
-    maxRetry: number
-    timeout: number
     name: string
     provider: $Enums.PaymentProvidersType
-    detailid: string
-    paymentHistoryId: string
+    maxRetry: number
+    timeout: number
+    detailId: string
   }
 
   export type PaymentHistoryCreateManyTenantInput = {
     id?: string
-    providerDetailsId: string
     status: $Enums.PaymentHistoryStatusType
   }
 
   export type PaymentProvidersUpdateWithoutTenantInput = {
     id?: StringFieldUpdateOperationsInput | string
-    maxRetry?: IntFieldUpdateOperationsInput | number
-    timeout?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     provider?: EnumPaymentProvidersTypeFieldUpdateOperationsInput | $Enums.PaymentProvidersType
-    paymentHistoryId?: StringFieldUpdateOperationsInput | string
+    maxRetry?: IntFieldUpdateOperationsInput | number
+    timeout?: IntFieldUpdateOperationsInput | number
     detail?: ProviderDetailUpdateOneRequiredWithoutPaymentProvidersNestedInput
-    PaymentHistory?: PaymentHistoryUpdateManyWithoutPaymentProvidersNestedInput
+    histories?: PaymentHistoryUpdateManyWithoutProvidersNestedInput
   }
 
   export type PaymentProvidersUncheckedUpdateWithoutTenantInput = {
     id?: StringFieldUpdateOperationsInput | string
-    maxRetry?: IntFieldUpdateOperationsInput | number
-    timeout?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     provider?: EnumPaymentProvidersTypeFieldUpdateOperationsInput | $Enums.PaymentProvidersType
-    detailid?: StringFieldUpdateOperationsInput | string
-    paymentHistoryId?: StringFieldUpdateOperationsInput | string
-    PaymentHistory?: PaymentHistoryUncheckedUpdateManyWithoutPaymentProvidersNestedInput
+    maxRetry?: IntFieldUpdateOperationsInput | number
+    timeout?: IntFieldUpdateOperationsInput | number
+    detailId?: StringFieldUpdateOperationsInput | string
+    histories?: PaymentHistoryUncheckedUpdateManyWithoutProvidersNestedInput
   }
 
   export type PaymentProvidersUncheckedUpdateManyWithoutTenantInput = {
     id?: StringFieldUpdateOperationsInput | string
-    maxRetry?: IntFieldUpdateOperationsInput | number
-    timeout?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     provider?: EnumPaymentProvidersTypeFieldUpdateOperationsInput | $Enums.PaymentProvidersType
-    detailid?: StringFieldUpdateOperationsInput | string
-    paymentHistoryId?: StringFieldUpdateOperationsInput | string
+    maxRetry?: IntFieldUpdateOperationsInput | number
+    timeout?: IntFieldUpdateOperationsInput | number
+    detailId?: StringFieldUpdateOperationsInput | string
   }
 
   export type PaymentHistoryUpdateWithoutTenantInput = {
     id?: StringFieldUpdateOperationsInput | string
     status?: EnumPaymentHistoryStatusTypeFieldUpdateOperationsInput | $Enums.PaymentHistoryStatusType
-    paymentProviders?: PaymentProvidersUpdateOneRequiredWithoutPaymentHistoryNestedInput
+    providers?: PaymentProvidersUpdateManyWithoutHistoriesNestedInput
   }
 
   export type PaymentHistoryUncheckedUpdateWithoutTenantInput = {
     id?: StringFieldUpdateOperationsInput | string
-    providerDetailsId?: StringFieldUpdateOperationsInput | string
     status?: EnumPaymentHistoryStatusTypeFieldUpdateOperationsInput | $Enums.PaymentHistoryStatusType
+    providers?: PaymentProvidersUncheckedUpdateManyWithoutHistoriesNestedInput
   }
 
   export type PaymentHistoryUncheckedUpdateManyWithoutTenantInput = {
     id?: StringFieldUpdateOperationsInput | string
-    providerDetailsId?: StringFieldUpdateOperationsInput | string
     status?: EnumPaymentHistoryStatusTypeFieldUpdateOperationsInput | $Enums.PaymentHistoryStatusType
   }
 
-  export type PaymentHistoryCreateManyPaymentProvidersInput = {
-    id?: string
-    tenantId: string
-    status: $Enums.PaymentHistoryStatusType
-  }
-
-  export type PaymentHistoryUpdateWithoutPaymentProvidersInput = {
+  export type PaymentHistoryUpdateWithoutProvidersInput = {
     id?: StringFieldUpdateOperationsInput | string
     status?: EnumPaymentHistoryStatusTypeFieldUpdateOperationsInput | $Enums.PaymentHistoryStatusType
     tenant?: TenantUpdateOneRequiredWithoutPaymentHistoryNestedInput
   }
 
-  export type PaymentHistoryUncheckedUpdateWithoutPaymentProvidersInput = {
+  export type PaymentHistoryUncheckedUpdateWithoutProvidersInput = {
     id?: StringFieldUpdateOperationsInput | string
     tenantId?: StringFieldUpdateOperationsInput | string
     status?: EnumPaymentHistoryStatusTypeFieldUpdateOperationsInput | $Enums.PaymentHistoryStatusType
   }
 
-  export type PaymentHistoryUncheckedUpdateManyWithoutPaymentProvidersInput = {
+  export type PaymentHistoryUncheckedUpdateManyWithoutProvidersInput = {
     id?: StringFieldUpdateOperationsInput | string
     tenantId?: StringFieldUpdateOperationsInput | string
     status?: EnumPaymentHistoryStatusTypeFieldUpdateOperationsInput | $Enums.PaymentHistoryStatusType
@@ -9021,44 +9024,40 @@ export namespace Prisma {
 
   export type PaymentProvidersCreateManyDetailInput = {
     id?: string
-    maxRetry: number
-    timeout: number
     name: string
     provider: $Enums.PaymentProvidersType
+    maxRetry: number
+    timeout: number
     tenantId: string
-    paymentHistoryId: string
   }
 
   export type PaymentProvidersUpdateWithoutDetailInput = {
     id?: StringFieldUpdateOperationsInput | string
-    maxRetry?: IntFieldUpdateOperationsInput | number
-    timeout?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     provider?: EnumPaymentProvidersTypeFieldUpdateOperationsInput | $Enums.PaymentProvidersType
-    paymentHistoryId?: StringFieldUpdateOperationsInput | string
+    maxRetry?: IntFieldUpdateOperationsInput | number
+    timeout?: IntFieldUpdateOperationsInput | number
     tenant?: TenantUpdateOneRequiredWithoutPaymentProvidersNestedInput
-    PaymentHistory?: PaymentHistoryUpdateManyWithoutPaymentProvidersNestedInput
+    histories?: PaymentHistoryUpdateManyWithoutProvidersNestedInput
   }
 
   export type PaymentProvidersUncheckedUpdateWithoutDetailInput = {
     id?: StringFieldUpdateOperationsInput | string
-    maxRetry?: IntFieldUpdateOperationsInput | number
-    timeout?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     provider?: EnumPaymentProvidersTypeFieldUpdateOperationsInput | $Enums.PaymentProvidersType
+    maxRetry?: IntFieldUpdateOperationsInput | number
+    timeout?: IntFieldUpdateOperationsInput | number
     tenantId?: StringFieldUpdateOperationsInput | string
-    paymentHistoryId?: StringFieldUpdateOperationsInput | string
-    PaymentHistory?: PaymentHistoryUncheckedUpdateManyWithoutPaymentProvidersNestedInput
+    histories?: PaymentHistoryUncheckedUpdateManyWithoutProvidersNestedInput
   }
 
   export type PaymentProvidersUncheckedUpdateManyWithoutDetailInput = {
     id?: StringFieldUpdateOperationsInput | string
-    maxRetry?: IntFieldUpdateOperationsInput | number
-    timeout?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     provider?: EnumPaymentProvidersTypeFieldUpdateOperationsInput | $Enums.PaymentProvidersType
+    maxRetry?: IntFieldUpdateOperationsInput | number
+    timeout?: IntFieldUpdateOperationsInput | number
     tenantId?: StringFieldUpdateOperationsInput | string
-    paymentHistoryId?: StringFieldUpdateOperationsInput | string
   }
 
   export type ProviderDetailCreateManyAuthenticationInput = {

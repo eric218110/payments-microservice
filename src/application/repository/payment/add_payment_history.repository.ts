@@ -3,6 +3,6 @@ import { PaymentHistoryModel } from 'src/domain/payment/model/payment_history.mo
 export interface AddPaymentHistoryRepository {
   onAdd(
     tenantId: string,
-    paymentProviderId: string,
+    paymentProviderIds: string[],
   ): Promise<PaymentHistoryModel>;
 }
