@@ -179,7 +179,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/home/eric218110/studies/payments-microservice/prisma/.generate",
+      "value": "/home/eric218110/work/node/payments-microservice/prisma/.generate",
       "fromEnvVar": null
     },
     "config": {
@@ -195,7 +195,7 @@ const config = {
     "previewFeatures": [
       "multiSchema"
     ],
-    "sourceFilePath": "/home/eric218110/studies/payments-microservice/prisma/schema.prisma",
+    "sourceFilePath": "/home/eric218110/work/node/payments-microservice/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
