@@ -87,4 +87,26 @@ describe('(PaymentService)', () => {
     expect(spy).toHaveBeenCalledTimes(1);
     expect(spy).toHaveBeenCalledWith('any_client', ['id-123']);
   });
+
+  it('should be service return valid value when success', async () => {
+    const response = await sut.process(
+      paymentMock.tenant,
+      paymentMock.paymentMethodDTO,
+    );
+
+    expect(response.payment_id).toEqual('1234');
+    expect(response.status).toEqual('IN_PROGRESS');
+  });
+
+  it('should be service return valid value when not success', async () => {
+    jest.spyOn(fakes.notifyProcessPayment, 'onNotify').mockResolvedValue(false);
+
+    const response = await sut.process(
+      paymentMock.tenant,
+      paymentMock.paymentMethodDTO,
+    );
+
+    expect(response.payment_id).toEqual('');
+    expect(response.status).toEqual('FAIL');
+  });
 });
