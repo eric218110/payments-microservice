@@ -22,7 +22,7 @@ echo "RabbitMQ UI is up!"
 echo "running migrations and seed"
 
 npx prisma migrate deploy
-npm run mock:seed:prd
+npm run seed:prd
 
 echo "Starting app..."
 

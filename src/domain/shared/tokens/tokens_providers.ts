@@ -3,4 +3,5 @@ export const TokenProvider = {
   FindAllPaymentProviderRepository: 'FindAllPaymentProviderRepository',
   NotifyProcessPayment: 'NotifyProcessPayment',
   AddPaymentHistoryRepository: 'AddPaymentHistoryRepository',
+  MessageProvider: 'MessageProvider',
 };

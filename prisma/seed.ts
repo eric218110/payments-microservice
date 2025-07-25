@@ -90,7 +90,7 @@ async function main() {
           provider: ProviderTypeEnum.STRIPPER,
           maxRetry: 3,
           timeout: 5000,
-          detailid: detail2.id,
+          detailId: detail2.id,
           tenantId: tenant.id,
         });
       }
@@ -101,7 +101,7 @@ async function main() {
           provider: ProviderTypeEnum.BRAINTREE,
           maxRetry: 5,
           timeout: 7000,
-          detailid: detail1.id,
+          detailId: detail1.id,
           tenantId: tenant.id,
         });
       }

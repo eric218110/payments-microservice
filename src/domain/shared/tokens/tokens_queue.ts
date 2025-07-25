@@ -1,3 +1,3 @@
 export const tokensQueue = {
-  processPayment: 'process_payment__init',
+  processPayment: 'process_payment',
 } as const;
