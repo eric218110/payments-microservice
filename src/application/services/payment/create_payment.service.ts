@@ -1,4 +1,5 @@
 import { Inject } from '@nestjs/common';
+import { AddPaymentHistoryRepository } from 'src/application/repository/payment/add_payment_history.repository';
 import { FindAllPaymentProviderRepository } from 'src/application/repository/payment/find_all_payment_providers.repository';
 import { NotifyPaymentMapper } from 'src/application/shared/mapper/notify_payment.mapper';
 import { NotifyProcessPayment } from 'src/domain/notify/use_cases/notify_process_payment';
@@ -15,6 +16,8 @@ export class PaymentService implements StartPaymentProcess {
     private readonly findAllPaymentProviderRepository: FindAllPaymentProviderRepository,
     @Inject(TokenProvider.NotifyProcessPayment)
     private readonly notifyProcessPayment: NotifyProcessPayment,
+    @Inject(TokenProvider.AddPaymentHistoryRepository)
+    private readonly addPaymentHistoryRepository: AddPaymentHistoryRepository,
     private readonly notifyPaymentMapper: NotifyPaymentMapper,
   ) {}
 
@@ -36,7 +39,16 @@ export class PaymentService implements StartPaymentProcess {
       paymentMethodDTO,
     );
 
-    await this.notifyProcessPayment.onNotify(paymentProvidersToNotify);
+    const notifyPaymentProcess = await this.notifyProcessPayment.onNotify(
+      paymentProvidersToNotify,
+    );
+
+    if (notifyPaymentProcess) {
+      const paymentHistoy = await this.addPaymentHistoryRepository.onAdd(
+        tenantHeader.tenantId,
+        paymentProviders,
+      );
+    }
 
     return new PaymentResultDTO({ payment_id: '123' });
   }
