@@ -8,17 +8,21 @@ import { tokensQueue } from 'src/domain/shared/tokens/tokens_queue';
 export class NotifyProcessPaymentService implements NotifyProcessPayment {
   constructor(
     @Inject(TokenProvider.MessageProvider)
-    private readonly messageProvider: MessageProvider<
-      NotifyProcessPaymentDTO[]
-    >,
+    private readonly messageProvider: MessageProvider<object>,
   ) {}
 
   async onNotify(
+    paymentId: string,
     notifyProcessPayment: NotifyProcessPaymentDTO[],
   ): Promise<boolean> {
+    const message = {
+      paymentId,
+      paymentsProviders: notifyProcessPayment,
+    };
+
     const notifySend = await this.messageProvider.onSendMessage(
       tokensQueue.processPayment,
-      notifyProcessPayment,
+      message,
     );
 
     return Promise.resolve(notifySend);
