@@ -1,6 +1,6 @@
 import { Inject } from '@nestjs/common';
-import { AddPaymentHistoryRepository } from 'src/application/repository/payment/add_payment_history.repository';
-import { FindAllPaymentProviderRepository } from 'src/application/repository/payment/find_all_payment_providers.repository';
+import { AddPaymentHistoryRepository } from 'src/application/repository/payment_history/add_payment_history.repository';
+import { FindAllPaymentProviderRepository } from 'src/application/repository/payment_provider/find_all_payment_providers.repository';
 import { NotifyPaymentMapper } from 'src/application/shared/mapper/notify_payment.mapper';
 import { NotifyProcessPayment } from 'src/domain/notify/use_cases/notify_process_payment';
 import { PaymentMethodDTO } from 'src/domain/payment/dto/payment.dto';

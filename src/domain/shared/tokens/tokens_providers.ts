@@ -5,4 +5,6 @@ export const TokenProvider = {
   AddPaymentHistoryRepository: 'AddPaymentHistoryRepository',
   MessageProvider: 'MessageProvider',
   NotifyPaymentResult: 'NotifyPaymentResult',
+  UpdateStatusByPaymentId: 'UpdateStatusByPaymentId',
+  UpdateHistoryStatusByPaymentId: 'UpdateHistoryStatusByPaymentId',
 };

@@ -16,6 +16,10 @@ const providers = [
     useClass: NotifyProcessPaymentService,
     provide: TokenProvider.NotifyProcessPayment,
   },
+  {
+    useClass: NotifyProcessPaymentService,
+    provide: TokenProvider.NotifyPaymentResult,
+  },
   NotifyPaymentMapper,
   StripperMapper,
   BrainTreeMapper,

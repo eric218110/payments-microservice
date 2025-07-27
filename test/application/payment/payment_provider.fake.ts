@@ -1,5 +1,5 @@
-import { AddPaymentHistoryRepository } from 'src/application/repository/payment/add_payment_history.repository';
-import { FindAllPaymentProviderRepository } from 'src/application/repository/payment/find_all_payment_providers.repository';
+import { AddPaymentHistoryRepository } from 'src/application/repository/payment_history/add_payment_history.repository';
+import { FindAllPaymentProviderRepository } from 'src/application/repository/payment_provider/find_all_payment_providers.repository';
 import { BrainTreeMapper } from 'src/application/shared/mapper/braintree.mapper';
 import { NotifyPaymentMapper } from 'src/application/shared/mapper/notify_payment.mapper';
 import { StripperMapper } from 'src/application/shared/mapper/stripper.mapper';
@@ -29,6 +29,7 @@ class AddPaymentHistoryRepositoryFake implements AddPaymentHistoryRepository {
       new PaymentHistoryModel({
         payment_id: '1234',
         status: ProviderStatusTypeEnum.IN_PROGRESS,
+        tenantId: '1234',
       }),
     );
   }

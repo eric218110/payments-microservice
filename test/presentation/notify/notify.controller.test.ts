@@ -11,7 +11,7 @@ describe('NotifyPaymentResultController', () => {
   });
 
   it('should be NotifyPaymentResultController call NotifyPaymentResult with correct params', async () => {
-    const spy = jest.spyOn(fakes.notifyPaymentResultFake, 'process');
+    const spy = jest.spyOn(fakes.notifyPaymentResultFake, 'onNotifyResult');
 
     await sut.handleMessage(notifyPaymentResultDTOMock);
 

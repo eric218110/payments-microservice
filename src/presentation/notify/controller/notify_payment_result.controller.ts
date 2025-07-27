@@ -14,7 +14,7 @@ export class NotifyPaymentResultController {
 
   @EventPattern(tokensQueue.processPaymentOut)
   handleMessage(@Payload() data: unknown) {
-    return this.notifyPaymentResult.process(
+    return this.notifyPaymentResult.onNotifyResult(
       new NotifyPaymentResultDTO(data as NotifyPaymentResultDTO),
     );
   }

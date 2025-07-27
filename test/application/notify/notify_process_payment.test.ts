@@ -1,8 +1,16 @@
 import { NotifyProcessPaymentService } from 'src/application/services/notify/notify_process_payments.services';
 import { fakes } from './notify_process_payment.fake';
+import { notifyPaymentResultDTOMock } from './notify_process_payment.mock';
 
 describe('(NotifyProcessPaymentService)', () => {
-  const sut = new NotifyProcessPaymentService(fakes.messageProviderFake);
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  const sut = new NotifyProcessPaymentService(
+    fakes.messageProviderFake,
+    fakes.updateHistoryStatusByPaymentId,
+  );
 
   it('should be service to defined', () => {
     expect(sut).toBeDefined();
@@ -18,5 +26,31 @@ describe('(NotifyProcessPaymentService)', () => {
       paymentId: '',
       paymentsProviders: [],
     });
+  });
+
+  it('should be function onNotifyResult call repository for change status', async () => {
+    const spy = jest.spyOn(
+      fakes.updateHistoryStatusByPaymentId,
+      'onUpdateStatusByPaymentId',
+    );
+
+    await sut.onNotifyResult(notifyPaymentResultDTOMock);
+
+    expect(spy).toHaveBeenCalledTimes(1);
+    expect(spy).toHaveBeenCalledWith('1234', 'SUCCESS');
+  });
+
+  it('should not be repository when status is not valid', async () => {
+    const spy = jest.spyOn(
+      fakes.updateHistoryStatusByPaymentId,
+      'onUpdateStatusByPaymentId',
+    );
+
+    await sut.onNotifyResult({
+      ...notifyPaymentResultDTOMock,
+      status: null,
+    });
+
+    expect(spy).toHaveBeenCalledTimes(0);
   });
 });

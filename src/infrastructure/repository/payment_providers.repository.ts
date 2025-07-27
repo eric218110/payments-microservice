@@ -1,37 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { AddPaymentHistoryRepository } from 'src/application/repository/payment/add_payment_history.repository';
-import { FindAllPaymentProviderRepository } from 'src/application/repository/payment/find_all_payment_providers.repository';
-import { ProviderStatusTypeEnum } from 'src/domain/payment/enum/payment_history_type.enum';
+import { FindAllPaymentProviderRepository } from 'src/application/repository/payment_provider/find_all_payment_providers.repository';
 import { ProviderTypeEnum } from 'src/domain/payment/enum/provider_type.enum';
 import { PaymentModel } from 'src/domain/payment/model';
-import { PaymentHistoryModel } from 'src/domain/payment/model/payment_history.model';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
-export class PaymentRepository
-  implements FindAllPaymentProviderRepository, AddPaymentHistoryRepository
+export class PaymentProvidersRepository
+  implements FindAllPaymentProviderRepository
 {
   constructor(private readonly prisma: PrismaService) {}
-
-  async onAdd(
-    tenantId: string,
-    paymentProviderIds: string[],
-  ): Promise<PaymentHistoryModel> {
-    const createdHistory = await this.prisma.paymentHistory.create({
-      data: {
-        status: 'IN_PROGRESS',
-        tenantId,
-        providers: {
-          connect: paymentProviderIds.map((id) => ({ id })),
-        },
-      },
-    });
-
-    return new PaymentHistoryModel({
-      payment_id: createdHistory.id,
-      status: ProviderStatusTypeEnum.IN_PROGRESS,
-    });
-  }
 
   async onFindAllByTenantId(tenantId: string): Promise<PaymentModel[]> {
     const list = await this.prisma.paymentProviders.findMany({

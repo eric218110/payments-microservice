@@ -11,4 +11,7 @@ export class PaymentHistoryModel {
 
   @IsEnum(ProviderStatusTypeEnum)
   status: ProviderStatusTypeEnum;
+
+  @IsString()
+  tenantId: string;
 }
