@@ -1,6 +1,9 @@
 import { NotifyProcessPaymentService } from 'src/application/services/notify/notify_process_payments.services';
 import { fakes } from './notify_process_payment.fake';
-import { notifyPaymentResultDTOMock } from './notify_process_payment.mock';
+import {
+  callbackTenantMock,
+  notifyPaymentResultDTOMock,
+} from './notify_process_payment.mock';
 
 describe('(NotifyProcessPaymentService)', () => {
   beforeEach(() => {
@@ -11,6 +14,7 @@ describe('(NotifyProcessPaymentService)', () => {
     fakes.messageProviderFake,
     fakes.updateHistoryStatusByPaymentId,
     fakes.findTenantWithCallbackRepositoryFake,
+    fakes.httpClientProviderFake,
   );
 
   it('should be service to defined', () => {
@@ -64,6 +68,15 @@ describe('(NotifyProcessPaymentService)', () => {
     await sut.onNotifyResult(notifyPaymentResultDTOMock);
 
     expect(spy).toHaveBeenCalledTimes(1);
-    expect(spy).toHaveBeenCalledWith('any_tenant_id', 'any event');
+    expect(spy).toHaveBeenCalledWith('any_tenant_id', 'any_event');
+  });
+
+  it('should be function onNotifyResult call HttpClientProvider with correct params', async () => {
+    const spy = jest.spyOn(fakes.httpClientProviderFake, 'onPost');
+
+    await sut.onNotifyResult(notifyPaymentResultDTOMock);
+
+    expect(spy).toHaveBeenCalledTimes(1);
+    expect(spy).toHaveBeenCalledWith(callbackTenantMock.callback.url, {});
   });
 });

@@ -4,5 +4,5 @@ import { ProviderStatusTypeEnum } from 'src/domain/payment/enum/payment_history_
 export const notifyPaymentResultDTOMock = new NotifyPaymentResultDTO({
   paymentId: '1234',
   status: ProviderStatusTypeEnum.SUCCESS,
-  event: 'any event',
+  event: 'any_event',
 });

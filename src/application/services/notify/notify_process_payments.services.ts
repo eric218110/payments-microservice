@@ -1,4 +1,5 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
+import { HttpClientProvider } from 'src/application/provider/http_client/http_client_provider';
 import { MessageProvider } from 'src/application/provider/message/message_provider';
 import { UpdateHistoryStatusByPaymentId } from 'src/application/repository/payment_history/update_status_by_payment_id.repository';
 import { FindTenantWithCallbackRepository } from 'src/application/repository/tenant/find_tenant_with_callback.repository';
@@ -23,6 +24,8 @@ export class NotifyProcessPaymentService
     private readonly historyRepository: UpdateHistoryStatusByPaymentId,
     @Inject(TokenProvider.FindTenantWithCallbackRepository)
     private readonly findTenantWithCallbackRepository: FindTenantWithCallbackRepository,
+    @Inject(TokenProvider.HttpClientProvider)
+    private readonly httpClientProvider: HttpClientProvider,
   ) {}
 
   async onNotifyResult(message: NotifyPaymentResultDTO): Promise<void> {
@@ -77,6 +80,13 @@ export class NotifyProcessPaymentService
       return;
     }
 
-    this.logger.log(`Send notify tenant ${tenantWithCallback.name}`);
+    const { status = 0 } = await this.httpClientProvider.onPost(
+      tenantWithCallback.callback.url,
+      {},
+    );
+
+    this.logger.log(
+      `Notify tenant ${tenantWithCallback.name} | Status: ${status}`,
+    );
   }
 }
