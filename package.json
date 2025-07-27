@@ -8,6 +8,7 @@
     "build": "nest build && npm run copy:prisma",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start:dev": "ts-node-dev --respawn --transpile-only -r tsconfig-paths/register src/core/server/main.server.ts",
+    "start": "node dist/src/core/server/main.server",
     "start:prod": "node dist/src/core/server/main.server",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
@@ -17,7 +18,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "seed": " npx ts-node prisma/seed.ts",
     "seed:prd": " npx ts-node dist/prisma/seed.js",
-    "copy:prisma": "cpx \"prisma/.generate/**/*\" dist/prisma/.generate"
+    "copy:prisma": "cpx \"prisma/.generate/**/*\" dist/prisma/.generate",
+    "migrate": "npx prisma migrate dev"
   },
   "engines": {
     "npm": ">=10.0.0",
