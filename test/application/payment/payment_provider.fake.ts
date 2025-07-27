@@ -3,7 +3,6 @@ import { FindAllPaymentProviderRepository } from 'src/application/repository/pay
 import { BrainTreeMapper } from 'src/application/shared/mapper/braintree.mapper';
 import { NotifyPaymentMapper } from 'src/application/shared/mapper/notify_payment.mapper';
 import { StripperMapper } from 'src/application/shared/mapper/stripper.mapper';
-import { NotifyProcessPaymentDTO } from 'src/domain/notify/dto/notify_process_payment.dto';
 import { NotifyProcessPayment } from 'src/domain/notify/use_cases/notify_process_payment';
 import { ProviderStatusTypeEnum } from 'src/domain/payment/enum/payment_history_type.enum';
 import { PaymentModel } from 'src/domain/payment/model';
@@ -19,8 +18,7 @@ class FindAllPaymentProviderRepositoryFake
 }
 
 class NotifyProcessPaymentFake implements NotifyProcessPayment {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  onNotify(notifyProcessPayment: NotifyProcessPaymentDTO[]): Promise<boolean> {
+  onNotify(): Promise<boolean> {
     return Promise.resolve(true);
   }
 }

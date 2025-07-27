@@ -1,5 +1,4 @@
 import { NotifyProcessPaymentService } from 'src/application/services/notify/notify_process_payments.services';
-import { tokensQueue } from 'src/domain/shared/tokens/tokens_queue';
 import { fakes } from './notify_process_payment.fake';
 
 describe('(NotifyProcessPaymentService)', () => {
@@ -12,9 +11,12 @@ describe('(NotifyProcessPaymentService)', () => {
   it('should be service call QueueServiceProvider with correct params', async () => {
     const spy = jest.spyOn(fakes.messageProviderFake, 'onSendMessage');
 
-    await sut.onNotify([]);
+    await sut.onNotify('', []);
 
     expect(spy).toHaveBeenCalledTimes(1);
-    expect(spy).toHaveBeenCalledWith(tokensQueue.processPayment, []);
+    expect(spy).toHaveBeenCalledWith('process_payment_in', {
+      paymentId: '',
+      paymentsProviders: [],
+    });
   });
 });

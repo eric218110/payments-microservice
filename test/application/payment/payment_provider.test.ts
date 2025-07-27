@@ -76,7 +76,7 @@ describe('(PaymentService)', () => {
     await sut.process(paymentMock.tenant, paymentMock.paymentMethodDTO);
 
     expect(spy).toHaveBeenCalledTimes(1);
-    expect(spy).toHaveBeenCalledWith(notifyProcessPaymentMock);
+    expect(spy).toHaveBeenCalledWith('1234', notifyProcessPaymentMock);
   });
 
   it('should be service call addPaymentHistoryRepository with correct params when success notify', async () => {
