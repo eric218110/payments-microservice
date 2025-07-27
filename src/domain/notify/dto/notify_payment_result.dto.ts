@@ -6,6 +6,7 @@ export class NotifyPaymentResultDTO {
   }
 
   paymentId: string;
+  event: string;
   status: ProviderStatusTypeEnum;
   response?: object;
 }

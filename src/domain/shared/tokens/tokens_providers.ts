@@ -7,4 +7,5 @@ export const TokenProvider = {
   NotifyPaymentResult: 'NotifyPaymentResult',
   UpdateStatusByPaymentId: 'UpdateStatusByPaymentId',
   UpdateHistoryStatusByPaymentId: 'UpdateHistoryStatusByPaymentId',
+  FindTenantWithCallbackRepository: 'FindTenantWithCallbackRepository',
 };

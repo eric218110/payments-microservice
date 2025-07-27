@@ -24,6 +24,11 @@ export type PaymentHistory = $Result.DefaultSelection<Prisma.$PaymentHistoryPayl
  */
 export type Tenant = $Result.DefaultSelection<Prisma.$TenantPayload>
 /**
+ * Model TenantCallbackListener
+ * 
+ */
+export type TenantCallbackListener = $Result.DefaultSelection<Prisma.$TenantCallbackListenerPayload>
+/**
  * Model PaymentProviders
  * 
  */
@@ -227,6 +232,16 @@ export class PrismaClient<
     * ```
     */
   get tenant(): Prisma.TenantDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.tenantCallbackListener`: Exposes CRUD operations for the **TenantCallbackListener** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TenantCallbackListeners
+    * const tenantCallbackListeners = await prisma.tenantCallbackListener.findMany()
+    * ```
+    */
+  get tenantCallbackListener(): Prisma.TenantCallbackListenerDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.paymentProviders`: Exposes CRUD operations for the **PaymentProviders** model.
@@ -699,6 +714,7 @@ export namespace Prisma {
   export const ModelName: {
     PaymentHistory: 'PaymentHistory',
     Tenant: 'Tenant',
+    TenantCallbackListener: 'TenantCallbackListener',
     PaymentProviders: 'PaymentProviders',
     ProviderDetail: 'ProviderDetail',
     ProviderAuthentication: 'ProviderAuthentication'
@@ -720,7 +736,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "paymentHistory" | "tenant" | "paymentProviders" | "providerDetail" | "providerAuthentication"
+      modelProps: "paymentHistory" | "tenant" | "tenantCallbackListener" | "paymentProviders" | "providerDetail" | "providerAuthentication"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -869,6 +885,80 @@ export namespace Prisma {
           count: {
             args: Prisma.TenantCountArgs<ExtArgs>
             result: $Utils.Optional<TenantCountAggregateOutputType> | number
+          }
+        }
+      }
+      TenantCallbackListener: {
+        payload: Prisma.$TenantCallbackListenerPayload<ExtArgs>
+        fields: Prisma.TenantCallbackListenerFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TenantCallbackListenerFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantCallbackListenerPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TenantCallbackListenerFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantCallbackListenerPayload>
+          }
+          findFirst: {
+            args: Prisma.TenantCallbackListenerFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantCallbackListenerPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TenantCallbackListenerFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantCallbackListenerPayload>
+          }
+          findMany: {
+            args: Prisma.TenantCallbackListenerFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantCallbackListenerPayload>[]
+          }
+          create: {
+            args: Prisma.TenantCallbackListenerCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantCallbackListenerPayload>
+          }
+          createMany: {
+            args: Prisma.TenantCallbackListenerCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TenantCallbackListenerCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantCallbackListenerPayload>[]
+          }
+          delete: {
+            args: Prisma.TenantCallbackListenerDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantCallbackListenerPayload>
+          }
+          update: {
+            args: Prisma.TenantCallbackListenerUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantCallbackListenerPayload>
+          }
+          deleteMany: {
+            args: Prisma.TenantCallbackListenerDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TenantCallbackListenerUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TenantCallbackListenerUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantCallbackListenerPayload>[]
+          }
+          upsert: {
+            args: Prisma.TenantCallbackListenerUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantCallbackListenerPayload>
+          }
+          aggregate: {
+            args: Prisma.TenantCallbackListenerAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTenantCallbackListener>
+          }
+          groupBy: {
+            args: Prisma.TenantCallbackListenerGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TenantCallbackListenerGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TenantCallbackListenerCountArgs<ExtArgs>
+            result: $Utils.Optional<TenantCallbackListenerCountAggregateOutputType> | number
           }
         }
       }
@@ -1180,6 +1270,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     paymentHistory?: PaymentHistoryOmit
     tenant?: TenantOmit
+    tenantCallbackListener?: TenantCallbackListenerOmit
     paymentProviders?: PaymentProvidersOmit
     providerDetail?: ProviderDetailOmit
     providerAuthentication?: ProviderAuthenticationOmit
@@ -1310,11 +1401,13 @@ export namespace Prisma {
   export type TenantCountOutputType = {
     PaymentProviders: number
     PaymentHistory: number
+    listeners: number
   }
 
   export type TenantCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     PaymentProviders?: boolean | TenantCountOutputTypeCountPaymentProvidersArgs
     PaymentHistory?: boolean | TenantCountOutputTypeCountPaymentHistoryArgs
+    listeners?: boolean | TenantCountOutputTypeCountListenersArgs
   }
 
   // Custom InputTypes
@@ -1340,6 +1433,13 @@ export namespace Prisma {
    */
   export type TenantCountOutputTypeCountPaymentHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PaymentHistoryWhereInput
+  }
+
+  /**
+   * TenantCountOutputType without action
+   */
+  export type TenantCountOutputTypeCountListenersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TenantCallbackListenerWhereInput
   }
 
 
@@ -2644,6 +2744,7 @@ export namespace Prisma {
     name?: boolean
     PaymentProviders?: boolean | Tenant$PaymentProvidersArgs<ExtArgs>
     PaymentHistory?: boolean | Tenant$PaymentHistoryArgs<ExtArgs>
+    listeners?: boolean | Tenant$listenersArgs<ExtArgs>
     _count?: boolean | TenantCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tenant"]>
 
@@ -2666,6 +2767,7 @@ export namespace Prisma {
   export type TenantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     PaymentProviders?: boolean | Tenant$PaymentProvidersArgs<ExtArgs>
     PaymentHistory?: boolean | Tenant$PaymentHistoryArgs<ExtArgs>
+    listeners?: boolean | Tenant$listenersArgs<ExtArgs>
     _count?: boolean | TenantCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TenantIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2676,6 +2778,7 @@ export namespace Prisma {
     objects: {
       PaymentProviders: Prisma.$PaymentProvidersPayload<ExtArgs>[]
       PaymentHistory: Prisma.$PaymentHistoryPayload<ExtArgs>[]
+      listeners: Prisma.$TenantCallbackListenerPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3076,6 +3179,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     PaymentProviders<T extends Tenant$PaymentProvidersArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$PaymentProvidersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentProvidersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     PaymentHistory<T extends Tenant$PaymentHistoryArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$PaymentHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    listeners<T extends Tenant$listenersArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$listenersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantCallbackListenerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3543,6 +3647,30 @@ export namespace Prisma {
   }
 
   /**
+   * Tenant.listeners
+   */
+  export type Tenant$listenersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantCallbackListener
+     */
+    select?: TenantCallbackListenerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantCallbackListener
+     */
+    omit?: TenantCallbackListenerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantCallbackListenerInclude<ExtArgs> | null
+    where?: TenantCallbackListenerWhereInput
+    orderBy?: TenantCallbackListenerOrderByWithRelationInput | TenantCallbackListenerOrderByWithRelationInput[]
+    cursor?: TenantCallbackListenerWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TenantCallbackListenerScalarFieldEnum | TenantCallbackListenerScalarFieldEnum[]
+  }
+
+  /**
    * Tenant without action
    */
   export type TenantDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3558,6 +3686,1103 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: TenantInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model TenantCallbackListener
+   */
+
+  export type AggregateTenantCallbackListener = {
+    _count: TenantCallbackListenerCountAggregateOutputType | null
+    _min: TenantCallbackListenerMinAggregateOutputType | null
+    _max: TenantCallbackListenerMaxAggregateOutputType | null
+  }
+
+  export type TenantCallbackListenerMinAggregateOutputType = {
+    id: string | null
+    event: string | null
+    url: string | null
+    secret: string | null
+    isActive: boolean | null
+    tenantId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TenantCallbackListenerMaxAggregateOutputType = {
+    id: string | null
+    event: string | null
+    url: string | null
+    secret: string | null
+    isActive: boolean | null
+    tenantId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TenantCallbackListenerCountAggregateOutputType = {
+    id: number
+    event: number
+    url: number
+    secret: number
+    isActive: number
+    tenantId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type TenantCallbackListenerMinAggregateInputType = {
+    id?: true
+    event?: true
+    url?: true
+    secret?: true
+    isActive?: true
+    tenantId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TenantCallbackListenerMaxAggregateInputType = {
+    id?: true
+    event?: true
+    url?: true
+    secret?: true
+    isActive?: true
+    tenantId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TenantCallbackListenerCountAggregateInputType = {
+    id?: true
+    event?: true
+    url?: true
+    secret?: true
+    isActive?: true
+    tenantId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type TenantCallbackListenerAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TenantCallbackListener to aggregate.
+     */
+    where?: TenantCallbackListenerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TenantCallbackListeners to fetch.
+     */
+    orderBy?: TenantCallbackListenerOrderByWithRelationInput | TenantCallbackListenerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TenantCallbackListenerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TenantCallbackListeners from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TenantCallbackListeners.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TenantCallbackListeners
+    **/
+    _count?: true | TenantCallbackListenerCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TenantCallbackListenerMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TenantCallbackListenerMaxAggregateInputType
+  }
+
+  export type GetTenantCallbackListenerAggregateType<T extends TenantCallbackListenerAggregateArgs> = {
+        [P in keyof T & keyof AggregateTenantCallbackListener]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTenantCallbackListener[P]>
+      : GetScalarType<T[P], AggregateTenantCallbackListener[P]>
+  }
+
+
+
+
+  export type TenantCallbackListenerGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TenantCallbackListenerWhereInput
+    orderBy?: TenantCallbackListenerOrderByWithAggregationInput | TenantCallbackListenerOrderByWithAggregationInput[]
+    by: TenantCallbackListenerScalarFieldEnum[] | TenantCallbackListenerScalarFieldEnum
+    having?: TenantCallbackListenerScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TenantCallbackListenerCountAggregateInputType | true
+    _min?: TenantCallbackListenerMinAggregateInputType
+    _max?: TenantCallbackListenerMaxAggregateInputType
+  }
+
+  export type TenantCallbackListenerGroupByOutputType = {
+    id: string
+    event: string
+    url: string
+    secret: string | null
+    isActive: boolean
+    tenantId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: TenantCallbackListenerCountAggregateOutputType | null
+    _min: TenantCallbackListenerMinAggregateOutputType | null
+    _max: TenantCallbackListenerMaxAggregateOutputType | null
+  }
+
+  type GetTenantCallbackListenerGroupByPayload<T extends TenantCallbackListenerGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TenantCallbackListenerGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TenantCallbackListenerGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TenantCallbackListenerGroupByOutputType[P]>
+            : GetScalarType<T[P], TenantCallbackListenerGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TenantCallbackListenerSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    event?: boolean
+    url?: boolean
+    secret?: boolean
+    isActive?: boolean
+    tenantId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tenantCallbackListener"]>
+
+  export type TenantCallbackListenerSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    event?: boolean
+    url?: boolean
+    secret?: boolean
+    isActive?: boolean
+    tenantId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tenantCallbackListener"]>
+
+  export type TenantCallbackListenerSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    event?: boolean
+    url?: boolean
+    secret?: boolean
+    isActive?: boolean
+    tenantId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tenantCallbackListener"]>
+
+  export type TenantCallbackListenerSelectScalar = {
+    id?: boolean
+    event?: boolean
+    url?: boolean
+    secret?: boolean
+    isActive?: boolean
+    tenantId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type TenantCallbackListenerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "event" | "url" | "secret" | "isActive" | "tenantId" | "createdAt" | "updatedAt", ExtArgs["result"]["tenantCallbackListener"]>
+  export type TenantCallbackListenerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+  export type TenantCallbackListenerIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+  export type TenantCallbackListenerIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+
+  export type $TenantCallbackListenerPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TenantCallbackListener"
+    objects: {
+      tenant: Prisma.$TenantPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      event: string
+      url: string
+      secret: string | null
+      isActive: boolean
+      tenantId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["tenantCallbackListener"]>
+    composites: {}
+  }
+
+  type TenantCallbackListenerGetPayload<S extends boolean | null | undefined | TenantCallbackListenerDefaultArgs> = $Result.GetResult<Prisma.$TenantCallbackListenerPayload, S>
+
+  type TenantCallbackListenerCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TenantCallbackListenerFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TenantCallbackListenerCountAggregateInputType | true
+    }
+
+  export interface TenantCallbackListenerDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TenantCallbackListener'], meta: { name: 'TenantCallbackListener' } }
+    /**
+     * Find zero or one TenantCallbackListener that matches the filter.
+     * @param {TenantCallbackListenerFindUniqueArgs} args - Arguments to find a TenantCallbackListener
+     * @example
+     * // Get one TenantCallbackListener
+     * const tenantCallbackListener = await prisma.tenantCallbackListener.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TenantCallbackListenerFindUniqueArgs>(args: SelectSubset<T, TenantCallbackListenerFindUniqueArgs<ExtArgs>>): Prisma__TenantCallbackListenerClient<$Result.GetResult<Prisma.$TenantCallbackListenerPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one TenantCallbackListener that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TenantCallbackListenerFindUniqueOrThrowArgs} args - Arguments to find a TenantCallbackListener
+     * @example
+     * // Get one TenantCallbackListener
+     * const tenantCallbackListener = await prisma.tenantCallbackListener.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TenantCallbackListenerFindUniqueOrThrowArgs>(args: SelectSubset<T, TenantCallbackListenerFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TenantCallbackListenerClient<$Result.GetResult<Prisma.$TenantCallbackListenerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TenantCallbackListener that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantCallbackListenerFindFirstArgs} args - Arguments to find a TenantCallbackListener
+     * @example
+     * // Get one TenantCallbackListener
+     * const tenantCallbackListener = await prisma.tenantCallbackListener.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TenantCallbackListenerFindFirstArgs>(args?: SelectSubset<T, TenantCallbackListenerFindFirstArgs<ExtArgs>>): Prisma__TenantCallbackListenerClient<$Result.GetResult<Prisma.$TenantCallbackListenerPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TenantCallbackListener that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantCallbackListenerFindFirstOrThrowArgs} args - Arguments to find a TenantCallbackListener
+     * @example
+     * // Get one TenantCallbackListener
+     * const tenantCallbackListener = await prisma.tenantCallbackListener.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TenantCallbackListenerFindFirstOrThrowArgs>(args?: SelectSubset<T, TenantCallbackListenerFindFirstOrThrowArgs<ExtArgs>>): Prisma__TenantCallbackListenerClient<$Result.GetResult<Prisma.$TenantCallbackListenerPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more TenantCallbackListeners that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantCallbackListenerFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TenantCallbackListeners
+     * const tenantCallbackListeners = await prisma.tenantCallbackListener.findMany()
+     * 
+     * // Get first 10 TenantCallbackListeners
+     * const tenantCallbackListeners = await prisma.tenantCallbackListener.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const tenantCallbackListenerWithIdOnly = await prisma.tenantCallbackListener.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TenantCallbackListenerFindManyArgs>(args?: SelectSubset<T, TenantCallbackListenerFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantCallbackListenerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a TenantCallbackListener.
+     * @param {TenantCallbackListenerCreateArgs} args - Arguments to create a TenantCallbackListener.
+     * @example
+     * // Create one TenantCallbackListener
+     * const TenantCallbackListener = await prisma.tenantCallbackListener.create({
+     *   data: {
+     *     // ... data to create a TenantCallbackListener
+     *   }
+     * })
+     * 
+     */
+    create<T extends TenantCallbackListenerCreateArgs>(args: SelectSubset<T, TenantCallbackListenerCreateArgs<ExtArgs>>): Prisma__TenantCallbackListenerClient<$Result.GetResult<Prisma.$TenantCallbackListenerPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many TenantCallbackListeners.
+     * @param {TenantCallbackListenerCreateManyArgs} args - Arguments to create many TenantCallbackListeners.
+     * @example
+     * // Create many TenantCallbackListeners
+     * const tenantCallbackListener = await prisma.tenantCallbackListener.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TenantCallbackListenerCreateManyArgs>(args?: SelectSubset<T, TenantCallbackListenerCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many TenantCallbackListeners and returns the data saved in the database.
+     * @param {TenantCallbackListenerCreateManyAndReturnArgs} args - Arguments to create many TenantCallbackListeners.
+     * @example
+     * // Create many TenantCallbackListeners
+     * const tenantCallbackListener = await prisma.tenantCallbackListener.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many TenantCallbackListeners and only return the `id`
+     * const tenantCallbackListenerWithIdOnly = await prisma.tenantCallbackListener.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TenantCallbackListenerCreateManyAndReturnArgs>(args?: SelectSubset<T, TenantCallbackListenerCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantCallbackListenerPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a TenantCallbackListener.
+     * @param {TenantCallbackListenerDeleteArgs} args - Arguments to delete one TenantCallbackListener.
+     * @example
+     * // Delete one TenantCallbackListener
+     * const TenantCallbackListener = await prisma.tenantCallbackListener.delete({
+     *   where: {
+     *     // ... filter to delete one TenantCallbackListener
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TenantCallbackListenerDeleteArgs>(args: SelectSubset<T, TenantCallbackListenerDeleteArgs<ExtArgs>>): Prisma__TenantCallbackListenerClient<$Result.GetResult<Prisma.$TenantCallbackListenerPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one TenantCallbackListener.
+     * @param {TenantCallbackListenerUpdateArgs} args - Arguments to update one TenantCallbackListener.
+     * @example
+     * // Update one TenantCallbackListener
+     * const tenantCallbackListener = await prisma.tenantCallbackListener.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TenantCallbackListenerUpdateArgs>(args: SelectSubset<T, TenantCallbackListenerUpdateArgs<ExtArgs>>): Prisma__TenantCallbackListenerClient<$Result.GetResult<Prisma.$TenantCallbackListenerPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more TenantCallbackListeners.
+     * @param {TenantCallbackListenerDeleteManyArgs} args - Arguments to filter TenantCallbackListeners to delete.
+     * @example
+     * // Delete a few TenantCallbackListeners
+     * const { count } = await prisma.tenantCallbackListener.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TenantCallbackListenerDeleteManyArgs>(args?: SelectSubset<T, TenantCallbackListenerDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TenantCallbackListeners.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantCallbackListenerUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TenantCallbackListeners
+     * const tenantCallbackListener = await prisma.tenantCallbackListener.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TenantCallbackListenerUpdateManyArgs>(args: SelectSubset<T, TenantCallbackListenerUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TenantCallbackListeners and returns the data updated in the database.
+     * @param {TenantCallbackListenerUpdateManyAndReturnArgs} args - Arguments to update many TenantCallbackListeners.
+     * @example
+     * // Update many TenantCallbackListeners
+     * const tenantCallbackListener = await prisma.tenantCallbackListener.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more TenantCallbackListeners and only return the `id`
+     * const tenantCallbackListenerWithIdOnly = await prisma.tenantCallbackListener.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TenantCallbackListenerUpdateManyAndReturnArgs>(args: SelectSubset<T, TenantCallbackListenerUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantCallbackListenerPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one TenantCallbackListener.
+     * @param {TenantCallbackListenerUpsertArgs} args - Arguments to update or create a TenantCallbackListener.
+     * @example
+     * // Update or create a TenantCallbackListener
+     * const tenantCallbackListener = await prisma.tenantCallbackListener.upsert({
+     *   create: {
+     *     // ... data to create a TenantCallbackListener
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TenantCallbackListener we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TenantCallbackListenerUpsertArgs>(args: SelectSubset<T, TenantCallbackListenerUpsertArgs<ExtArgs>>): Prisma__TenantCallbackListenerClient<$Result.GetResult<Prisma.$TenantCallbackListenerPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of TenantCallbackListeners.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantCallbackListenerCountArgs} args - Arguments to filter TenantCallbackListeners to count.
+     * @example
+     * // Count the number of TenantCallbackListeners
+     * const count = await prisma.tenantCallbackListener.count({
+     *   where: {
+     *     // ... the filter for the TenantCallbackListeners we want to count
+     *   }
+     * })
+    **/
+    count<T extends TenantCallbackListenerCountArgs>(
+      args?: Subset<T, TenantCallbackListenerCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TenantCallbackListenerCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TenantCallbackListener.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantCallbackListenerAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TenantCallbackListenerAggregateArgs>(args: Subset<T, TenantCallbackListenerAggregateArgs>): Prisma.PrismaPromise<GetTenantCallbackListenerAggregateType<T>>
+
+    /**
+     * Group by TenantCallbackListener.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantCallbackListenerGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TenantCallbackListenerGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TenantCallbackListenerGroupByArgs['orderBy'] }
+        : { orderBy?: TenantCallbackListenerGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TenantCallbackListenerGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTenantCallbackListenerGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TenantCallbackListener model
+   */
+  readonly fields: TenantCallbackListenerFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TenantCallbackListener.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TenantCallbackListenerClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TenantCallbackListener model
+   */
+  interface TenantCallbackListenerFieldRefs {
+    readonly id: FieldRef<"TenantCallbackListener", 'String'>
+    readonly event: FieldRef<"TenantCallbackListener", 'String'>
+    readonly url: FieldRef<"TenantCallbackListener", 'String'>
+    readonly secret: FieldRef<"TenantCallbackListener", 'String'>
+    readonly isActive: FieldRef<"TenantCallbackListener", 'Boolean'>
+    readonly tenantId: FieldRef<"TenantCallbackListener", 'String'>
+    readonly createdAt: FieldRef<"TenantCallbackListener", 'DateTime'>
+    readonly updatedAt: FieldRef<"TenantCallbackListener", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TenantCallbackListener findUnique
+   */
+  export type TenantCallbackListenerFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantCallbackListener
+     */
+    select?: TenantCallbackListenerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantCallbackListener
+     */
+    omit?: TenantCallbackListenerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantCallbackListenerInclude<ExtArgs> | null
+    /**
+     * Filter, which TenantCallbackListener to fetch.
+     */
+    where: TenantCallbackListenerWhereUniqueInput
+  }
+
+  /**
+   * TenantCallbackListener findUniqueOrThrow
+   */
+  export type TenantCallbackListenerFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantCallbackListener
+     */
+    select?: TenantCallbackListenerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantCallbackListener
+     */
+    omit?: TenantCallbackListenerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantCallbackListenerInclude<ExtArgs> | null
+    /**
+     * Filter, which TenantCallbackListener to fetch.
+     */
+    where: TenantCallbackListenerWhereUniqueInput
+  }
+
+  /**
+   * TenantCallbackListener findFirst
+   */
+  export type TenantCallbackListenerFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantCallbackListener
+     */
+    select?: TenantCallbackListenerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantCallbackListener
+     */
+    omit?: TenantCallbackListenerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantCallbackListenerInclude<ExtArgs> | null
+    /**
+     * Filter, which TenantCallbackListener to fetch.
+     */
+    where?: TenantCallbackListenerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TenantCallbackListeners to fetch.
+     */
+    orderBy?: TenantCallbackListenerOrderByWithRelationInput | TenantCallbackListenerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TenantCallbackListeners.
+     */
+    cursor?: TenantCallbackListenerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TenantCallbackListeners from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TenantCallbackListeners.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TenantCallbackListeners.
+     */
+    distinct?: TenantCallbackListenerScalarFieldEnum | TenantCallbackListenerScalarFieldEnum[]
+  }
+
+  /**
+   * TenantCallbackListener findFirstOrThrow
+   */
+  export type TenantCallbackListenerFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantCallbackListener
+     */
+    select?: TenantCallbackListenerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantCallbackListener
+     */
+    omit?: TenantCallbackListenerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantCallbackListenerInclude<ExtArgs> | null
+    /**
+     * Filter, which TenantCallbackListener to fetch.
+     */
+    where?: TenantCallbackListenerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TenantCallbackListeners to fetch.
+     */
+    orderBy?: TenantCallbackListenerOrderByWithRelationInput | TenantCallbackListenerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TenantCallbackListeners.
+     */
+    cursor?: TenantCallbackListenerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TenantCallbackListeners from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TenantCallbackListeners.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TenantCallbackListeners.
+     */
+    distinct?: TenantCallbackListenerScalarFieldEnum | TenantCallbackListenerScalarFieldEnum[]
+  }
+
+  /**
+   * TenantCallbackListener findMany
+   */
+  export type TenantCallbackListenerFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantCallbackListener
+     */
+    select?: TenantCallbackListenerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantCallbackListener
+     */
+    omit?: TenantCallbackListenerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantCallbackListenerInclude<ExtArgs> | null
+    /**
+     * Filter, which TenantCallbackListeners to fetch.
+     */
+    where?: TenantCallbackListenerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TenantCallbackListeners to fetch.
+     */
+    orderBy?: TenantCallbackListenerOrderByWithRelationInput | TenantCallbackListenerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TenantCallbackListeners.
+     */
+    cursor?: TenantCallbackListenerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TenantCallbackListeners from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TenantCallbackListeners.
+     */
+    skip?: number
+    distinct?: TenantCallbackListenerScalarFieldEnum | TenantCallbackListenerScalarFieldEnum[]
+  }
+
+  /**
+   * TenantCallbackListener create
+   */
+  export type TenantCallbackListenerCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantCallbackListener
+     */
+    select?: TenantCallbackListenerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantCallbackListener
+     */
+    omit?: TenantCallbackListenerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantCallbackListenerInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TenantCallbackListener.
+     */
+    data: XOR<TenantCallbackListenerCreateInput, TenantCallbackListenerUncheckedCreateInput>
+  }
+
+  /**
+   * TenantCallbackListener createMany
+   */
+  export type TenantCallbackListenerCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TenantCallbackListeners.
+     */
+    data: TenantCallbackListenerCreateManyInput | TenantCallbackListenerCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * TenantCallbackListener createManyAndReturn
+   */
+  export type TenantCallbackListenerCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantCallbackListener
+     */
+    select?: TenantCallbackListenerSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantCallbackListener
+     */
+    omit?: TenantCallbackListenerOmit<ExtArgs> | null
+    /**
+     * The data used to create many TenantCallbackListeners.
+     */
+    data: TenantCallbackListenerCreateManyInput | TenantCallbackListenerCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantCallbackListenerIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TenantCallbackListener update
+   */
+  export type TenantCallbackListenerUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantCallbackListener
+     */
+    select?: TenantCallbackListenerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantCallbackListener
+     */
+    omit?: TenantCallbackListenerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantCallbackListenerInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TenantCallbackListener.
+     */
+    data: XOR<TenantCallbackListenerUpdateInput, TenantCallbackListenerUncheckedUpdateInput>
+    /**
+     * Choose, which TenantCallbackListener to update.
+     */
+    where: TenantCallbackListenerWhereUniqueInput
+  }
+
+  /**
+   * TenantCallbackListener updateMany
+   */
+  export type TenantCallbackListenerUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TenantCallbackListeners.
+     */
+    data: XOR<TenantCallbackListenerUpdateManyMutationInput, TenantCallbackListenerUncheckedUpdateManyInput>
+    /**
+     * Filter which TenantCallbackListeners to update
+     */
+    where?: TenantCallbackListenerWhereInput
+    /**
+     * Limit how many TenantCallbackListeners to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * TenantCallbackListener updateManyAndReturn
+   */
+  export type TenantCallbackListenerUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantCallbackListener
+     */
+    select?: TenantCallbackListenerSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantCallbackListener
+     */
+    omit?: TenantCallbackListenerOmit<ExtArgs> | null
+    /**
+     * The data used to update TenantCallbackListeners.
+     */
+    data: XOR<TenantCallbackListenerUpdateManyMutationInput, TenantCallbackListenerUncheckedUpdateManyInput>
+    /**
+     * Filter which TenantCallbackListeners to update
+     */
+    where?: TenantCallbackListenerWhereInput
+    /**
+     * Limit how many TenantCallbackListeners to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantCallbackListenerIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TenantCallbackListener upsert
+   */
+  export type TenantCallbackListenerUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantCallbackListener
+     */
+    select?: TenantCallbackListenerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantCallbackListener
+     */
+    omit?: TenantCallbackListenerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantCallbackListenerInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TenantCallbackListener to update in case it exists.
+     */
+    where: TenantCallbackListenerWhereUniqueInput
+    /**
+     * In case the TenantCallbackListener found by the `where` argument doesn't exist, create a new TenantCallbackListener with this data.
+     */
+    create: XOR<TenantCallbackListenerCreateInput, TenantCallbackListenerUncheckedCreateInput>
+    /**
+     * In case the TenantCallbackListener was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TenantCallbackListenerUpdateInput, TenantCallbackListenerUncheckedUpdateInput>
+  }
+
+  /**
+   * TenantCallbackListener delete
+   */
+  export type TenantCallbackListenerDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantCallbackListener
+     */
+    select?: TenantCallbackListenerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantCallbackListener
+     */
+    omit?: TenantCallbackListenerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantCallbackListenerInclude<ExtArgs> | null
+    /**
+     * Filter which TenantCallbackListener to delete.
+     */
+    where: TenantCallbackListenerWhereUniqueInput
+  }
+
+  /**
+   * TenantCallbackListener deleteMany
+   */
+  export type TenantCallbackListenerDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TenantCallbackListeners to delete
+     */
+    where?: TenantCallbackListenerWhereInput
+    /**
+     * Limit how many TenantCallbackListeners to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * TenantCallbackListener without action
+   */
+  export type TenantCallbackListenerDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantCallbackListener
+     */
+    select?: TenantCallbackListenerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantCallbackListener
+     */
+    omit?: TenantCallbackListenerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantCallbackListenerInclude<ExtArgs> | null
   }
 
 
@@ -3591,6 +4816,8 @@ export namespace Prisma {
     timeout: number | null
     detailId: string | null
     tenantId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type PaymentProvidersMaxAggregateOutputType = {
@@ -3601,6 +4828,8 @@ export namespace Prisma {
     timeout: number | null
     detailId: string | null
     tenantId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type PaymentProvidersCountAggregateOutputType = {
@@ -3611,6 +4840,8 @@ export namespace Prisma {
     timeout: number
     detailId: number
     tenantId: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -3633,6 +4864,8 @@ export namespace Prisma {
     timeout?: true
     detailId?: true
     tenantId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type PaymentProvidersMaxAggregateInputType = {
@@ -3643,6 +4876,8 @@ export namespace Prisma {
     timeout?: true
     detailId?: true
     tenantId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type PaymentProvidersCountAggregateInputType = {
@@ -3653,6 +4888,8 @@ export namespace Prisma {
     timeout?: true
     detailId?: true
     tenantId?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -3750,6 +4987,8 @@ export namespace Prisma {
     timeout: number
     detailId: string
     tenantId: string
+    createdAt: Date
+    updatedAt: Date
     _count: PaymentProvidersCountAggregateOutputType | null
     _avg: PaymentProvidersAvgAggregateOutputType | null
     _sum: PaymentProvidersSumAggregateOutputType | null
@@ -3779,6 +5018,8 @@ export namespace Prisma {
     timeout?: boolean
     detailId?: boolean
     tenantId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
     detail?: boolean | ProviderDetailDefaultArgs<ExtArgs>
     histories?: boolean | PaymentProviders$historiesArgs<ExtArgs>
@@ -3793,6 +5034,8 @@ export namespace Prisma {
     timeout?: boolean
     detailId?: boolean
     tenantId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
     detail?: boolean | ProviderDetailDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["paymentProviders"]>
@@ -3805,6 +5048,8 @@ export namespace Prisma {
     timeout?: boolean
     detailId?: boolean
     tenantId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
     detail?: boolean | ProviderDetailDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["paymentProviders"]>
@@ -3817,9 +5062,11 @@ export namespace Prisma {
     timeout?: boolean
     detailId?: boolean
     tenantId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type PaymentProvidersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "provider" | "maxRetry" | "timeout" | "detailId" | "tenantId", ExtArgs["result"]["paymentProviders"]>
+  export type PaymentProvidersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "provider" | "maxRetry" | "timeout" | "detailId" | "tenantId" | "createdAt" | "updatedAt", ExtArgs["result"]["paymentProviders"]>
   export type PaymentProvidersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
     detail?: boolean | ProviderDetailDefaultArgs<ExtArgs>
@@ -3850,6 +5097,8 @@ export namespace Prisma {
       timeout: number
       detailId: string
       tenantId: string
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["paymentProviders"]>
     composites: {}
   }
@@ -4283,6 +5532,8 @@ export namespace Prisma {
     readonly timeout: FieldRef<"PaymentProviders", 'Int'>
     readonly detailId: FieldRef<"PaymentProviders", 'String'>
     readonly tenantId: FieldRef<"PaymentProviders", 'String'>
+    readonly createdAt: FieldRef<"PaymentProviders", 'DateTime'>
+    readonly updatedAt: FieldRef<"PaymentProviders", 'DateTime'>
   }
     
 
@@ -4737,6 +5988,8 @@ export namespace Prisma {
     method: string | null
     requireAuthentication: boolean | null
     authenticationId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ProviderDetailMaxAggregateOutputType = {
@@ -4745,6 +5998,8 @@ export namespace Prisma {
     method: string | null
     requireAuthentication: boolean | null
     authenticationId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ProviderDetailCountAggregateOutputType = {
@@ -4753,6 +6008,8 @@ export namespace Prisma {
     method: number
     requireAuthentication: number
     authenticationId: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -4763,6 +6020,8 @@ export namespace Prisma {
     method?: true
     requireAuthentication?: true
     authenticationId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type ProviderDetailMaxAggregateInputType = {
@@ -4771,6 +6030,8 @@ export namespace Prisma {
     method?: true
     requireAuthentication?: true
     authenticationId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type ProviderDetailCountAggregateInputType = {
@@ -4779,6 +6040,8 @@ export namespace Prisma {
     method?: true
     requireAuthentication?: true
     authenticationId?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -4860,6 +6123,8 @@ export namespace Prisma {
     method: string
     requireAuthentication: boolean
     authenticationId: string
+    createdAt: Date
+    updatedAt: Date
     _count: ProviderDetailCountAggregateOutputType | null
     _min: ProviderDetailMinAggregateOutputType | null
     _max: ProviderDetailMaxAggregateOutputType | null
@@ -4885,6 +6150,8 @@ export namespace Prisma {
     method?: boolean
     requireAuthentication?: boolean
     authenticationId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     authentication?: boolean | ProviderAuthenticationDefaultArgs<ExtArgs>
     PaymentProviders?: boolean | ProviderDetail$PaymentProvidersArgs<ExtArgs>
     _count?: boolean | ProviderDetailCountOutputTypeDefaultArgs<ExtArgs>
@@ -4896,6 +6163,8 @@ export namespace Prisma {
     method?: boolean
     requireAuthentication?: boolean
     authenticationId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     authentication?: boolean | ProviderAuthenticationDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["providerDetail"]>
 
@@ -4905,6 +6174,8 @@ export namespace Prisma {
     method?: boolean
     requireAuthentication?: boolean
     authenticationId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     authentication?: boolean | ProviderAuthenticationDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["providerDetail"]>
 
@@ -4914,9 +6185,11 @@ export namespace Prisma {
     method?: boolean
     requireAuthentication?: boolean
     authenticationId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type ProviderDetailOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url" | "method" | "requireAuthentication" | "authenticationId", ExtArgs["result"]["providerDetail"]>
+  export type ProviderDetailOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url" | "method" | "requireAuthentication" | "authenticationId" | "createdAt" | "updatedAt", ExtArgs["result"]["providerDetail"]>
   export type ProviderDetailInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     authentication?: boolean | ProviderAuthenticationDefaultArgs<ExtArgs>
     PaymentProviders?: boolean | ProviderDetail$PaymentProvidersArgs<ExtArgs>
@@ -4941,6 +6214,8 @@ export namespace Prisma {
       method: string
       requireAuthentication: boolean
       authenticationId: string
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["providerDetail"]>
     composites: {}
   }
@@ -5371,6 +6646,8 @@ export namespace Prisma {
     readonly method: FieldRef<"ProviderDetail", 'String'>
     readonly requireAuthentication: FieldRef<"ProviderDetail", 'Boolean'>
     readonly authenticationId: FieldRef<"ProviderDetail", 'String'>
+    readonly createdAt: FieldRef<"ProviderDetail", 'DateTime'>
+    readonly updatedAt: FieldRef<"ProviderDetail", 'DateTime'>
   }
     
 
@@ -5825,6 +7102,8 @@ export namespace Prisma {
     type: $Enums.AuthenticationType | null
     username: string | null
     password: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ProviderAuthenticationMaxAggregateOutputType = {
@@ -5833,6 +7112,8 @@ export namespace Prisma {
     type: $Enums.AuthenticationType | null
     username: string | null
     password: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ProviderAuthenticationCountAggregateOutputType = {
@@ -5841,6 +7122,8 @@ export namespace Prisma {
     type: number
     username: number
     password: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -5851,6 +7134,8 @@ export namespace Prisma {
     type?: true
     username?: true
     password?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type ProviderAuthenticationMaxAggregateInputType = {
@@ -5859,6 +7144,8 @@ export namespace Prisma {
     type?: true
     username?: true
     password?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type ProviderAuthenticationCountAggregateInputType = {
@@ -5867,6 +7154,8 @@ export namespace Prisma {
     type?: true
     username?: true
     password?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -5948,6 +7237,8 @@ export namespace Prisma {
     type: $Enums.AuthenticationType
     username: string | null
     password: string | null
+    createdAt: Date
+    updatedAt: Date
     _count: ProviderAuthenticationCountAggregateOutputType | null
     _min: ProviderAuthenticationMinAggregateOutputType | null
     _max: ProviderAuthenticationMaxAggregateOutputType | null
@@ -5973,6 +7264,8 @@ export namespace Prisma {
     type?: boolean
     username?: boolean
     password?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     ProviderDetail?: boolean | ProviderAuthentication$ProviderDetailArgs<ExtArgs>
     _count?: boolean | ProviderAuthenticationCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["providerAuthentication"]>
@@ -5983,6 +7276,8 @@ export namespace Prisma {
     type?: boolean
     username?: boolean
     password?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["providerAuthentication"]>
 
   export type ProviderAuthenticationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5991,6 +7286,8 @@ export namespace Prisma {
     type?: boolean
     username?: boolean
     password?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["providerAuthentication"]>
 
   export type ProviderAuthenticationSelectScalar = {
@@ -5999,9 +7296,11 @@ export namespace Prisma {
     type?: boolean
     username?: boolean
     password?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type ProviderAuthenticationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url" | "type" | "username" | "password", ExtArgs["result"]["providerAuthentication"]>
+  export type ProviderAuthenticationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url" | "type" | "username" | "password" | "createdAt" | "updatedAt", ExtArgs["result"]["providerAuthentication"]>
   export type ProviderAuthenticationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ProviderDetail?: boolean | ProviderAuthentication$ProviderDetailArgs<ExtArgs>
     _count?: boolean | ProviderAuthenticationCountOutputTypeDefaultArgs<ExtArgs>
@@ -6020,6 +7319,8 @@ export namespace Prisma {
       type: $Enums.AuthenticationType
       username: string | null
       password: string | null
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["providerAuthentication"]>
     composites: {}
   }
@@ -6449,6 +7750,8 @@ export namespace Prisma {
     readonly type: FieldRef<"ProviderAuthentication", 'AuthenticationType'>
     readonly username: FieldRef<"ProviderAuthentication", 'String'>
     readonly password: FieldRef<"ProviderAuthentication", 'String'>
+    readonly createdAt: FieldRef<"ProviderAuthentication", 'DateTime'>
+    readonly updatedAt: FieldRef<"ProviderAuthentication", 'DateTime'>
   }
     
 
@@ -6910,6 +8213,20 @@ export namespace Prisma {
   export type TenantScalarFieldEnum = (typeof TenantScalarFieldEnum)[keyof typeof TenantScalarFieldEnum]
 
 
+  export const TenantCallbackListenerScalarFieldEnum: {
+    id: 'id',
+    event: 'event',
+    url: 'url',
+    secret: 'secret',
+    isActive: 'isActive',
+    tenantId: 'tenantId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type TenantCallbackListenerScalarFieldEnum = (typeof TenantCallbackListenerScalarFieldEnum)[keyof typeof TenantCallbackListenerScalarFieldEnum]
+
+
   export const PaymentProvidersScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -6917,7 +8234,9 @@ export namespace Prisma {
     maxRetry: 'maxRetry',
     timeout: 'timeout',
     detailId: 'detailId',
-    tenantId: 'tenantId'
+    tenantId: 'tenantId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type PaymentProvidersScalarFieldEnum = (typeof PaymentProvidersScalarFieldEnum)[keyof typeof PaymentProvidersScalarFieldEnum]
@@ -6928,7 +8247,9 @@ export namespace Prisma {
     url: 'url',
     method: 'method',
     requireAuthentication: 'requireAuthentication',
-    authenticationId: 'authenticationId'
+    authenticationId: 'authenticationId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type ProviderDetailScalarFieldEnum = (typeof ProviderDetailScalarFieldEnum)[keyof typeof ProviderDetailScalarFieldEnum]
@@ -6939,7 +8260,9 @@ export namespace Prisma {
     url: 'url',
     type: 'type',
     username: 'username',
-    password: 'password'
+    password: 'password',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type ProviderAuthenticationScalarFieldEnum = (typeof ProviderAuthenticationScalarFieldEnum)[keyof typeof ProviderAuthenticationScalarFieldEnum]
@@ -7003,6 +8326,27 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime[]'
+   */
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
    * Reference to a field of type 'PaymentProvidersType'
    */
   export type EnumPaymentProvidersTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentProvidersType'>
@@ -7027,13 +8371,6 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -7124,6 +8461,7 @@ export namespace Prisma {
     name?: StringFilter<"Tenant"> | string
     PaymentProviders?: PaymentProvidersListRelationFilter
     PaymentHistory?: PaymentHistoryListRelationFilter
+    listeners?: TenantCallbackListenerListRelationFilter
   }
 
   export type TenantOrderByWithRelationInput = {
@@ -7131,6 +8469,7 @@ export namespace Prisma {
     name?: SortOrder
     PaymentProviders?: PaymentProvidersOrderByRelationAggregateInput
     PaymentHistory?: PaymentHistoryOrderByRelationAggregateInput
+    listeners?: TenantCallbackListenerOrderByRelationAggregateInput
   }
 
   export type TenantWhereUniqueInput = Prisma.AtLeast<{
@@ -7141,6 +8480,7 @@ export namespace Prisma {
     NOT?: TenantWhereInput | TenantWhereInput[]
     PaymentProviders?: PaymentProvidersListRelationFilter
     PaymentHistory?: PaymentHistoryListRelationFilter
+    listeners?: TenantCallbackListenerListRelationFilter
   }, "id" | "name">
 
   export type TenantOrderByWithAggregationInput = {
@@ -7159,6 +8499,76 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Tenant"> | string
   }
 
+  export type TenantCallbackListenerWhereInput = {
+    AND?: TenantCallbackListenerWhereInput | TenantCallbackListenerWhereInput[]
+    OR?: TenantCallbackListenerWhereInput[]
+    NOT?: TenantCallbackListenerWhereInput | TenantCallbackListenerWhereInput[]
+    id?: StringFilter<"TenantCallbackListener"> | string
+    event?: StringFilter<"TenantCallbackListener"> | string
+    url?: StringFilter<"TenantCallbackListener"> | string
+    secret?: StringNullableFilter<"TenantCallbackListener"> | string | null
+    isActive?: BoolFilter<"TenantCallbackListener"> | boolean
+    tenantId?: StringFilter<"TenantCallbackListener"> | string
+    createdAt?: DateTimeFilter<"TenantCallbackListener"> | Date | string
+    updatedAt?: DateTimeFilter<"TenantCallbackListener"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+  }
+
+  export type TenantCallbackListenerOrderByWithRelationInput = {
+    id?: SortOrder
+    event?: SortOrder
+    url?: SortOrder
+    secret?: SortOrderInput | SortOrder
+    isActive?: SortOrder
+    tenantId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    tenant?: TenantOrderByWithRelationInput
+  }
+
+  export type TenantCallbackListenerWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: TenantCallbackListenerWhereInput | TenantCallbackListenerWhereInput[]
+    OR?: TenantCallbackListenerWhereInput[]
+    NOT?: TenantCallbackListenerWhereInput | TenantCallbackListenerWhereInput[]
+    event?: StringFilter<"TenantCallbackListener"> | string
+    url?: StringFilter<"TenantCallbackListener"> | string
+    secret?: StringNullableFilter<"TenantCallbackListener"> | string | null
+    isActive?: BoolFilter<"TenantCallbackListener"> | boolean
+    tenantId?: StringFilter<"TenantCallbackListener"> | string
+    createdAt?: DateTimeFilter<"TenantCallbackListener"> | Date | string
+    updatedAt?: DateTimeFilter<"TenantCallbackListener"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+  }, "id">
+
+  export type TenantCallbackListenerOrderByWithAggregationInput = {
+    id?: SortOrder
+    event?: SortOrder
+    url?: SortOrder
+    secret?: SortOrderInput | SortOrder
+    isActive?: SortOrder
+    tenantId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: TenantCallbackListenerCountOrderByAggregateInput
+    _max?: TenantCallbackListenerMaxOrderByAggregateInput
+    _min?: TenantCallbackListenerMinOrderByAggregateInput
+  }
+
+  export type TenantCallbackListenerScalarWhereWithAggregatesInput = {
+    AND?: TenantCallbackListenerScalarWhereWithAggregatesInput | TenantCallbackListenerScalarWhereWithAggregatesInput[]
+    OR?: TenantCallbackListenerScalarWhereWithAggregatesInput[]
+    NOT?: TenantCallbackListenerScalarWhereWithAggregatesInput | TenantCallbackListenerScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"TenantCallbackListener"> | string
+    event?: StringWithAggregatesFilter<"TenantCallbackListener"> | string
+    url?: StringWithAggregatesFilter<"TenantCallbackListener"> | string
+    secret?: StringNullableWithAggregatesFilter<"TenantCallbackListener"> | string | null
+    isActive?: BoolWithAggregatesFilter<"TenantCallbackListener"> | boolean
+    tenantId?: StringWithAggregatesFilter<"TenantCallbackListener"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"TenantCallbackListener"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"TenantCallbackListener"> | Date | string
+  }
+
   export type PaymentProvidersWhereInput = {
     AND?: PaymentProvidersWhereInput | PaymentProvidersWhereInput[]
     OR?: PaymentProvidersWhereInput[]
@@ -7170,6 +8580,8 @@ export namespace Prisma {
     timeout?: IntFilter<"PaymentProviders"> | number
     detailId?: StringFilter<"PaymentProviders"> | string
     tenantId?: StringFilter<"PaymentProviders"> | string
+    createdAt?: DateTimeFilter<"PaymentProviders"> | Date | string
+    updatedAt?: DateTimeFilter<"PaymentProviders"> | Date | string
     tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
     detail?: XOR<ProviderDetailScalarRelationFilter, ProviderDetailWhereInput>
     histories?: PaymentHistoryListRelationFilter
@@ -7183,6 +8595,8 @@ export namespace Prisma {
     timeout?: SortOrder
     detailId?: SortOrder
     tenantId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     tenant?: TenantOrderByWithRelationInput
     detail?: ProviderDetailOrderByWithRelationInput
     histories?: PaymentHistoryOrderByRelationAggregateInput
@@ -7199,6 +8613,8 @@ export namespace Prisma {
     timeout?: IntFilter<"PaymentProviders"> | number
     detailId?: StringFilter<"PaymentProviders"> | string
     tenantId?: StringFilter<"PaymentProviders"> | string
+    createdAt?: DateTimeFilter<"PaymentProviders"> | Date | string
+    updatedAt?: DateTimeFilter<"PaymentProviders"> | Date | string
     tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
     detail?: XOR<ProviderDetailScalarRelationFilter, ProviderDetailWhereInput>
     histories?: PaymentHistoryListRelationFilter
@@ -7212,6 +8628,8 @@ export namespace Prisma {
     timeout?: SortOrder
     detailId?: SortOrder
     tenantId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: PaymentProvidersCountOrderByAggregateInput
     _avg?: PaymentProvidersAvgOrderByAggregateInput
     _max?: PaymentProvidersMaxOrderByAggregateInput
@@ -7230,6 +8648,8 @@ export namespace Prisma {
     timeout?: IntWithAggregatesFilter<"PaymentProviders"> | number
     detailId?: StringWithAggregatesFilter<"PaymentProviders"> | string
     tenantId?: StringWithAggregatesFilter<"PaymentProviders"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"PaymentProviders"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"PaymentProviders"> | Date | string
   }
 
   export type ProviderDetailWhereInput = {
@@ -7241,6 +8661,8 @@ export namespace Prisma {
     method?: StringFilter<"ProviderDetail"> | string
     requireAuthentication?: BoolFilter<"ProviderDetail"> | boolean
     authenticationId?: StringFilter<"ProviderDetail"> | string
+    createdAt?: DateTimeFilter<"ProviderDetail"> | Date | string
+    updatedAt?: DateTimeFilter<"ProviderDetail"> | Date | string
     authentication?: XOR<ProviderAuthenticationScalarRelationFilter, ProviderAuthenticationWhereInput>
     PaymentProviders?: PaymentProvidersListRelationFilter
   }
@@ -7251,6 +8673,8 @@ export namespace Prisma {
     method?: SortOrder
     requireAuthentication?: SortOrder
     authenticationId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     authentication?: ProviderAuthenticationOrderByWithRelationInput
     PaymentProviders?: PaymentProvidersOrderByRelationAggregateInput
   }
@@ -7264,6 +8688,8 @@ export namespace Prisma {
     method?: StringFilter<"ProviderDetail"> | string
     requireAuthentication?: BoolFilter<"ProviderDetail"> | boolean
     authenticationId?: StringFilter<"ProviderDetail"> | string
+    createdAt?: DateTimeFilter<"ProviderDetail"> | Date | string
+    updatedAt?: DateTimeFilter<"ProviderDetail"> | Date | string
     authentication?: XOR<ProviderAuthenticationScalarRelationFilter, ProviderAuthenticationWhereInput>
     PaymentProviders?: PaymentProvidersListRelationFilter
   }, "id">
@@ -7274,6 +8700,8 @@ export namespace Prisma {
     method?: SortOrder
     requireAuthentication?: SortOrder
     authenticationId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: ProviderDetailCountOrderByAggregateInput
     _max?: ProviderDetailMaxOrderByAggregateInput
     _min?: ProviderDetailMinOrderByAggregateInput
@@ -7288,6 +8716,8 @@ export namespace Prisma {
     method?: StringWithAggregatesFilter<"ProviderDetail"> | string
     requireAuthentication?: BoolWithAggregatesFilter<"ProviderDetail"> | boolean
     authenticationId?: StringWithAggregatesFilter<"ProviderDetail"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"ProviderDetail"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ProviderDetail"> | Date | string
   }
 
   export type ProviderAuthenticationWhereInput = {
@@ -7299,6 +8729,8 @@ export namespace Prisma {
     type?: EnumAuthenticationTypeFilter<"ProviderAuthentication"> | $Enums.AuthenticationType
     username?: StringNullableFilter<"ProviderAuthentication"> | string | null
     password?: StringNullableFilter<"ProviderAuthentication"> | string | null
+    createdAt?: DateTimeFilter<"ProviderAuthentication"> | Date | string
+    updatedAt?: DateTimeFilter<"ProviderAuthentication"> | Date | string
     ProviderDetail?: ProviderDetailListRelationFilter
   }
 
@@ -7308,6 +8740,8 @@ export namespace Prisma {
     type?: SortOrder
     username?: SortOrderInput | SortOrder
     password?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     ProviderDetail?: ProviderDetailOrderByRelationAggregateInput
   }
 
@@ -7320,6 +8754,8 @@ export namespace Prisma {
     type?: EnumAuthenticationTypeFilter<"ProviderAuthentication"> | $Enums.AuthenticationType
     username?: StringNullableFilter<"ProviderAuthentication"> | string | null
     password?: StringNullableFilter<"ProviderAuthentication"> | string | null
+    createdAt?: DateTimeFilter<"ProviderAuthentication"> | Date | string
+    updatedAt?: DateTimeFilter<"ProviderAuthentication"> | Date | string
     ProviderDetail?: ProviderDetailListRelationFilter
   }, "id">
 
@@ -7329,6 +8765,8 @@ export namespace Prisma {
     type?: SortOrder
     username?: SortOrderInput | SortOrder
     password?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: ProviderAuthenticationCountOrderByAggregateInput
     _max?: ProviderAuthenticationMaxOrderByAggregateInput
     _min?: ProviderAuthenticationMinOrderByAggregateInput
@@ -7343,6 +8781,8 @@ export namespace Prisma {
     type?: EnumAuthenticationTypeWithAggregatesFilter<"ProviderAuthentication"> | $Enums.AuthenticationType
     username?: StringNullableWithAggregatesFilter<"ProviderAuthentication"> | string | null
     password?: StringNullableWithAggregatesFilter<"ProviderAuthentication"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"ProviderAuthentication"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ProviderAuthentication"> | Date | string
   }
 
   export type PaymentHistoryCreateInput = {
@@ -7395,6 +8835,7 @@ export namespace Prisma {
     name: string
     PaymentProviders?: PaymentProvidersCreateNestedManyWithoutTenantInput
     PaymentHistory?: PaymentHistoryCreateNestedManyWithoutTenantInput
+    listeners?: TenantCallbackListenerCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateInput = {
@@ -7402,6 +8843,7 @@ export namespace Prisma {
     name: string
     PaymentProviders?: PaymentProvidersUncheckedCreateNestedManyWithoutTenantInput
     PaymentHistory?: PaymentHistoryUncheckedCreateNestedManyWithoutTenantInput
+    listeners?: TenantCallbackListenerUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUpdateInput = {
@@ -7409,6 +8851,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     PaymentProviders?: PaymentProvidersUpdateManyWithoutTenantNestedInput
     PaymentHistory?: PaymentHistoryUpdateManyWithoutTenantNestedInput
+    listeners?: TenantCallbackListenerUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateInput = {
@@ -7416,6 +8859,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     PaymentProviders?: PaymentProvidersUncheckedUpdateManyWithoutTenantNestedInput
     PaymentHistory?: PaymentHistoryUncheckedUpdateManyWithoutTenantNestedInput
+    listeners?: TenantCallbackListenerUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantCreateManyInput = {
@@ -7433,12 +8877,90 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
   }
 
+  export type TenantCallbackListenerCreateInput = {
+    id?: string
+    event: string
+    url: string
+    secret?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutListenersInput
+  }
+
+  export type TenantCallbackListenerUncheckedCreateInput = {
+    id?: string
+    event: string
+    url: string
+    secret?: string | null
+    isActive?: boolean
+    tenantId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TenantCallbackListenerUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    event?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutListenersNestedInput
+  }
+
+  export type TenantCallbackListenerUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    event?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    tenantId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TenantCallbackListenerCreateManyInput = {
+    id?: string
+    event: string
+    url: string
+    secret?: string | null
+    isActive?: boolean
+    tenantId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TenantCallbackListenerUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    event?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TenantCallbackListenerUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    event?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    tenantId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type PaymentProvidersCreateInput = {
     id?: string
     name: string
     provider: $Enums.PaymentProvidersType
     maxRetry: number
     timeout: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
     tenant: TenantCreateNestedOneWithoutPaymentProvidersInput
     detail: ProviderDetailCreateNestedOneWithoutPaymentProvidersInput
     histories?: PaymentHistoryCreateNestedManyWithoutProvidersInput
@@ -7452,6 +8974,8 @@ export namespace Prisma {
     timeout: number
     detailId: string
     tenantId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     histories?: PaymentHistoryUncheckedCreateNestedManyWithoutProvidersInput
   }
 
@@ -7461,6 +8985,8 @@ export namespace Prisma {
     provider?: EnumPaymentProvidersTypeFieldUpdateOperationsInput | $Enums.PaymentProvidersType
     maxRetry?: IntFieldUpdateOperationsInput | number
     timeout?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneRequiredWithoutPaymentProvidersNestedInput
     detail?: ProviderDetailUpdateOneRequiredWithoutPaymentProvidersNestedInput
     histories?: PaymentHistoryUpdateManyWithoutProvidersNestedInput
@@ -7474,6 +9000,8 @@ export namespace Prisma {
     timeout?: IntFieldUpdateOperationsInput | number
     detailId?: StringFieldUpdateOperationsInput | string
     tenantId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     histories?: PaymentHistoryUncheckedUpdateManyWithoutProvidersNestedInput
   }
 
@@ -7485,6 +9013,8 @@ export namespace Prisma {
     timeout: number
     detailId: string
     tenantId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type PaymentProvidersUpdateManyMutationInput = {
@@ -7493,6 +9023,8 @@ export namespace Prisma {
     provider?: EnumPaymentProvidersTypeFieldUpdateOperationsInput | $Enums.PaymentProvidersType
     maxRetry?: IntFieldUpdateOperationsInput | number
     timeout?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PaymentProvidersUncheckedUpdateManyInput = {
@@ -7503,6 +9035,8 @@ export namespace Prisma {
     timeout?: IntFieldUpdateOperationsInput | number
     detailId?: StringFieldUpdateOperationsInput | string
     tenantId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProviderDetailCreateInput = {
@@ -7510,6 +9044,8 @@ export namespace Prisma {
     url: string
     method: string
     requireAuthentication?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     authentication: ProviderAuthenticationCreateNestedOneWithoutProviderDetailInput
     PaymentProviders?: PaymentProvidersCreateNestedManyWithoutDetailInput
   }
@@ -7520,6 +9056,8 @@ export namespace Prisma {
     method: string
     requireAuthentication?: boolean
     authenticationId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     PaymentProviders?: PaymentProvidersUncheckedCreateNestedManyWithoutDetailInput
   }
 
@@ -7528,6 +9066,8 @@ export namespace Prisma {
     url?: StringFieldUpdateOperationsInput | string
     method?: StringFieldUpdateOperationsInput | string
     requireAuthentication?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authentication?: ProviderAuthenticationUpdateOneRequiredWithoutProviderDetailNestedInput
     PaymentProviders?: PaymentProvidersUpdateManyWithoutDetailNestedInput
   }
@@ -7538,6 +9078,8 @@ export namespace Prisma {
     method?: StringFieldUpdateOperationsInput | string
     requireAuthentication?: BoolFieldUpdateOperationsInput | boolean
     authenticationId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     PaymentProviders?: PaymentProvidersUncheckedUpdateManyWithoutDetailNestedInput
   }
 
@@ -7547,6 +9089,8 @@ export namespace Prisma {
     method: string
     requireAuthentication?: boolean
     authenticationId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ProviderDetailUpdateManyMutationInput = {
@@ -7554,6 +9098,8 @@ export namespace Prisma {
     url?: StringFieldUpdateOperationsInput | string
     method?: StringFieldUpdateOperationsInput | string
     requireAuthentication?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProviderDetailUncheckedUpdateManyInput = {
@@ -7562,6 +9108,8 @@ export namespace Prisma {
     method?: StringFieldUpdateOperationsInput | string
     requireAuthentication?: BoolFieldUpdateOperationsInput | boolean
     authenticationId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProviderAuthenticationCreateInput = {
@@ -7570,6 +9118,8 @@ export namespace Prisma {
     type?: $Enums.AuthenticationType
     username?: string | null
     password?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     ProviderDetail?: ProviderDetailCreateNestedManyWithoutAuthenticationInput
   }
 
@@ -7579,6 +9129,8 @@ export namespace Prisma {
     type?: $Enums.AuthenticationType
     username?: string | null
     password?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     ProviderDetail?: ProviderDetailUncheckedCreateNestedManyWithoutAuthenticationInput
   }
 
@@ -7588,6 +9140,8 @@ export namespace Prisma {
     type?: EnumAuthenticationTypeFieldUpdateOperationsInput | $Enums.AuthenticationType
     username?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ProviderDetail?: ProviderDetailUpdateManyWithoutAuthenticationNestedInput
   }
 
@@ -7597,6 +9151,8 @@ export namespace Prisma {
     type?: EnumAuthenticationTypeFieldUpdateOperationsInput | $Enums.AuthenticationType
     username?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ProviderDetail?: ProviderDetailUncheckedUpdateManyWithoutAuthenticationNestedInput
   }
 
@@ -7606,6 +9162,8 @@ export namespace Prisma {
     type?: $Enums.AuthenticationType
     username?: string | null
     password?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ProviderAuthenticationUpdateManyMutationInput = {
@@ -7614,6 +9172,8 @@ export namespace Prisma {
     type?: EnumAuthenticationTypeFieldUpdateOperationsInput | $Enums.AuthenticationType
     username?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProviderAuthenticationUncheckedUpdateManyInput = {
@@ -7622,6 +9182,8 @@ export namespace Prisma {
     type?: EnumAuthenticationTypeFieldUpdateOperationsInput | $Enums.AuthenticationType
     username?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -7713,7 +9275,17 @@ export namespace Prisma {
     none?: PaymentHistoryWhereInput
   }
 
+  export type TenantCallbackListenerListRelationFilter = {
+    every?: TenantCallbackListenerWhereInput
+    some?: TenantCallbackListenerWhereInput
+    none?: TenantCallbackListenerWhereInput
+  }
+
   export type PaymentHistoryOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TenantCallbackListenerOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -7730,6 +9302,115 @@ export namespace Prisma {
   export type TenantMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+  }
+
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
+  export type TenantCallbackListenerCountOrderByAggregateInput = {
+    id?: SortOrder
+    event?: SortOrder
+    url?: SortOrder
+    secret?: SortOrder
+    isActive?: SortOrder
+    tenantId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TenantCallbackListenerMaxOrderByAggregateInput = {
+    id?: SortOrder
+    event?: SortOrder
+    url?: SortOrder
+    secret?: SortOrder
+    isActive?: SortOrder
+    tenantId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TenantCallbackListenerMinOrderByAggregateInput = {
+    id?: SortOrder
+    event?: SortOrder
+    url?: SortOrder
+    secret?: SortOrder
+    isActive?: SortOrder
+    tenantId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type EnumPaymentProvidersTypeFilter<$PrismaModel = never> = {
@@ -7763,6 +9444,8 @@ export namespace Prisma {
     timeout?: SortOrder
     detailId?: SortOrder
     tenantId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type PaymentProvidersAvgOrderByAggregateInput = {
@@ -7778,6 +9461,8 @@ export namespace Prisma {
     timeout?: SortOrder
     detailId?: SortOrder
     tenantId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type PaymentProvidersMinOrderByAggregateInput = {
@@ -7788,6 +9473,8 @@ export namespace Prisma {
     timeout?: SortOrder
     detailId?: SortOrder
     tenantId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type PaymentProvidersSumOrderByAggregateInput = {
@@ -7821,11 +9508,6 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type ProviderAuthenticationScalarRelationFilter = {
     is?: ProviderAuthenticationWhereInput
     isNot?: ProviderAuthenticationWhereInput
@@ -7837,6 +9519,8 @@ export namespace Prisma {
     method?: SortOrder
     requireAuthentication?: SortOrder
     authenticationId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ProviderDetailMaxOrderByAggregateInput = {
@@ -7845,6 +9529,8 @@ export namespace Prisma {
     method?: SortOrder
     requireAuthentication?: SortOrder
     authenticationId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ProviderDetailMinOrderByAggregateInput = {
@@ -7853,14 +9539,8 @@ export namespace Prisma {
     method?: SortOrder
     requireAuthentication?: SortOrder
     authenticationId?: SortOrder
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type EnumAuthenticationTypeFilter<$PrismaModel = never> = {
@@ -7870,30 +9550,10 @@ export namespace Prisma {
     not?: NestedEnumAuthenticationTypeFilter<$PrismaModel> | $Enums.AuthenticationType
   }
 
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type ProviderDetailListRelationFilter = {
     every?: ProviderDetailWhereInput
     some?: ProviderDetailWhereInput
     none?: ProviderDetailWhereInput
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
   }
 
   export type ProviderDetailOrderByRelationAggregateInput = {
@@ -7906,6 +9566,8 @@ export namespace Prisma {
     type?: SortOrder
     username?: SortOrder
     password?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ProviderAuthenticationMaxOrderByAggregateInput = {
@@ -7914,6 +9576,8 @@ export namespace Prisma {
     type?: SortOrder
     username?: SortOrder
     password?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ProviderAuthenticationMinOrderByAggregateInput = {
@@ -7922,6 +9586,8 @@ export namespace Prisma {
     type?: SortOrder
     username?: SortOrder
     password?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type EnumAuthenticationTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -7932,24 +9598,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumAuthenticationTypeFilter<$PrismaModel>
     _max?: NestedEnumAuthenticationTypeFilter<$PrismaModel>
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type TenantCreateNestedOneWithoutPaymentHistoryInput = {
@@ -8026,6 +9674,13 @@ export namespace Prisma {
     connect?: PaymentHistoryWhereUniqueInput | PaymentHistoryWhereUniqueInput[]
   }
 
+  export type TenantCallbackListenerCreateNestedManyWithoutTenantInput = {
+    create?: XOR<TenantCallbackListenerCreateWithoutTenantInput, TenantCallbackListenerUncheckedCreateWithoutTenantInput> | TenantCallbackListenerCreateWithoutTenantInput[] | TenantCallbackListenerUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: TenantCallbackListenerCreateOrConnectWithoutTenantInput | TenantCallbackListenerCreateOrConnectWithoutTenantInput[]
+    createMany?: TenantCallbackListenerCreateManyTenantInputEnvelope
+    connect?: TenantCallbackListenerWhereUniqueInput | TenantCallbackListenerWhereUniqueInput[]
+  }
+
   export type PaymentProvidersUncheckedCreateNestedManyWithoutTenantInput = {
     create?: XOR<PaymentProvidersCreateWithoutTenantInput, PaymentProvidersUncheckedCreateWithoutTenantInput> | PaymentProvidersCreateWithoutTenantInput[] | PaymentProvidersUncheckedCreateWithoutTenantInput[]
     connectOrCreate?: PaymentProvidersCreateOrConnectWithoutTenantInput | PaymentProvidersCreateOrConnectWithoutTenantInput[]
@@ -8038,6 +9693,13 @@ export namespace Prisma {
     connectOrCreate?: PaymentHistoryCreateOrConnectWithoutTenantInput | PaymentHistoryCreateOrConnectWithoutTenantInput[]
     createMany?: PaymentHistoryCreateManyTenantInputEnvelope
     connect?: PaymentHistoryWhereUniqueInput | PaymentHistoryWhereUniqueInput[]
+  }
+
+  export type TenantCallbackListenerUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<TenantCallbackListenerCreateWithoutTenantInput, TenantCallbackListenerUncheckedCreateWithoutTenantInput> | TenantCallbackListenerCreateWithoutTenantInput[] | TenantCallbackListenerUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: TenantCallbackListenerCreateOrConnectWithoutTenantInput | TenantCallbackListenerCreateOrConnectWithoutTenantInput[]
+    createMany?: TenantCallbackListenerCreateManyTenantInputEnvelope
+    connect?: TenantCallbackListenerWhereUniqueInput | TenantCallbackListenerWhereUniqueInput[]
   }
 
   export type PaymentProvidersUpdateManyWithoutTenantNestedInput = {
@@ -8068,6 +9730,20 @@ export namespace Prisma {
     deleteMany?: PaymentHistoryScalarWhereInput | PaymentHistoryScalarWhereInput[]
   }
 
+  export type TenantCallbackListenerUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<TenantCallbackListenerCreateWithoutTenantInput, TenantCallbackListenerUncheckedCreateWithoutTenantInput> | TenantCallbackListenerCreateWithoutTenantInput[] | TenantCallbackListenerUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: TenantCallbackListenerCreateOrConnectWithoutTenantInput | TenantCallbackListenerCreateOrConnectWithoutTenantInput[]
+    upsert?: TenantCallbackListenerUpsertWithWhereUniqueWithoutTenantInput | TenantCallbackListenerUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: TenantCallbackListenerCreateManyTenantInputEnvelope
+    set?: TenantCallbackListenerWhereUniqueInput | TenantCallbackListenerWhereUniqueInput[]
+    disconnect?: TenantCallbackListenerWhereUniqueInput | TenantCallbackListenerWhereUniqueInput[]
+    delete?: TenantCallbackListenerWhereUniqueInput | TenantCallbackListenerWhereUniqueInput[]
+    connect?: TenantCallbackListenerWhereUniqueInput | TenantCallbackListenerWhereUniqueInput[]
+    update?: TenantCallbackListenerUpdateWithWhereUniqueWithoutTenantInput | TenantCallbackListenerUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: TenantCallbackListenerUpdateManyWithWhereWithoutTenantInput | TenantCallbackListenerUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: TenantCallbackListenerScalarWhereInput | TenantCallbackListenerScalarWhereInput[]
+  }
+
   export type PaymentProvidersUncheckedUpdateManyWithoutTenantNestedInput = {
     create?: XOR<PaymentProvidersCreateWithoutTenantInput, PaymentProvidersUncheckedCreateWithoutTenantInput> | PaymentProvidersCreateWithoutTenantInput[] | PaymentProvidersUncheckedCreateWithoutTenantInput[]
     connectOrCreate?: PaymentProvidersCreateOrConnectWithoutTenantInput | PaymentProvidersCreateOrConnectWithoutTenantInput[]
@@ -8094,6 +9770,46 @@ export namespace Prisma {
     update?: PaymentHistoryUpdateWithWhereUniqueWithoutTenantInput | PaymentHistoryUpdateWithWhereUniqueWithoutTenantInput[]
     updateMany?: PaymentHistoryUpdateManyWithWhereWithoutTenantInput | PaymentHistoryUpdateManyWithWhereWithoutTenantInput[]
     deleteMany?: PaymentHistoryScalarWhereInput | PaymentHistoryScalarWhereInput[]
+  }
+
+  export type TenantCallbackListenerUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<TenantCallbackListenerCreateWithoutTenantInput, TenantCallbackListenerUncheckedCreateWithoutTenantInput> | TenantCallbackListenerCreateWithoutTenantInput[] | TenantCallbackListenerUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: TenantCallbackListenerCreateOrConnectWithoutTenantInput | TenantCallbackListenerCreateOrConnectWithoutTenantInput[]
+    upsert?: TenantCallbackListenerUpsertWithWhereUniqueWithoutTenantInput | TenantCallbackListenerUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: TenantCallbackListenerCreateManyTenantInputEnvelope
+    set?: TenantCallbackListenerWhereUniqueInput | TenantCallbackListenerWhereUniqueInput[]
+    disconnect?: TenantCallbackListenerWhereUniqueInput | TenantCallbackListenerWhereUniqueInput[]
+    delete?: TenantCallbackListenerWhereUniqueInput | TenantCallbackListenerWhereUniqueInput[]
+    connect?: TenantCallbackListenerWhereUniqueInput | TenantCallbackListenerWhereUniqueInput[]
+    update?: TenantCallbackListenerUpdateWithWhereUniqueWithoutTenantInput | TenantCallbackListenerUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: TenantCallbackListenerUpdateManyWithWhereWithoutTenantInput | TenantCallbackListenerUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: TenantCallbackListenerScalarWhereInput | TenantCallbackListenerScalarWhereInput[]
+  }
+
+  export type TenantCreateNestedOneWithoutListenersInput = {
+    create?: XOR<TenantCreateWithoutListenersInput, TenantUncheckedCreateWithoutListenersInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutListenersInput
+    connect?: TenantWhereUniqueInput
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type TenantUpdateOneRequiredWithoutListenersNestedInput = {
+    create?: XOR<TenantCreateWithoutListenersInput, TenantUncheckedCreateWithoutListenersInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutListenersInput
+    upsert?: TenantUpsertWithoutListenersInput
+    connect?: TenantWhereUniqueInput
+    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutListenersInput, TenantUpdateWithoutListenersInput>, TenantUncheckedUpdateWithoutListenersInput>
   }
 
   export type TenantCreateNestedOneWithoutPaymentProvidersInput = {
@@ -8194,10 +9910,6 @@ export namespace Prisma {
     connect?: PaymentProvidersWhereUniqueInput | PaymentProvidersWhereUniqueInput[]
   }
 
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
-  }
-
   export type ProviderAuthenticationUpdateOneRequiredWithoutProviderDetailNestedInput = {
     create?: XOR<ProviderAuthenticationCreateWithoutProviderDetailInput, ProviderAuthenticationUncheckedCreateWithoutProviderDetailInput>
     connectOrCreate?: ProviderAuthenticationCreateOrConnectWithoutProviderDetailInput
@@ -8250,10 +9962,6 @@ export namespace Prisma {
 
   export type EnumAuthenticationTypeFieldUpdateOperationsInput = {
     set?: $Enums.AuthenticationType
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
   }
 
   export type ProviderDetailUpdateManyWithoutAuthenticationNestedInput = {
@@ -8343,6 +10051,86 @@ export namespace Prisma {
     _max?: NestedEnumPaymentHistoryStatusTypeFilter<$PrismaModel>
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type NestedEnumPaymentProvidersTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.PaymentProvidersType | EnumPaymentProvidersTypeFieldRefInput<$PrismaModel>
     in?: $Enums.PaymentProvidersType[] | ListEnumPaymentProvidersTypeFieldRefInput<$PrismaModel>
@@ -8387,38 +10175,11 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
   export type NestedEnumAuthenticationTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.AuthenticationType | EnumAuthenticationTypeFieldRefInput<$PrismaModel>
     in?: $Enums.AuthenticationType[] | ListEnumAuthenticationTypeFieldRefInput<$PrismaModel>
     notIn?: $Enums.AuthenticationType[] | ListEnumAuthenticationTypeFieldRefInput<$PrismaModel>
     not?: NestedEnumAuthenticationTypeFilter<$PrismaModel> | $Enums.AuthenticationType
-  }
-
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type NestedEnumAuthenticationTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -8431,44 +10192,18 @@ export namespace Prisma {
     _max?: NestedEnumAuthenticationTypeFilter<$PrismaModel>
   }
 
-  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type TenantCreateWithoutPaymentHistoryInput = {
     id?: string
     name: string
     PaymentProviders?: PaymentProvidersCreateNestedManyWithoutTenantInput
+    listeners?: TenantCallbackListenerCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutPaymentHistoryInput = {
     id?: string
     name: string
     PaymentProviders?: PaymentProvidersUncheckedCreateNestedManyWithoutTenantInput
+    listeners?: TenantCallbackListenerUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutPaymentHistoryInput = {
@@ -8482,6 +10217,8 @@ export namespace Prisma {
     provider: $Enums.PaymentProvidersType
     maxRetry: number
     timeout: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
     tenant: TenantCreateNestedOneWithoutPaymentProvidersInput
     detail: ProviderDetailCreateNestedOneWithoutPaymentProvidersInput
   }
@@ -8494,6 +10231,8 @@ export namespace Prisma {
     timeout: number
     detailId: string
     tenantId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type PaymentProvidersCreateOrConnectWithoutHistoriesInput = {
@@ -8516,12 +10255,14 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     PaymentProviders?: PaymentProvidersUpdateManyWithoutTenantNestedInput
+    listeners?: TenantCallbackListenerUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutPaymentHistoryInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     PaymentProviders?: PaymentProvidersUncheckedUpdateManyWithoutTenantNestedInput
+    listeners?: TenantCallbackListenerUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type PaymentProvidersUpsertWithWhereUniqueWithoutHistoriesInput = {
@@ -8551,6 +10292,8 @@ export namespace Prisma {
     timeout?: IntFilter<"PaymentProviders"> | number
     detailId?: StringFilter<"PaymentProviders"> | string
     tenantId?: StringFilter<"PaymentProviders"> | string
+    createdAt?: DateTimeFilter<"PaymentProviders"> | Date | string
+    updatedAt?: DateTimeFilter<"PaymentProviders"> | Date | string
   }
 
   export type PaymentProvidersCreateWithoutTenantInput = {
@@ -8559,6 +10302,8 @@ export namespace Prisma {
     provider: $Enums.PaymentProvidersType
     maxRetry: number
     timeout: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
     detail: ProviderDetailCreateNestedOneWithoutPaymentProvidersInput
     histories?: PaymentHistoryCreateNestedManyWithoutProvidersInput
   }
@@ -8570,6 +10315,8 @@ export namespace Prisma {
     maxRetry: number
     timeout: number
     detailId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     histories?: PaymentHistoryUncheckedCreateNestedManyWithoutProvidersInput
   }
 
@@ -8602,6 +10349,36 @@ export namespace Prisma {
 
   export type PaymentHistoryCreateManyTenantInputEnvelope = {
     data: PaymentHistoryCreateManyTenantInput | PaymentHistoryCreateManyTenantInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TenantCallbackListenerCreateWithoutTenantInput = {
+    id?: string
+    event: string
+    url: string
+    secret?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TenantCallbackListenerUncheckedCreateWithoutTenantInput = {
+    id?: string
+    event: string
+    url: string
+    secret?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TenantCallbackListenerCreateOrConnectWithoutTenantInput = {
+    where: TenantCallbackListenerWhereUniqueInput
+    create: XOR<TenantCallbackListenerCreateWithoutTenantInput, TenantCallbackListenerUncheckedCreateWithoutTenantInput>
+  }
+
+  export type TenantCallbackListenerCreateManyTenantInputEnvelope = {
+    data: TenantCallbackListenerCreateManyTenantInput | TenantCallbackListenerCreateManyTenantInput[]
     skipDuplicates?: boolean
   }
 
@@ -8646,16 +10423,92 @@ export namespace Prisma {
     status?: EnumPaymentHistoryStatusTypeFilter<"PaymentHistory"> | $Enums.PaymentHistoryStatusType
   }
 
+  export type TenantCallbackListenerUpsertWithWhereUniqueWithoutTenantInput = {
+    where: TenantCallbackListenerWhereUniqueInput
+    update: XOR<TenantCallbackListenerUpdateWithoutTenantInput, TenantCallbackListenerUncheckedUpdateWithoutTenantInput>
+    create: XOR<TenantCallbackListenerCreateWithoutTenantInput, TenantCallbackListenerUncheckedCreateWithoutTenantInput>
+  }
+
+  export type TenantCallbackListenerUpdateWithWhereUniqueWithoutTenantInput = {
+    where: TenantCallbackListenerWhereUniqueInput
+    data: XOR<TenantCallbackListenerUpdateWithoutTenantInput, TenantCallbackListenerUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type TenantCallbackListenerUpdateManyWithWhereWithoutTenantInput = {
+    where: TenantCallbackListenerScalarWhereInput
+    data: XOR<TenantCallbackListenerUpdateManyMutationInput, TenantCallbackListenerUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type TenantCallbackListenerScalarWhereInput = {
+    AND?: TenantCallbackListenerScalarWhereInput | TenantCallbackListenerScalarWhereInput[]
+    OR?: TenantCallbackListenerScalarWhereInput[]
+    NOT?: TenantCallbackListenerScalarWhereInput | TenantCallbackListenerScalarWhereInput[]
+    id?: StringFilter<"TenantCallbackListener"> | string
+    event?: StringFilter<"TenantCallbackListener"> | string
+    url?: StringFilter<"TenantCallbackListener"> | string
+    secret?: StringNullableFilter<"TenantCallbackListener"> | string | null
+    isActive?: BoolFilter<"TenantCallbackListener"> | boolean
+    tenantId?: StringFilter<"TenantCallbackListener"> | string
+    createdAt?: DateTimeFilter<"TenantCallbackListener"> | Date | string
+    updatedAt?: DateTimeFilter<"TenantCallbackListener"> | Date | string
+  }
+
+  export type TenantCreateWithoutListenersInput = {
+    id?: string
+    name: string
+    PaymentProviders?: PaymentProvidersCreateNestedManyWithoutTenantInput
+    PaymentHistory?: PaymentHistoryCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUncheckedCreateWithoutListenersInput = {
+    id?: string
+    name: string
+    PaymentProviders?: PaymentProvidersUncheckedCreateNestedManyWithoutTenantInput
+    PaymentHistory?: PaymentHistoryUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantCreateOrConnectWithoutListenersInput = {
+    where: TenantWhereUniqueInput
+    create: XOR<TenantCreateWithoutListenersInput, TenantUncheckedCreateWithoutListenersInput>
+  }
+
+  export type TenantUpsertWithoutListenersInput = {
+    update: XOR<TenantUpdateWithoutListenersInput, TenantUncheckedUpdateWithoutListenersInput>
+    create: XOR<TenantCreateWithoutListenersInput, TenantUncheckedCreateWithoutListenersInput>
+    where?: TenantWhereInput
+  }
+
+  export type TenantUpdateToOneWithWhereWithoutListenersInput = {
+    where?: TenantWhereInput
+    data: XOR<TenantUpdateWithoutListenersInput, TenantUncheckedUpdateWithoutListenersInput>
+  }
+
+  export type TenantUpdateWithoutListenersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    PaymentProviders?: PaymentProvidersUpdateManyWithoutTenantNestedInput
+    PaymentHistory?: PaymentHistoryUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantUncheckedUpdateWithoutListenersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    PaymentProviders?: PaymentProvidersUncheckedUpdateManyWithoutTenantNestedInput
+    PaymentHistory?: PaymentHistoryUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
   export type TenantCreateWithoutPaymentProvidersInput = {
     id?: string
     name: string
     PaymentHistory?: PaymentHistoryCreateNestedManyWithoutTenantInput
+    listeners?: TenantCallbackListenerCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutPaymentProvidersInput = {
     id?: string
     name: string
     PaymentHistory?: PaymentHistoryUncheckedCreateNestedManyWithoutTenantInput
+    listeners?: TenantCallbackListenerUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutPaymentProvidersInput = {
@@ -8668,6 +10521,8 @@ export namespace Prisma {
     url: string
     method: string
     requireAuthentication?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     authentication: ProviderAuthenticationCreateNestedOneWithoutProviderDetailInput
   }
 
@@ -8677,6 +10532,8 @@ export namespace Prisma {
     method: string
     requireAuthentication?: boolean
     authenticationId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ProviderDetailCreateOrConnectWithoutPaymentProvidersInput = {
@@ -8716,12 +10573,14 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     PaymentHistory?: PaymentHistoryUpdateManyWithoutTenantNestedInput
+    listeners?: TenantCallbackListenerUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutPaymentProvidersInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     PaymentHistory?: PaymentHistoryUncheckedUpdateManyWithoutTenantNestedInput
+    listeners?: TenantCallbackListenerUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type ProviderDetailUpsertWithoutPaymentProvidersInput = {
@@ -8740,6 +10599,8 @@ export namespace Prisma {
     url?: StringFieldUpdateOperationsInput | string
     method?: StringFieldUpdateOperationsInput | string
     requireAuthentication?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authentication?: ProviderAuthenticationUpdateOneRequiredWithoutProviderDetailNestedInput
   }
 
@@ -8749,6 +10610,8 @@ export namespace Prisma {
     method?: StringFieldUpdateOperationsInput | string
     requireAuthentication?: BoolFieldUpdateOperationsInput | boolean
     authenticationId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PaymentHistoryUpsertWithWhereUniqueWithoutProvidersInput = {
@@ -8773,6 +10636,8 @@ export namespace Prisma {
     type?: $Enums.AuthenticationType
     username?: string | null
     password?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ProviderAuthenticationUncheckedCreateWithoutProviderDetailInput = {
@@ -8781,6 +10646,8 @@ export namespace Prisma {
     type?: $Enums.AuthenticationType
     username?: string | null
     password?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ProviderAuthenticationCreateOrConnectWithoutProviderDetailInput = {
@@ -8794,6 +10661,8 @@ export namespace Prisma {
     provider: $Enums.PaymentProvidersType
     maxRetry: number
     timeout: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
     tenant: TenantCreateNestedOneWithoutPaymentProvidersInput
     histories?: PaymentHistoryCreateNestedManyWithoutProvidersInput
   }
@@ -8805,6 +10674,8 @@ export namespace Prisma {
     maxRetry: number
     timeout: number
     tenantId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     histories?: PaymentHistoryUncheckedCreateNestedManyWithoutProvidersInput
   }
 
@@ -8835,6 +10706,8 @@ export namespace Prisma {
     type?: EnumAuthenticationTypeFieldUpdateOperationsInput | $Enums.AuthenticationType
     username?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProviderAuthenticationUncheckedUpdateWithoutProviderDetailInput = {
@@ -8843,6 +10716,8 @@ export namespace Prisma {
     type?: EnumAuthenticationTypeFieldUpdateOperationsInput | $Enums.AuthenticationType
     username?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PaymentProvidersUpsertWithWhereUniqueWithoutDetailInput = {
@@ -8866,6 +10741,8 @@ export namespace Prisma {
     url: string
     method: string
     requireAuthentication?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     PaymentProviders?: PaymentProvidersCreateNestedManyWithoutDetailInput
   }
 
@@ -8874,6 +10751,8 @@ export namespace Prisma {
     url: string
     method: string
     requireAuthentication?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     PaymentProviders?: PaymentProvidersUncheckedCreateNestedManyWithoutDetailInput
   }
 
@@ -8912,6 +10791,8 @@ export namespace Prisma {
     method?: StringFilter<"ProviderDetail"> | string
     requireAuthentication?: BoolFilter<"ProviderDetail"> | boolean
     authenticationId?: StringFilter<"ProviderDetail"> | string
+    createdAt?: DateTimeFilter<"ProviderDetail"> | Date | string
+    updatedAt?: DateTimeFilter<"ProviderDetail"> | Date | string
   }
 
   export type PaymentProvidersUpdateWithoutHistoriesInput = {
@@ -8920,6 +10801,8 @@ export namespace Prisma {
     provider?: EnumPaymentProvidersTypeFieldUpdateOperationsInput | $Enums.PaymentProvidersType
     maxRetry?: IntFieldUpdateOperationsInput | number
     timeout?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneRequiredWithoutPaymentProvidersNestedInput
     detail?: ProviderDetailUpdateOneRequiredWithoutPaymentProvidersNestedInput
   }
@@ -8932,6 +10815,8 @@ export namespace Prisma {
     timeout?: IntFieldUpdateOperationsInput | number
     detailId?: StringFieldUpdateOperationsInput | string
     tenantId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PaymentProvidersUncheckedUpdateManyWithoutHistoriesInput = {
@@ -8942,6 +10827,8 @@ export namespace Prisma {
     timeout?: IntFieldUpdateOperationsInput | number
     detailId?: StringFieldUpdateOperationsInput | string
     tenantId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PaymentProvidersCreateManyTenantInput = {
@@ -8951,11 +10838,23 @@ export namespace Prisma {
     maxRetry: number
     timeout: number
     detailId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type PaymentHistoryCreateManyTenantInput = {
     id?: string
     status: $Enums.PaymentHistoryStatusType
+  }
+
+  export type TenantCallbackListenerCreateManyTenantInput = {
+    id?: string
+    event: string
+    url: string
+    secret?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type PaymentProvidersUpdateWithoutTenantInput = {
@@ -8964,6 +10863,8 @@ export namespace Prisma {
     provider?: EnumPaymentProvidersTypeFieldUpdateOperationsInput | $Enums.PaymentProvidersType
     maxRetry?: IntFieldUpdateOperationsInput | number
     timeout?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     detail?: ProviderDetailUpdateOneRequiredWithoutPaymentProvidersNestedInput
     histories?: PaymentHistoryUpdateManyWithoutProvidersNestedInput
   }
@@ -8975,6 +10876,8 @@ export namespace Prisma {
     maxRetry?: IntFieldUpdateOperationsInput | number
     timeout?: IntFieldUpdateOperationsInput | number
     detailId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     histories?: PaymentHistoryUncheckedUpdateManyWithoutProvidersNestedInput
   }
 
@@ -8985,6 +10888,8 @@ export namespace Prisma {
     maxRetry?: IntFieldUpdateOperationsInput | number
     timeout?: IntFieldUpdateOperationsInput | number
     detailId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PaymentHistoryUpdateWithoutTenantInput = {
@@ -9002,6 +10907,36 @@ export namespace Prisma {
   export type PaymentHistoryUncheckedUpdateManyWithoutTenantInput = {
     id?: StringFieldUpdateOperationsInput | string
     status?: EnumPaymentHistoryStatusTypeFieldUpdateOperationsInput | $Enums.PaymentHistoryStatusType
+  }
+
+  export type TenantCallbackListenerUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    event?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TenantCallbackListenerUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    event?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TenantCallbackListenerUncheckedUpdateManyWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    event?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PaymentHistoryUpdateWithoutProvidersInput = {
@@ -9029,6 +10964,8 @@ export namespace Prisma {
     maxRetry: number
     timeout: number
     tenantId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type PaymentProvidersUpdateWithoutDetailInput = {
@@ -9037,6 +10974,8 @@ export namespace Prisma {
     provider?: EnumPaymentProvidersTypeFieldUpdateOperationsInput | $Enums.PaymentProvidersType
     maxRetry?: IntFieldUpdateOperationsInput | number
     timeout?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneRequiredWithoutPaymentProvidersNestedInput
     histories?: PaymentHistoryUpdateManyWithoutProvidersNestedInput
   }
@@ -9048,6 +10987,8 @@ export namespace Prisma {
     maxRetry?: IntFieldUpdateOperationsInput | number
     timeout?: IntFieldUpdateOperationsInput | number
     tenantId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     histories?: PaymentHistoryUncheckedUpdateManyWithoutProvidersNestedInput
   }
 
@@ -9058,6 +10999,8 @@ export namespace Prisma {
     maxRetry?: IntFieldUpdateOperationsInput | number
     timeout?: IntFieldUpdateOperationsInput | number
     tenantId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProviderDetailCreateManyAuthenticationInput = {
@@ -9065,6 +11008,8 @@ export namespace Prisma {
     url: string
     method: string
     requireAuthentication?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ProviderDetailUpdateWithoutAuthenticationInput = {
@@ -9072,6 +11017,8 @@ export namespace Prisma {
     url?: StringFieldUpdateOperationsInput | string
     method?: StringFieldUpdateOperationsInput | string
     requireAuthentication?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     PaymentProviders?: PaymentProvidersUpdateManyWithoutDetailNestedInput
   }
 
@@ -9080,6 +11027,8 @@ export namespace Prisma {
     url?: StringFieldUpdateOperationsInput | string
     method?: StringFieldUpdateOperationsInput | string
     requireAuthentication?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     PaymentProviders?: PaymentProvidersUncheckedUpdateManyWithoutDetailNestedInput
   }
 
@@ -9088,6 +11037,8 @@ export namespace Prisma {
     url?: StringFieldUpdateOperationsInput | string
     method?: StringFieldUpdateOperationsInput | string
     requireAuthentication?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

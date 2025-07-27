@@ -44,23 +44,41 @@ model PaymentHistory {
 }
 
 model Tenant {
-  id               String             @id @default(cuid())
-  name             String             @unique
+  id               String                   @id @default(cuid())
+  name             String                   @unique
   PaymentProviders PaymentProviders[]
   PaymentHistory   PaymentHistory[]
+  listeners        TenantCallbackListener[]
 
   @@map("tenants")
   @@schema("main")
 }
 
+model TenantCallbackListener {
+  id        String   @id @default(cuid())
+  event     String
+  url       String
+  secret    String?
+  isActive  Boolean  @default(true)
+  tenantId  String
+  tenant    Tenant   @relation(fields: [tenantId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("tenant_callback_listeners")
+  @@schema("main")
+}
+
 model PaymentProviders {
-  id       String               @id @default(cuid())
-  name     String               @unique
-  provider PaymentProvidersType
-  maxRetry Int
-  timeout  Int
-  detailId String
-  tenantId String
+  id        String               @id @default(cuid())
+  name      String               @unique
+  provider  PaymentProvidersType
+  maxRetry  Int
+  timeout   Int
+  detailId  String
+  tenantId  String
+  createdAt DateTime             @default(now())
+  updatedAt DateTime             @default(now()) @updatedAt
 
   tenant    Tenant           @relation(fields: [tenantId], references: [id])
   detail    ProviderDetail   @relation(fields: [detailId], references: [id])
@@ -71,11 +89,13 @@ model PaymentProviders {
 }
 
 model ProviderDetail {
-  id                    String  @id @default(cuid())
+  id                    String   @id @default(cuid())
   url                   String
   method                String
-  requireAuthentication Boolean @default(false)
+  requireAuthentication Boolean  @default(false)
   authenticationId      String
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @default(now()) @updatedAt
 
   authentication   ProviderAuthentication @relation(fields: [authenticationId], references: [id])
   PaymentProviders PaymentProviders[]
@@ -100,6 +120,8 @@ model ProviderAuthentication {
   ProviderDetail ProviderDetail[]
   username       String?
   password       String?
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @default(now()) @updatedAt
 
   @@map("provider_authentication")
   @@schema("main")

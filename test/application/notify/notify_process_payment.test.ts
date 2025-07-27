@@ -10,6 +10,7 @@ describe('(NotifyProcessPaymentService)', () => {
   const sut = new NotifyProcessPaymentService(
     fakes.messageProviderFake,
     fakes.updateHistoryStatusByPaymentId,
+    fakes.findTenantWithCallbackRepositoryFake,
   );
 
   it('should be service to defined', () => {
@@ -52,5 +53,17 @@ describe('(NotifyProcessPaymentService)', () => {
     });
 
     expect(spy).toHaveBeenCalledTimes(0);
+  });
+
+  it('should be function onNotifyResult call FindTenantWithCallbackRepository with correct params', async () => {
+    const spy = jest.spyOn(
+      fakes.findTenantWithCallbackRepositoryFake,
+      'onFindByTenantIdAndCallbackIsActiveAndEvent',
+    );
+
+    await sut.onNotifyResult(notifyPaymentResultDTOMock);
+
+    expect(spy).toHaveBeenCalledTimes(1);
+    expect(spy).toHaveBeenCalledWith('any_tenant_id', 'any event');
   });
 });

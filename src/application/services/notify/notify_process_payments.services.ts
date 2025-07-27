@@ -1,6 +1,7 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { MessageProvider } from 'src/application/provider/message/message_provider';
 import { UpdateHistoryStatusByPaymentId } from 'src/application/repository/payment_history/update_status_by_payment_id.repository';
+import { FindTenantWithCallbackRepository } from 'src/application/repository/tenant/find_tenant_with_callback.repository';
 import { NotifyPaymentResultDTO } from 'src/domain/notify/dto/notify_payment_result.dto';
 import { NotifyProcessPaymentDTO } from 'src/domain/notify/dto/notify_process_payment.dto';
 import { NotifyPaymentResult } from 'src/domain/notify/use_cases/notify_payment_result';
@@ -20,13 +21,25 @@ export class NotifyProcessPaymentService
     private readonly messageProvider: MessageProvider<object>,
     @Inject(TokenProvider.UpdateHistoryStatusByPaymentId)
     private readonly historyRepository: UpdateHistoryStatusByPaymentId,
+    @Inject(TokenProvider.FindTenantWithCallbackRepository)
+    private readonly findTenantWithCallbackRepository: FindTenantWithCallbackRepository,
   ) {}
 
   async onNotifyResult(message: NotifyPaymentResultDTO): Promise<void> {
-    const { paymentId = '', status = ProviderStatusTypeEnum.NONE } = message;
+    const {
+      paymentId = '',
+      status = ProviderStatusTypeEnum.NONE,
+      event = '',
+    } = message;
 
     if (paymentId && status) {
-      await this.historyRepository.onUpdateStatusByPaymentId(paymentId, status);
+      const { tenantId } =
+        await this.historyRepository.onUpdateStatusByPaymentId(
+          paymentId,
+          status,
+        );
+
+      await this.sendNotificationToTenant(tenantId, event);
       return;
     }
 
@@ -48,5 +61,22 @@ export class NotifyProcessPaymentService
     );
 
     return Promise.resolve(notifySend);
+  }
+
+  private async sendNotificationToTenant(tenantId: string, event: string) {
+    const tenantWithCallback =
+      await this.findTenantWithCallbackRepository.onFindByTenantIdAndCallbackIsActiveAndEvent(
+        tenantId,
+        event,
+      );
+
+    if (!tenantWithCallback) {
+      this.logger.error(
+        `Not possible notify tenant, contact administrator and try again`,
+      );
+      return;
+    }
+
+    this.logger.log(`Send notify tenant ${tenantWithCallback.name}`);
   }
 }

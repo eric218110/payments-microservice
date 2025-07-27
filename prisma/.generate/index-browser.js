@@ -131,6 +131,17 @@ exports.Prisma.TenantScalarFieldEnum = {
   name: 'name'
 };
 
+exports.Prisma.TenantCallbackListenerScalarFieldEnum = {
+  id: 'id',
+  event: 'event',
+  url: 'url',
+  secret: 'secret',
+  isActive: 'isActive',
+  tenantId: 'tenantId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.PaymentProvidersScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -138,7 +149,9 @@ exports.Prisma.PaymentProvidersScalarFieldEnum = {
   maxRetry: 'maxRetry',
   timeout: 'timeout',
   detailId: 'detailId',
-  tenantId: 'tenantId'
+  tenantId: 'tenantId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.ProviderDetailScalarFieldEnum = {
@@ -146,7 +159,9 @@ exports.Prisma.ProviderDetailScalarFieldEnum = {
   url: 'url',
   method: 'method',
   requireAuthentication: 'requireAuthentication',
-  authenticationId: 'authenticationId'
+  authenticationId: 'authenticationId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.ProviderAuthenticationScalarFieldEnum = {
@@ -154,7 +169,9 @@ exports.Prisma.ProviderAuthenticationScalarFieldEnum = {
   url: 'url',
   type: 'type',
   username: 'username',
-  password: 'password'
+  password: 'password',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -192,6 +209,7 @@ exports.AuthenticationType = exports.$Enums.AuthenticationType = {
 exports.Prisma.ModelName = {
   PaymentHistory: 'PaymentHistory',
   Tenant: 'Tenant',
+  TenantCallbackListener: 'TenantCallbackListener',
   PaymentProviders: 'PaymentProviders',
   ProviderDetail: 'ProviderDetail',
   ProviderAuthentication: 'ProviderAuthentication'
