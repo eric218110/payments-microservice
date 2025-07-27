@@ -88,8 +88,8 @@ async function main() {
         providersToCreate.push({
           name: 'StripeProvider',
           provider: ProviderTypeEnum.STRIPPER,
-          maxRetry: 3,
-          timeout: 5000,
+          maxRetry: 0,
+          timeout: 15000,
           detailId: detail2.id,
           tenantId: tenant.id,
         });
@@ -99,8 +99,8 @@ async function main() {
         providersToCreate.push({
           name: 'BraintreeProvider',
           provider: ProviderTypeEnum.BRAINTREE,
-          maxRetry: 5,
-          timeout: 7000,
+          maxRetry: 0,
+          timeout: 15000,
           detailId: detail1.id,
           tenantId: tenant.id,
         });
