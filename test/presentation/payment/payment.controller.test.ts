@@ -1,5 +1,5 @@
 import { PaymentController } from 'src/presentation/payment/controller/payment.controller';
-import { paymentMock } from '../shared/mock';
+import { paymentMock } from '../../shared/mock';
 import { fakes } from './payment.controller.fake';
 
 describe('(PaymentController)', () => {

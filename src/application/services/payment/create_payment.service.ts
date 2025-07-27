@@ -40,19 +40,21 @@ export class PaymentService implements StartPaymentProcess {
       paymentMethodDTO,
     );
 
+    const paymentProvidersIds = paymentProviders.map(
+      ({ payment_id }) => payment_id,
+    );
+
+    const paymentHistory = await this.addPaymentHistoryRepository.onAdd(
+      tenantHeader.tenantId,
+      paymentProvidersIds,
+    );
+
     const notifyPaymentProcess = await this.notifyProcessPayment.onNotify(
+      paymentHistory.payment_id,
       paymentProvidersToNotify,
     );
 
     if (notifyPaymentProcess) {
-      const paymentProvidersIds = paymentProviders.map(
-        ({ payment_id }) => payment_id,
-      );
-      const paymentHistory = await this.addPaymentHistoryRepository.onAdd(
-        tenantHeader.tenantId,
-        paymentProvidersIds,
-      );
-
       return new PaymentResultDTO({ ...paymentHistory });
     }
 

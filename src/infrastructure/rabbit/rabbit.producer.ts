@@ -30,6 +30,8 @@ export class RabbitProducer implements MessageProvider<object>, OnModuleInit {
       this.logger.log(
         `Send message queue: (${queueName}) content:\n ${JSON.stringify(message, null, 2)}`,
       );
+
+      return true;
     } catch (error) {
       this.logger.error(error);
       return false;
