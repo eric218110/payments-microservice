@@ -21,7 +21,7 @@ export class NotifyProcessPaymentService implements NotifyProcessPayment {
     };
 
     const notifySend = await this.messageProvider.onSendMessage(
-      tokensQueue.processPayment,
+      tokensQueue.processPaymentIn,
       message,
     );
 

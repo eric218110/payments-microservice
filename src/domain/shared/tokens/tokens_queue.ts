@@ -1,3 +1,4 @@
 export const tokensQueue = {
-  processPayment: 'process_payment',
+  processPaymentIn: 'process_payment_in',
+  processPaymentOut: 'process_payment_out',
 } as const;
