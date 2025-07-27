@@ -44,11 +44,11 @@ model PaymentHistory {
 }
 
 model Tenant {
-  id               String                   @id @default(cuid())
-  name             String                   @unique
-  PaymentProviders PaymentProviders[]
-  PaymentHistory   PaymentHistory[]
-  listeners        TenantCallbackListener[]
+  id                      String                   @id @default(cuid())
+  name                    String                   @unique
+  PaymentProviders        PaymentProviders[]
+  PaymentHistory          PaymentHistory[]
+  TenantCallbackListeners TenantCallbackListener[]
 
   @@map("tenants")
   @@schema("main")

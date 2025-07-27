@@ -42,7 +42,14 @@ export class NotifyProcessPaymentService
           status,
         );
 
-      await this.sendNotificationToTenant(tenantId, event);
+      const bodyToNotify = {
+        status,
+        paymentId,
+        tenantId,
+        event,
+      };
+
+      await this.sendNotificationToTenant(tenantId, event, bodyToNotify);
       return;
     }
 
@@ -66,14 +73,18 @@ export class NotifyProcessPaymentService
     return Promise.resolve(notifySend);
   }
 
-  private async sendNotificationToTenant(tenantId: string, event: string) {
+  private async sendNotificationToTenant(
+    tenantId: string,
+    event: string,
+    body: object,
+  ) {
     const tenantWithCallback =
       await this.findTenantWithCallbackRepository.onFindByTenantIdAndCallbackIsActiveAndEvent(
         tenantId,
         event,
       );
 
-    if (!tenantWithCallback) {
+    if (!tenantWithCallback && !tenantWithCallback.callback.isActive) {
       this.logger.error(
         `Not possible notify tenant, contact administrator and try again`,
       );
@@ -82,7 +93,7 @@ export class NotifyProcessPaymentService
 
     const { status = 0 } = await this.httpClientProvider.onPost(
       tenantWithCallback.callback.url,
-      {},
+      body,
     );
 
     this.logger.log(

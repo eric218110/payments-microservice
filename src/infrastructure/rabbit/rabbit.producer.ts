@@ -28,7 +28,7 @@ export class RabbitProducer implements MessageProvider<object>, OnModuleInit {
       channel.sendToQueue(queueName, Buffer.from(JSON.stringify(message)));
 
       this.logger.log(
-        `Send message queue: (${queueName}) content:\n ${JSON.stringify(message, null, 2)}`,
+        `Send message queue: (${queueName}) content:\n ${JSON.stringify(message)}`,
       );
 
       return true;

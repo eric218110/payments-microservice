@@ -74,6 +74,22 @@ async function main() {
         });
       }
 
+      const callback = await tx.tenantCallbackListener.findFirst({
+        where: {
+          tenantId,
+        },
+      });
+
+      if (!callback) {
+        await tx.tenantCallbackListener.create({
+          data: {
+            event: 'process_payment_out',
+            url: 'http://localhost:8080/malga.io/process_payment_out/listener',
+            tenantId,
+          },
+        });
+      }
+
       const existingProviders = await tx.paymentProviders.findMany({
         where: {
           name: { in: ['StripeProvider', 'BraintreeProvider'] },
