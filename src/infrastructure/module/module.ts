@@ -21,6 +21,10 @@ const exportProviders = [
     provide: TokenProvider.UpdateHistoryStatusByPaymentId,
   },
   {
+    useClass: PaymentHistoryRepository,
+    provide: TokenProvider.LoadAllHistoryByTenantRepository,
+  },
+  {
     useClass: RabbitProducer,
     provide: TokenProvider.MessageProvider,
   },

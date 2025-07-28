@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { Injectable } from '@nestjs/common';
 import { PaymentHistoryStatusType } from 'prisma/.generate';
 import { AddPaymentHistoryRepository } from 'src/application/repository/payment_history/add_payment_history.repository';
+import { LoadAllHistoryByTenantRepository } from 'src/application/repository/payment_history/load_all_by_tenant_id.reporitory';
 import { UpdateHistoryStatusByPaymentId } from 'src/application/repository/payment_history/update_status_by_payment_id.repository';
 import { ProviderStatusTypeEnum } from 'src/domain/payment/enum/payment_history_type.enum';
 import { PaymentHistoryModel } from 'src/domain/payment/model/payment_history.model';
@@ -8,9 +10,30 @@ import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class PaymentHistoryRepository
-  implements AddPaymentHistoryRepository, UpdateHistoryStatusByPaymentId
+  implements
+    AddPaymentHistoryRepository,
+    UpdateHistoryStatusByPaymentId,
+    LoadAllHistoryByTenantRepository
 {
   constructor(private readonly prisma: PrismaService) {}
+
+  async onLoadAllByTenantId(tenantId: string): Promise<PaymentHistoryModel[]> {
+    const items = await this.prisma.paymentHistory.findMany({
+      where: {
+        tenantId,
+      },
+    });
+
+    return items.map(
+      (item) =>
+        new PaymentHistoryModel({
+          createAt: item.createdAt?.toISOString(),
+          payment_id: item.id,
+          tenantId: item.tenantId,
+          status: this.mapperStatusToResponse(item.status),
+        }),
+    );
+  }
 
   async onUpdateStatusByPaymentId(
     paymentId: string,
@@ -30,6 +53,7 @@ export class PaymentHistoryRepository
         payment_id: '',
         status: ProviderStatusTypeEnum.NONE,
         tenantId: '',
+        createAt: '',
       });
     }
 
@@ -49,6 +73,7 @@ export class PaymentHistoryRepository
       payment_id: updatePaymentHistory.id,
       status: this.mapperStatusToResponse(updatePaymentHistory.status),
       tenantId: updatePaymentHistory.tenantId,
+      createAt: updatePaymentHistory.createdAt?.toISOString(),
     });
   }
 
@@ -70,6 +95,7 @@ export class PaymentHistoryRepository
       payment_id: createdHistory.id,
       status: ProviderStatusTypeEnum.IN_PROGRESS,
       tenantId: createdHistory.tenantId,
+      createAt: createdHistory.createdAt?.toISOString(),
     });
   }
 

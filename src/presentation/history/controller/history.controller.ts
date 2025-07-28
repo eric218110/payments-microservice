@@ -11,7 +11,7 @@ import {
 @HistoryControllerDecorator()
 export class HistoryController {
   constructor(
-    @Inject(TokenProvider.LoadAllHistoryService)
+    @Inject(TokenProvider.LoadAllHistoryByTenant)
     private readonly loadAllHistoryService: LoadAllHistoryByTenant,
   ) {}
 

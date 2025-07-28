@@ -14,4 +14,7 @@ export class PaymentHistoryModel {
 
   @IsString()
   tenantId: string;
+
+  @IsString()
+  createAt: string;
 }

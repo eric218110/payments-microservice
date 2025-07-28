@@ -27,6 +27,7 @@ class UpdateHistoryStatusByPaymentIdFake
       tenantId: 'any_tenant_id',
       payment_id: paymentId,
       status: status,
+      createAt: '',
     });
   }
 }

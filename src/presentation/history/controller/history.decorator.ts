@@ -10,12 +10,13 @@ import { HistoryResponseDTO } from 'src/domain/history/dto/history_response.dto'
 
 export function HistoryPayment() {
   return applyDecorators(
-    Get('payment'),
+    Get('paymentHistory'),
     HttpCode(HttpStatus.OK),
     ApiResponse({
       status: 200,
       description: 'Load history',
       type: HistoryResponseDTO,
+      isArray: true,
     }),
   );
 }

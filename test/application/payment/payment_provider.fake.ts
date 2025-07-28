@@ -30,6 +30,7 @@ class AddPaymentHistoryRepositoryFake implements AddPaymentHistoryRepository {
         payment_id: '1234',
         status: ProviderStatusTypeEnum.IN_PROGRESS,
         tenantId: '1234',
+        createAt: '',
       }),
     );
   }
