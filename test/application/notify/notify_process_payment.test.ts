@@ -77,6 +77,11 @@ describe('(NotifyProcessPaymentService)', () => {
     await sut.onNotifyResult(notifyPaymentResultDTOMock);
 
     expect(spy).toHaveBeenCalledTimes(1);
-    expect(spy).toHaveBeenCalledWith(callbackTenantMock.callback.url, {});
+    expect(spy).toHaveBeenCalledWith(callbackTenantMock.callback.url, {
+      event: 'any_event',
+      paymentId: '1234',
+      status: 'SUCCESS',
+      tenantId: 'any_tenant_id',
+    });
   });
 });

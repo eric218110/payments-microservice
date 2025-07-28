@@ -9,4 +9,5 @@ export const TokenProvider = {
   UpdateHistoryStatusByPaymentId: 'UpdateHistoryStatusByPaymentId',
   FindTenantWithCallbackRepository: 'FindTenantWithCallbackRepository',
   HttpClientProvider: 'HttpClientProvider',
+  LoadAllHistoryService: 'LoadAllHistoryService',
 };

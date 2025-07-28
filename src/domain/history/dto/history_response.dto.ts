@@ -3,6 +3,10 @@ import { IsEnum } from 'class-validator';
 import { ProviderStatusTypeEnum } from 'src/domain/payment/enum/payment_history_type.enum';
 
 export class HistoryResponseDTO {
+  constructor(data: HistoryResponseDTO) {
+    Object.assign(this, data);
+  }
+
   @ApiProperty({
     example: 'cmdmil3qr000xnzk6piwqcgsf',
     description: 'Payment Id',
